@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hank_talker_mobile/counter/counter.dart';
+import 'package:hank_talker_mobile/config/theme_data.dart';
 import 'package:hank_talker_mobile/l10n/l10n.dart';
 
 class App extends StatelessWidget {
@@ -8,15 +8,11 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        appBarTheme: AppBarTheme(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        ),
-        useMaterial3: true,
-      ),
+      theme: CustomThemeData.lightTheme,
+      darkTheme: CustomThemeData.darkTheme,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const CounterPage(),
+      home: const Scaffold(),
     );
   }
 }
