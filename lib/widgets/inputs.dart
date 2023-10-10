@@ -7,23 +7,23 @@ Widget CustomTextImputWithLabel(
     TextInputType keyboardType,
     BuildContext context,
     Icon icon,
-    Function validator) {
+    String? Function(String?)? validator) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(label, style: Theme.of(context).textTheme.bodyLarge),
       const SizedBox(height: 5),
       SizedBox(
-        height: 54,
         child: TextFormField(
           controller: controller,
-          validator: validator as String? Function(String?)?,
+          validator: validator, // ignore: cast_nullable_to_non_nullable
           keyboardType: keyboardType,
           decoration: InputDecoration(
             filled: true,
             errorBorder: OutlineInputBorder(
                 borderSide:
-                    BorderSide(color: Theme.of(context).colorScheme.error)),
+                    BorderSide(color: Theme.of(context).colorScheme.error),
+                borderRadius: BorderRadius.circular(20)),
             errorStyle: Theme.of(context)
                 .textTheme
                 .bodySmall!
@@ -116,21 +116,21 @@ Widget CustomImputPassword(
     BuildContext context,
     Icon icon,
     String hintText,
-    Function validator,
+    String? Function(String?)? validator,
     bool showPassword) {
   return SizedBox(
-    height: 54,
     child: TextFormField(
       controller: controller,
       keyboardType: keyboardType,
-      validator: validator as String? Function(String?)?,
+      validator: validator,
       obscureText: !showPassword
           ? true
           : false, // If password is not visible then it's value will be true
       decoration: InputDecoration(
         filled: true,
         errorBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Theme.of(context).colorScheme.error)),
+            borderSide: BorderSide(color: Theme.of(context).colorScheme.error),
+            borderRadius: BorderRadius.circular(20)),
         errorStyle: Theme.of(context)
             .textTheme
             .bodySmall!
