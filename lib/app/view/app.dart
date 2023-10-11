@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hank_talker_mobile/config/theme_data.dart';
 import 'package:hank_talker_mobile/features/login/pages/login_page.dart';
+import 'package:hank_talker_mobile/features/welcome/pages/welcome_page.dart';
 import 'package:hank_talker_mobile/l10n/l10n.dart';
 import 'package:hank_talker_mobile/widgets/bottom_bar.dart';
 
@@ -14,7 +15,7 @@ class App extends StatelessWidget {
       darkTheme: CustomThemeData.darkTheme,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const LoginPage(),
+      home: const WelcomePage(),
     );
   }
 }

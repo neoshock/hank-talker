@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hank_talker_mobile/features/login/pages/register_page.dart';
+import 'package:hank_talker_mobile/features/register/pages/register_page.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
 import 'package:hank_talker_mobile/widgets/inputs.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
@@ -49,12 +49,8 @@ class _LoginPageState extends State<LoginPage> {
                             margin: EdgeInsets.only(
                                 bottom:
                                     20), // Ajusta el margen inferior según sea necesario
-                            child: Image.network(
-                              'https://cdn-icons-png.flaticon.com/512/5687/5687730.png', // Ruta de la imagen en tus assets
-                              width:
-                                  150, // Ajusta el ancho de la imagen según sea necesario
-                              height:
-                                  150, // Ajusta la altura de la imagen según sea necesario
+                            child: Image.asset(
+                              'assets/images/Logo.png', // Ruta de la imagen en tus assets
                             ),
                           ),
                         ),
