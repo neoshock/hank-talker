@@ -16,19 +16,10 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-<<<<<<< HEAD
         theme: CustomThemeData.lightTheme,
         darkTheme: CustomThemeData.darkTheme,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         home: BottomBar());
-=======
-      theme: CustomThemeData.lightTheme,
-      darkTheme: CustomThemeData.darkTheme,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      home: RegisterPassword(),
-    );
->>>>>>> developtment
   }
 }
