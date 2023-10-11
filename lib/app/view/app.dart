@@ -20,6 +20,6 @@ class App extends StatelessWidget {
         darkTheme: CustomThemeData.darkTheme,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        home: BottomBar());
+        home: RegisterPassword());
   }
 }
