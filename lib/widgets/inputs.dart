@@ -16,7 +16,7 @@ Widget CustomTextImputWithLabel(
       SizedBox(
         child: TextFormField(
           controller: controller,
-          validator: validator, // ignore: cast_nullable_to_non_nullable
+          validator: validator,
           keyboardType: keyboardType,
           decoration: InputDecoration(
             filled: true,
