@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 
 class ExperienceChartWidget extends StatefulWidget {
-  const ExperienceChartWidget({Key? key}) : super(key: key);
+  const ExperienceChartWidget({super.key});
 
   @override
   _ExperienceChartWidgetState createState() => _ExperienceChartWidgetState();

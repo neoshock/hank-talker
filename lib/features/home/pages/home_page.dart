@@ -3,7 +3,7 @@ import 'package:hank_talker_mobile/features/home/widgets/body_section.dart';
 import 'package:hank_talker_mobile/features/home/widgets/header_section.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   _HomePageState createState() => _HomePageState();

@@ -10,11 +10,10 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: CustomThemeData.lightTheme,
-      darkTheme: CustomThemeData.darkTheme,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      home: const LoginPage(),
-    );
+        theme: CustomThemeData.lightTheme,
+        darkTheme: CustomThemeData.darkTheme,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: BottomBar());
   }
 }
