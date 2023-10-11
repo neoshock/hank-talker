@@ -16,7 +16,7 @@ Widget CustomTextImputWithLabel(
       SizedBox(
         child: TextFormField(
           controller: controller,
-          validator: validator, // ignore: cast_nullable_to_non_nullable
+          validator: validator,
           keyboardType: keyboardType,
           decoration: InputDecoration(
             filled: true,
@@ -123,9 +123,7 @@ Widget CustomImputPassword(
       controller: controller,
       keyboardType: keyboardType,
       validator: validator,
-      obscureText: !showPassword
-          ? true
-          : false, // If password is not visible then it's value will be true
+      obscureText: showPassword,
       decoration: InputDecoration(
         filled: true,
         errorBorder: OutlineInputBorder(
