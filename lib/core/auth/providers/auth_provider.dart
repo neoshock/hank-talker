@@ -8,7 +8,7 @@ class AuthProvider with ChangeNotifier {
   bool get isAuth => _isAuth;
 
   Future<bool> login(String email, String password) async {
-    final bool isLogged = await authService.login(email, password);
+    final isLogged = await authService.login(email, password);
 
     if (isLogged) {
       _isAuth = true;

@@ -16,6 +16,7 @@ class RegisterPage extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         body: SafeArea(
+          top: false,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

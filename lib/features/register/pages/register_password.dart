@@ -7,27 +7,32 @@ import 'package:hank_talker_mobile/widgets/custom_widgets.dart';
 import 'package:hank_talker_mobile/widgets/inputs.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
-class RegisterPassword extends StatelessWidget {
-  TextEditingController passwordController = TextEditingController();
+class RegisterPassword extends StatefulWidget {
+  const RegisterPassword({Key? key}) : super(key: key);
+
+  @override
+  _RegisterPasswordState createState() => _RegisterPasswordState();
+}
+
+class _RegisterPasswordState extends State<RegisterPassword> {
+  final passwordController = TextEditingController(text: '');
   bool showPassword = false;
-  void Name() {
-    // Acción para el botón "Siguiente"
-    // Implementa la lógica para guardar los nombres y apellidos
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        actions: [CustomBackButton(context, () {})],
-      ),
-      body: Padding(
+        body: SafeArea(
+            child: SingleChildScrollView(
+      child: Padding(
         padding: const EdgeInsets.all(18.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(
+            Row(
+              children: [CustomBackButton(context, () {})],
+            ),
+            const SizedBox(height: 45),
+            const Center(
               child: Text(
                 'Configura tu contraseña',
                 style: TextStyle(
@@ -36,7 +41,7 @@ class RegisterPassword extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             CustomImputPassword(
                 passwordController,
                 TextInputType.visiblePassword,
@@ -48,15 +53,15 @@ class RegisterPassword extends StatelessWidget {
               }
               return null;
             }, () {
-              /* setState(() {
+              setState(() {
                 showPassword = !showPassword;
-              });*/
+              });
             }, showPassword),
-            SizedBox(height: 40),
-            CusttomButtonRounded(context, Name, 'Comenzar'),
+            const SizedBox(height: 40),
+            CusttomButtonRounded(context, () {}, 'Comenzar'),
           ],
         ),
       ),
-    );
+    )));
   }
 }
