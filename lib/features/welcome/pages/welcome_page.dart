@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hank_talker_mobile/features/login/pages/login_page.dart';
 import 'package:hank_talker_mobile/features/welcome/widgets/welcome_smooth_page_widget.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
 
@@ -41,7 +42,12 @@ class WelcomePage extends StatelessWidget {
                   const SizedBox(
                     height: 30,
                   ),
-                  CustomButtonOutLine(context, () {}, 'Comenzar'),
+                  CustomButtonOutLine(context, () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => LoginPage()),
+                    );
+                  }, 'Comenzar'),
                   SizedBox(height: 30)
                 ]),
               )

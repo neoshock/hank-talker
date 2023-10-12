@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hank_talker_mobile/config/theme_data.dart';
+import 'package:hank_talker_mobile/features/register/pages/register_nane.dart';
+import 'package:hank_talker_mobile/features/register/pages/register_page.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
+import 'package:hank_talker_mobile/widgets/custom_widgets.dart';
 import 'package:hank_talker_mobile/widgets/inputs.dart';
 
 class BirthDatePage extends StatelessWidget {
@@ -22,30 +25,28 @@ class BirthDatePage extends StatelessWidget {
     }
   }
 
-  void Nac() {
-    // Acción para el botón "Siguiente"
-    // Implementa la lógica para guardar la fecha de nacimiento
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            // Acción al presionar el botón de regresar
-            Navigator.of(context).pop();
-          },
-        ),
-      ),
-      body: Padding(
+        body: SafeArea(
+      child: SingleChildScrollView(
+          child: Padding(
         padding: const EdgeInsets.all(18.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 0),
+            SizedBox(height: 15),
+            Row(
+              children: [
+                CustomBackButton(context, () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => RegisterPage()),
+                  );
+                })
+              ],
+            ),
+            SizedBox(height: 20),
             Text(
               'Cual es tu fecha de nacimiento',
               style: TextStyle(
@@ -83,15 +84,23 @@ class BirthDatePage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 40),
-            CusttomButtonRounded(context, () => Nac(), 'Siguiente'),
+            CusttomButtonRounded(
+                context,
+                () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => RegisterNane()),
+                    ),
+                'Siguiente'),
             SizedBox(height: 80),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 TextButton.icon(
                   onPressed: () {
-                    // Acción para el botón "Saltar"
-                    // Implementa la lógica para saltar esta parte del proceso
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => RegisterNane()),
+                    );
                   },
                   icon: Icon(
                     Icons.arrow_forward,
@@ -106,7 +115,7 @@ class BirthDatePage extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
+      )),
+    ));
   }
 }
