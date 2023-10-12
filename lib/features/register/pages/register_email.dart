@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hank_talker_mobile/config/theme_data.dart';
+import 'package:hank_talker_mobile/core/register/providers/regi_provider.dart';
 import 'package:hank_talker_mobile/features/register/pages/register_nane.dart';
 import 'package:hank_talker_mobile/features/register/pages/register_password.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
 import 'package:hank_talker_mobile/widgets/custom_widgets.dart';
 import 'package:hank_talker_mobile/widgets/inputs.dart';
+import 'package:provider/provider.dart';
 
 class RegisterEmail extends StatefulWidget {
   @override
@@ -19,6 +21,7 @@ class _RegisterEmailState extends State<RegisterEmail> {
     // Acción para el botón "Siguiente"
     // Implementa la lógica para guardar el correo electrónico
     if (formGlobalKey.currentState!.validate()) {
+      intoEmail();
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const RegisterPassword()),
@@ -26,6 +29,10 @@ class _RegisterEmailState extends State<RegisterEmail> {
     } else {
       // print("No Validado"); // ejecutando
     }
+  }
+
+  void intoEmail() {
+    context.read<RegiProvider>().enterEmail(emailController.text);
   }
 
   @override
