@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hank_talker_mobile/features/home/pages/home_page.dart';
+import 'package:hank_talker_mobile/features/login/pages/login_page.dart';
+import 'package:hank_talker_mobile/features/register/pages/register_email.dart';
 import 'package:hank_talker_mobile/features/register/pages/register_page.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
 import 'package:hank_talker_mobile/widgets/custom_widgets.dart';
@@ -29,7 +32,14 @@ class _RegisterPasswordState extends State<RegisterPassword> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              children: [CustomBackButton(context, () {})],
+              children: [
+                CustomBackButton(context, () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => RegisterEmail()),
+                  );
+                })
+              ],
             ),
             const SizedBox(height: 45),
             const Center(
@@ -58,7 +68,12 @@ class _RegisterPasswordState extends State<RegisterPassword> {
               });
             }, showPassword),
             const SizedBox(height: 40),
-            CusttomButtonRounded(context, () {}, 'Comenzar'),
+            CusttomButtonRounded(context, () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => LoginPage()),
+              );
+            }, 'Comenzar'),
           ],
         ),
       ),

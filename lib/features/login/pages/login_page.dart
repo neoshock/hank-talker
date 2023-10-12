@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hank_talker_mobile/features/home/pages/home_page.dart';
 import 'package:hank_talker_mobile/features/register/pages/register_page.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
 import 'package:hank_talker_mobile/widgets/inputs.dart';
@@ -17,16 +18,15 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController passwordController = TextEditingController();
   final formGlobalKey = GlobalKey<FormState>();
   bool showPassword = false;
+
   void login() {
     if (formGlobalKey.currentState!.validate()) {
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return const AlertDialog(
-              title: Text('Login'),
-              content: Text('Login'),
-            );
-          });
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage()),
+      );
+    } else {
+      // print("No Validado"); // ejecutando
     }
   }
 
@@ -35,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Padding(
+        body: SingleChildScrollView(
             padding: EdgeInsets.all(15),
             child: Center(
                 child: Form(
@@ -65,6 +65,13 @@ class _LoginPageState extends State<LoginPage> {
                             if (value == null || value == '') {
                               return 'Correo electrónico es requerido';
                             }
+                            String emailPattern =
+                                r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+';
+                            RegExp regex = RegExp(emailPattern);
+                            if (!regex.hasMatch(value!)) {
+                              return 'Ingrese un correo electrónico válido';
+                            }
+
                             return null;
                           },
                         ),

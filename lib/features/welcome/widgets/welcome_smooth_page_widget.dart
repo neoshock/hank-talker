@@ -67,7 +67,7 @@ class _WelcomeSmoothPageWidgetState extends State<WelcomeSmoothPageWidget> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SizedBox(
-          height: 200,
+          height: MediaQuery.sizeOf(context).height * 0.2,
           child: PageView.builder(
             controller: controller,
             // itemCount: pages.length,
