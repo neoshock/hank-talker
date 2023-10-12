@@ -16,15 +16,16 @@ class _HomePageState extends State<HomePage> {
     return Container(
       color: Theme.of(context).colorScheme.primary,
       child: const SafeArea(
+          bottom: false,
           child: Column(
-        children: [
-          HeaderSection(),
-          SizedBox(
-            height: 15,
-          ),
-          BodySection()
-        ],
-      )),
+            children: [
+              HeaderSection(),
+              SizedBox(
+                height: 15,
+              ),
+              BodySection()
+            ],
+          )),
     );
   }
 }

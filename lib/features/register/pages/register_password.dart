@@ -34,10 +34,7 @@ class _RegisterPasswordState extends State<RegisterPassword> {
             Row(
               children: [
                 CustomBackButton(context, () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => RegisterEmail()),
-                  );
+                  Navigator.pop(context);
                 })
               ],
             ),
@@ -68,12 +65,15 @@ class _RegisterPasswordState extends State<RegisterPassword> {
               });
             }, showPassword),
             const SizedBox(height: 40),
-            CusttomButtonRounded(context, () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => LoginPage()),
-              );
-            }, 'Comenzar'),
+            SizedBox(
+              width: MediaQuery.sizeOf(context).width,
+              child: CusttomButtonRounded(context, () {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginPage()),
+                    (route) => false);
+              }, 'Comenzar'),
+            )
           ],
         ),
       ),

@@ -13,12 +13,19 @@ class RegisterEmail extends StatefulWidget {
 
 class _RegisterEmailState extends State<RegisterEmail> {
   final TextEditingController emailController = TextEditingController();
+  final formGlobalKey = GlobalKey<FormState>();
 
   void email(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => RegisterPassword()),
-    );
+    // Acción para el botón "Siguiente"
+    // Implementa la lógica para guardar el correo electrónico
+    if (formGlobalKey.currentState!.validate()) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const RegisterPassword()),
+      );
+    } else {
+      // print("No Validado"); // ejecutando
+    }
   }
 
   @override
@@ -27,52 +34,59 @@ class _RegisterEmailState extends State<RegisterEmail> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(18.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 15),
-                Row(
+              padding: const EdgeInsets.all(18.0),
+              child: Form(
+                key: formGlobalKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CustomBackButton(context, () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => RegisterNane()),
-                      );
-                    })
+                    Row(
+                      children: [
+                        CustomBackButton(context, () {
+                          Navigator.pop(context);
+                        })
+                      ],
+                    ),
+                    const SizedBox(height: 45),
+                    const Center(
+                      child: Text(
+                        '¿Cuál es tu correo electrónico?',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 40),
+                    CustomTextImputWithOutLabel(
+                      emailController,
+                      TextInputType.emailAddress,
+                      context,
+                      const Icon(Icons.email),
+                      'john.Doe@gmail.com',
+                      (value) {
+                        if (value == null || value == '') {
+                          print("Validating email");
+                          return 'Correo electrónico es requerido';
+                        }
+                        final String emailPattern =
+                            r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+';
+                        final RegExp regex = RegExp(emailPattern);
+                        if (!regex.hasMatch(value!)) {
+                          return 'Ingrese un correo electrónico válido';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 40),
+                    SizedBox(
+                      width: MediaQuery.sizeOf(context).width,
+                      child: CusttomButtonRounded(
+                          context, () => email(context), 'Siguiente'),
+                    )
                   ],
                 ),
-                SizedBox(height: 20),
-                Center(
-                  child: Text(
-                    '¿Cuál es tu correo electrónico?',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 40),
-                CustomTextImputWithOutLabel(
-                  emailController,
-                  TextInputType.emailAddress,
-                  context,
-                  Icon(Icons.email),
-                  'john.Doe@gmail.com',
-                  (value) {
-                    if (value == null || value == '') {
-                      print("Validating email");
-                      return 'Correo electrónico es requerido';
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: 40),
-                CusttomButtonRounded(
-                    context, () => email(context), 'Siguiente'),
-              ],
-            ),
-          ),
+              )),
         ),
       ),
     );

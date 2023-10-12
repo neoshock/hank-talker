@@ -48,16 +48,16 @@ Widget CustomTextImputWithOutLabel(
     BuildContext context,
     Icon icon,
     String hintText,
-    Function validator) {
+    String? Function(String?)? validator) {
   return SizedBox(
-    height: 54,
     child: TextFormField(
       controller: controller,
       keyboardType: keyboardType,
-      validator: validator as String? Function(String?)?,
+      validator: validator,
       decoration: InputDecoration(
         filled: true,
         errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20),
             borderSide: BorderSide(color: Theme.of(context).colorScheme.error)),
         errorStyle: Theme.of(context)
             .textTheme
