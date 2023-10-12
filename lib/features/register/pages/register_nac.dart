@@ -35,26 +35,22 @@ class BirthDatePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 15),
             Row(
               children: [
                 CustomBackButton(context, () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => RegisterPage()),
-                  );
+                  Navigator.pop(context);
                 })
               ],
             ),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 45),
+            const Text(
               'Cual es tu fecha de nacimiento',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             Container(
               height: 54,
               decoration: BoxDecoration(
@@ -69,7 +65,7 @@ class BirthDatePage extends StatelessWidget {
                       child: TextFormField(
                         controller: dateController,
                         keyboardType: TextInputType.datetime,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           hintText: 'DD/MM/YYYY',
                           border: InputBorder.none,
                         ),
@@ -77,21 +73,25 @@ class BirthDatePage extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () => _selectDate(context),
-                      child: Icon(Icons.calendar_today, color: Colors.green),
+                      child:
+                          const Icon(Icons.calendar_today, color: Colors.green),
                     ),
                   ],
                 ),
               ),
             ),
-            SizedBox(height: 40),
-            CusttomButtonRounded(
-                context,
-                () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => RegisterNane()),
-                    ),
-                'Siguiente'),
-            SizedBox(height: 80),
+            const SizedBox(height: 40),
+            SizedBox(
+              width: MediaQuery.sizeOf(context).width,
+              child: CusttomButtonRounded(
+                  context,
+                  () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => RegisterNane()),
+                      ),
+                  'Siguiente'),
+            ),
+            const SizedBox(height: 80),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -102,11 +102,11 @@ class BirthDatePage extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => RegisterNane()),
                     );
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.arrow_forward,
                     color: Colors.green,
                   ),
-                  label: Text(
+                  label: const Text(
                     'Saltar',
                     style: TextStyle(color: Colors.green),
                   ),

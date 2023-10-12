@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 Widget CusttomButtonRounded(
     BuildContext context, Function onPressed, String title) {
   return SizedBox(
-    width: double.infinity,
     height: 54,
     child: ElevatedButton(
       onPressed: () => onPressed(),
       style: ElevatedButton.styleFrom(
+        backgroundColor: Theme.of(context).colorScheme.primary,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),

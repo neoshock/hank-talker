@@ -91,9 +91,12 @@ class _LoginPageState extends State<LoginPage> {
                             showPassword = !showPassword;
                           });
                         }, showPassword),
-                        const SizedBox(height: 15),
-                        CusttomButtonRounded(
-                            context, () => login(), 'Iniciar Sesión'),
+                        const SizedBox(height: 30),
+                        SizedBox(
+                          width: MediaQuery.sizeOf(context).width,
+                          child: CusttomButtonRounded(
+                              context, () => login(), 'Iniciar Sesión'),
+                        ),
                         const SizedBox(height: 60),
                         GestureDetector(
                           onTap: () {
