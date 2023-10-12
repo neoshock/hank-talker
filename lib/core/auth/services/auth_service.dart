@@ -7,10 +7,12 @@ class AuthService {
 
   Future<HttpBaseResponde> login(String email, String password) async {
     try {
-      final response = await api.post('/Auth/login', {
-        'email': email,
-        'password': password,
-      });
+      final response = await api.post(
+          '/Auth/login',
+          jsonEncode({
+            'email': email,
+            'password': password,
+          }));
 
       print(response.statusCode);
 
@@ -26,7 +28,6 @@ class AuthService {
       return HttpBaseResponde(
           code: 300, data: null, message: 'no vale esa webada', detail: null);
     } catch (e) {
-      print(e.toString());
       return HttpBaseResponde(
           code: 300, data: null, message: 'no vale esa webada', detail: null);
     }

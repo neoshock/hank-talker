@@ -19,7 +19,6 @@ class _LoginPageState extends State<LoginPage> {
   final formGlobalKey = GlobalKey<FormState>();
 
   void login() {
-    print('entro');
     if (formGlobalKey.currentState!.validate()) {
       context
           .read<AuthProvider>()
