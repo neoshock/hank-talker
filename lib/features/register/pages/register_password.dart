@@ -63,7 +63,7 @@ class _RegisterPasswordState extends State<RegisterPassword> {
               setState(() {
                 showPassword = !showPassword;
               });
-            }, showPassword),
+            }, false, showPassword),
             const SizedBox(height: 40),
             SizedBox(
               width: MediaQuery.sizeOf(context).width,

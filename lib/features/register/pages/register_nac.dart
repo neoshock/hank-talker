@@ -52,7 +52,7 @@ class BirthDatePage extends StatelessWidget {
             ),
             const SizedBox(height: 40),
             Container(
-              height: 54,
+              height: 66,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(color: Colors.green, width: 2),
