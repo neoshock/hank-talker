@@ -10,6 +10,8 @@ class CustomThemeData {
       foregroundColor: Color.fromRGBO(44, 44, 44, 1),
       elevation: 0,
     ),
+    scaffoldBackgroundColor:
+        const Color(0xFFF1F5F9), // light grey, used for background
     colorScheme: const ColorScheme.light(
       primary: Color(0xFF1B7505),
       secondary: Color(0xFFD29335),
@@ -21,8 +23,6 @@ class CustomThemeData {
       inversePrimary: Color(0xFF1B7505), // green, used for appbar bg
       inverseSurface:
           Color(0xFFD29335), // orange, used for appbar bg and button bg
-      surface:
-          Color.fromARGB(255, 255, 255, 255), // light grey, used for background
       onPrimary: Color(0xFFF1F5F9), // light grey, used for text on green
       onSecondary: Color.fromARGB(
           255, 108, 122, 122), // light grey, used for text on orange
