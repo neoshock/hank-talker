@@ -28,7 +28,7 @@ Widget CustomTextImputWithLabel(
                 .textTheme
                 .bodySmall!
                 .copyWith(color: Theme.of(context).colorScheme.error),
-            fillColor: Theme.of(context).colorScheme.surface,
+            fillColor: Theme.of(context).colorScheme.onPrimary,
             hintText: label,
             prefixIconColor: Theme.of(context).colorScheme.primaryContainer,
             prefixIcon: icon,
@@ -63,7 +63,7 @@ Widget CustomTextImputWithOutLabel(
             .textTheme
             .bodySmall!
             .copyWith(color: Theme.of(context).colorScheme.error),
-        fillColor: Theme.of(context).colorScheme.surface,
+        fillColor: Theme.of(context).colorScheme.onPrimary,
         hintText: hintText,
         prefixIconColor: Theme.of(context).colorScheme.primaryContainer,
         prefixIcon: icon,
@@ -118,11 +118,14 @@ Widget CustomImputPassword(
     String hintText,
     String? Function(String?)? validator,
     Function onPressed,
+    bool label,
     bool showPassword) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Text(hintText, style: Theme.of(context).textTheme.bodyLarge),
+      label
+          ? Text(hintText, style: Theme.of(context).textTheme.bodyLarge)
+          : SizedBox(),
       const SizedBox(height: 5),
       SizedBox(
         child: TextFormField(

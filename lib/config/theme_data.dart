@@ -10,6 +10,8 @@ class CustomThemeData {
       foregroundColor: Color.fromRGBO(44, 44, 44, 1),
       elevation: 0,
     ),
+    scaffoldBackgroundColor:
+        const Color(0xFFF1F5F9), // light grey, used for background
     colorScheme: const ColorScheme.light(
       primary: Color(0xFF1B7505),
       secondary: Color(0xFFD29335),

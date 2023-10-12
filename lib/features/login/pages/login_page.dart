@@ -90,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
                           setState(() {
                             showPassword = !showPassword;
                           });
-                        }, showPassword),
+                        }, true, showPassword),
                         const SizedBox(height: 30),
                         SizedBox(
                           width: MediaQuery.sizeOf(context).width,

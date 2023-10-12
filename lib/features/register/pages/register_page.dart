@@ -21,23 +21,32 @@ class RegisterPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.5,
-                  decoration: const BoxDecoration(
-                    color: Colors.green,
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(150),
-                      bottomRight: Radius.circular(100),
+                Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Transform.scale(
+                      scale: 1.5,
+                      child: Container(
+                        width: MediaQuery.sizeOf(context).width,
+                        height: MediaQuery.sizeOf(context).height * 0.45,
+                        decoration: const BoxDecoration(
+                          color: Colors.green,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(1000),
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                  child: Center(
-                    child: Image.asset(
-                      'assets/images/welcome_page.png',
-                      height: 250,
+                    Positioned(
+                      top: 150,
+                      child: Image.asset(
+                        'assets/images/welcome_page.png',
+                        height: 250,
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-                const SizedBox(height: 30),
+                const SizedBox(height: 150),
                 Padding(
                   padding: const EdgeInsets.only(left: 16.0),
                   child: Column(
