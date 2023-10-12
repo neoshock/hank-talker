@@ -13,23 +13,17 @@ class AuthService {
             'email': email,
             'password': password,
           }));
-
-      print(response.statusCode);
-
+      final decodedData = json.decode(response.body);
       if (response.statusCode == 200) {
-        final decodedData = json.decode(response.body);
         return HttpBaseResponde.fromJson(decodedData as Map<String, dynamic>);
       }
-
-      if (response.statusCode == 400) {
-        final decodedData = json.decode(response.body);
-        return HttpBaseResponde.fromJson(decodedData as Map<String, dynamic>);
-      }
-      return HttpBaseResponde(
-          code: 300, data: null, message: 'no vale esa webada', detail: null);
+      return HttpBaseResponde.fromJson(decodedData as Map<String, dynamic>);
     } catch (e) {
       return HttpBaseResponde(
-          code: 300, data: null, message: 'no vale esa webada', detail: null);
+          code: 500,
+          data: null,
+          message: 'Hubo un problema al iniciar sesion',
+          detail: null);
     }
   }
 }

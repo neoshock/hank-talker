@@ -7,7 +7,7 @@ import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:hank_talker_mobile/config/main_pages.dart';
 
 class BottomBar extends StatefulWidget {
-  const BottomBar({Key? key}) : super(key: key);
+  const BottomBar({super.key});
 
   @override
   _BottomBarState createState() => _BottomBarState();
@@ -49,7 +49,7 @@ class _BottomBarState extends State<BottomBar> {
     return Scaffold(
         body: PageView(
             controller: pageController,
-            physics: const NeverScrollableScrollPhysics(),
+            physics: NeverScrollableScrollPhysics(),
             children: mainPages),
         bottomNavigationBar: Container(
           child: BottomBarInspiredOutside(
@@ -65,7 +65,6 @@ class _BottomBarState extends State<BottomBar> {
               color: Theme.of(context).colorScheme.surface,
               background: Theme.of(context).colorScheme.primary,
             ),
-            animated: true,
             indexSelected: currentIndex,
             onTap: (int index) => setState(() {
               currentIndex = index;

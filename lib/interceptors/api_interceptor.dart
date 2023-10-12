@@ -14,8 +14,11 @@ class ApiInterceptor {
   }
 
   Future<http.Response> post(String url, dynamic body) async {
-    return http.post(Uri.parse(apiUrl + url),
-        headers: defaultHeaders, body: body);
+    return http.post(
+      Uri.parse(apiUrl + url),
+      headers: defaultHeaders,
+      body: body,
+    );
   }
 
   Future<http.Response> put(String url, dynamic body) async {

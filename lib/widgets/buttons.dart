@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 Widget CusttomButtonRounded(
     BuildContext context, Function onPressed, String title) {
   return SizedBox(
-    width: double.infinity,
     height: 54,
     child: ElevatedButton(
       onPressed: () => onPressed(),
       style: ElevatedButton.styleFrom(
+        backgroundColor: Theme.of(context).colorScheme.primary,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
@@ -27,16 +27,20 @@ Widget CustomButtonOutLine(
     BuildContext context, Function onPressed, String title) {
   return SizedBox(
     width: double.infinity,
-    height: 54,
+    height: 60,
     child: OutlinedButton(
       onPressed: () => onPressed(),
       style: OutlinedButton.styleFrom(
-        side: BorderSide(color: Theme.of(context).primaryColor),
+        side: BorderSide(color: Colors.white),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
       ),
-      child: Text(title, style: Theme.of(context).textTheme.displaySmall),
+      child: Text(title,
+          style: Theme.of(context)
+              .textTheme
+              .displaySmall!
+              .copyWith(color: Colors.white)),
     ),
   );
 }
