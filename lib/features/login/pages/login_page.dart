@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hank_talker_mobile/features/home/pages/home_page.dart';
-import 'package:hank_talker_mobile/features/register/pages/register_page.dart';
+import 'package:hank_talker_mobile/core/auth/providers/auth_provider.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
 import 'package:hank_talker_mobile/widgets/inputs.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -20,13 +20,11 @@ class _LoginPageState extends State<LoginPage> {
   bool showPassword = false;
 
   void login() {
+    print('entro');
     if (formGlobalKey.currentState!.validate()) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => HomePage()),
-      );
-    } else {
-      // print("No Validado"); // ejecutando
+      context
+          .read<AuthProvider>()
+          .login(emailController.text, passwordController.text);
     }
   }
 
@@ -86,43 +84,9 @@ class _LoginPageState extends State<LoginPage> {
                             return 'Contraseña es requerida';
                           }
                           return null;
-                        }, () {
-                          setState(() {
-                            showPassword = !showPassword;
-                          });
-                        }, true, showPassword),
-                        const SizedBox(height: 30),
-                        SizedBox(
-                          width: MediaQuery.sizeOf(context).width,
-                          child: CusttomButtonRounded(
-                              context, () => login(), 'Iniciar Sesión'),
-                        ),
-                        const SizedBox(height: 60),
-                        GestureDetector(
-                          onTap: () {
-                            //  print("Registrarse Tocado"); // ejecutando
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => RegisterPage()),
-                            );
-                          },
-                          child: RichText(
-                            text: TextSpan(
-                              text: '¿No tienes una cuenta? ',
-                              style: TextStyle(color: Colors.black),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: 'Registrarse',
-                                  style: TextStyle(
-                                    color: Colors.green,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
+                        }, false),
+                        const SizedBox(height: 15),
+                        CusttomButtonRounded(context, login, 'Login'),
                       ],
                     )))));
   }
