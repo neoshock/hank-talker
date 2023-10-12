@@ -49,7 +49,7 @@ class _BottomBarState extends State<BottomBar> {
     return Scaffold(
         body: PageView(
             controller: pageController,
-            physics: const NeverScrollableScrollPhysics(),
+            physics: NeverScrollableScrollPhysics(),
             children: mainPages),
         bottomNavigationBar: Container(
           child: BottomBarInspiredOutside(
