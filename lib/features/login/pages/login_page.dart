@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hank_talker_mobile/core/auth/providers/auth_provider.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
 import 'package:hank_talker_mobile/widgets/inputs.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -17,15 +19,11 @@ class _LoginPageState extends State<LoginPage> {
   final formGlobalKey = GlobalKey<FormState>();
 
   void login() {
+    print('entro');
     if (formGlobalKey.currentState!.validate()) {
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return const AlertDialog(
-              title: Text('Login'),
-              content: Text('Login'),
-            );
-          });
+      context
+          .read<AuthProvider>()
+          .login(emailController.text, passwordController.text);
     }
   }
 
@@ -68,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
                           return null;
                         }, false),
                         const SizedBox(height: 15),
-                        CusttomButtonRounded(context, () => login(), 'Login'),
+                        CusttomButtonRounded(context, login, 'Login'),
                       ],
                     )))));
   }
