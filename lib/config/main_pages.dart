@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hank_talker_mobile/features/home/pages/home_page.dart';
+import 'package:hank_talker_mobile/features/learning/pages/learning_page.dart';
 
 final List<Widget> mainPages = [
   const HomePage(),
-  const Center(
-    child: Text('Cart'),
-  ),
+  const LearningPage(),
   const Center(
     child: Text('Profile'),
   ),
