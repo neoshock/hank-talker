@@ -7,6 +7,7 @@ import 'package:hank_talker_mobile/features/register/pages/register_nane.dart';
 import 'package:hank_talker_mobile/features/register/pages/register_page.dart';
 import 'package:hank_talker_mobile/features/register/pages/register_password.dart';
 import 'package:hank_talker_mobile/features/welcome/pages/welcome_page.dart';
+import 'package:hank_talker_mobile/features/settings/pages/settings_page.dart';
 import 'package:hank_talker_mobile/l10n/l10n.dart';
 import 'package:hank_talker_mobile/widgets/bottom_bar.dart';
 
@@ -20,7 +21,7 @@ class App extends StatelessWidget {
       darkTheme: CustomThemeData.darkTheme,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: WelcomePage(),
+      home: BottomBar(),
     );
   }
 }

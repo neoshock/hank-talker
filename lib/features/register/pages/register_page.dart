@@ -24,6 +24,7 @@ class RegisterPage extends StatelessWidget {
                 Stack(
                   alignment: Alignment.center,
                   children: [
+                    SizedBox(height: MediaQuery.sizeOf(context).height * 0.5),
                     Transform.scale(
                       scale: 1.5,
                       child: Container(
@@ -46,7 +47,7 @@ class RegisterPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 150),
+                const SizedBox(height: 90),
                 Padding(
                   padding: const EdgeInsets.only(left: 16.0),
                   child: Column(
