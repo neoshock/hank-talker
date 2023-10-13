@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hank_talker_mobile/core/register/providers/regi_provider.dart';
 import 'package:hank_talker_mobile/features/home/pages/home_page.dart';
 import 'package:hank_talker_mobile/features/login/pages/login_page.dart';
 import 'package:hank_talker_mobile/features/register/pages/register_email.dart';
@@ -19,6 +20,7 @@ class RegisterPassword extends StatefulWidget {
 
 class _RegisterPasswordState extends State<RegisterPassword> {
   final passwordController = TextEditingController(text: '');
+  final RegiProvider regiProvider = RegiProvider();
   bool showPassword = false;
 
   @override
@@ -68,6 +70,7 @@ class _RegisterPasswordState extends State<RegisterPassword> {
             SizedBox(
               width: MediaQuery.sizeOf(context).width,
               child: CusttomButtonRounded(context, () {
+                intoPassword();
                 Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (context) => LoginPage()),
@@ -78,5 +81,11 @@ class _RegisterPasswordState extends State<RegisterPassword> {
         ),
       ),
     )));
+  }
+
+  void intoPassword() async {
+    final result =
+        await context.read<RegiProvider>().register(passwordController.text);
+    print(result.message);
   }
 }
