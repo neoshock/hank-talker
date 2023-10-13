@@ -6,6 +6,7 @@ import 'package:hank_talker_mobile/features/home/pages/home_page.dart';
 import 'package:hank_talker_mobile/features/login/pages/login_page.dart';
 import 'package:hank_talker_mobile/features/register/pages/register_email.dart';
 import 'package:hank_talker_mobile/features/register/pages/register_page.dart';
+import 'package:hank_talker_mobile/utils/dialogs_events.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
 import 'package:hank_talker_mobile/widgets/custom_widgets.dart';
 import 'package:hank_talker_mobile/widgets/inputs.dart';
@@ -69,13 +70,11 @@ class _RegisterPasswordState extends State<RegisterPassword> {
             const SizedBox(height: 40),
             SizedBox(
               width: MediaQuery.sizeOf(context).width,
-              child: CusttomButtonRounded(context, () {
-                intoPassword();
-                Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context) => LoginPage()),
-                    (route) => false);
-              }, 'Comenzar'),
+              child: CusttomButtonRounded(
+                context,
+                intoPassword,
+                'Comenzar',
+              ),
             )
           ],
         ),
@@ -83,9 +82,22 @@ class _RegisterPasswordState extends State<RegisterPassword> {
     )));
   }
 
-  void intoPassword() async {
+  Future<void> intoPassword() async {
     final result =
         await context.read<RegiProvider>().register(passwordController.text);
-    print(result.message);
+    if (result.code == 200) {
+      // ignore: use_build_context_synchronously
+      await showSuccessDialog('Felicidades', result.message, context);
+      // ignore: use_build_context_synchronously
+      await Navigator.pushAndRemoveUntil(
+        context,
+        // ignore: inference_failure_on_instance_creation
+        MaterialPageRoute(builder: (context) => const LoginPage()),
+        (route) => false,
+      );
+    } else {
+      // ignore: use_build_context_synchronously
+      await showErrorDialog('Error', result.message, context);
+    }
   }
 }

@@ -48,8 +48,8 @@ class _LearningPageState extends State<LearningPage> {
                           )
                         ],
                       ),
-                      CategoryListHorizontal(),
-                      SizedBox(
+                      const CategoryListHorizontal(),
+                      const SizedBox(
                         height: 15,
                       ),
                       Row(
@@ -62,14 +62,14 @@ class _LearningPageState extends State<LearningPage> {
                           )),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       ...List.generate(15, (index) {
                         return Container(
                           margin: const EdgeInsets.all(15),
                           width: MediaQuery.of(context).size.width,
-                          padding: EdgeInsets.all(15),
+                          padding: const EdgeInsets.all(15),
                           decoration: BoxDecoration(
                             color: Theme.of(context).colorScheme.surface,
                             borderRadius: BorderRadius.circular(15),
@@ -80,7 +80,7 @@ class _LearningPageState extends State<LearningPage> {
                                       color: Colors.grey.withOpacity(0.25),
                                       spreadRadius: 3,
                                       blurRadius: 6,
-                                      offset: Offset(
+                                      offset: const Offset(
                                           0, 3), // changes position of shadow
                                     ),
                                   ]
@@ -98,7 +98,8 @@ class _LearningPageState extends State<LearningPage> {
                             ),
                             title: Text('Clase ${index + 1}'),
                             subtitle: Text('Categoría ${index + 1}'),
-                            trailing: Icon(PhosphorIcons.arrow_right_bold),
+                            trailing:
+                                const Icon(PhosphorIcons.arrow_right_bold),
                           ),
                         );
                       })
