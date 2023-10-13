@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hank_talker_mobile/config/theme_data.dart';
+import 'package:hank_talker_mobile/core/register/providers/regi_provider.dart';
 import 'package:hank_talker_mobile/features/register/pages/register_nane.dart';
 import 'package:hank_talker_mobile/features/register/pages/register_page.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
@@ -8,6 +9,7 @@ import 'package:hank_talker_mobile/widgets/inputs.dart';
 
 class BirthDatePage extends StatelessWidget {
   final TextEditingController dateController = TextEditingController();
+  final RegiProvider regiProvider = RegiProvider();
 
   Future<void> _selectDate(BuildContext context) async {
     DateTime? pickedDate = await showDatePicker(
@@ -85,10 +87,14 @@ class BirthDatePage extends StatelessWidget {
               width: MediaQuery.sizeOf(context).width,
               child: CusttomButtonRounded(
                   context,
-                  () => Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => RegisterNane()),
-                      ),
+                  () => {
+                        intoDate(),
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => RegisterNane()),
+                        ),
+                      },
                   'Siguiente'),
             ),
             const SizedBox(height: 80),
@@ -117,5 +123,9 @@ class BirthDatePage extends StatelessWidget {
         ),
       )),
     ));
+  }
+
+  void intoDate() {
+    regiProvider.enterDateBirthday(dateController.text);
   }
 }
