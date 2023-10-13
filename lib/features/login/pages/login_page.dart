@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hank_talker_mobile/core/auth/providers/auth_provider.dart';
 import 'package:hank_talker_mobile/features/home/pages/home_page.dart';
 import 'package:hank_talker_mobile/features/register/pages/register_page.dart';
+import 'package:hank_talker_mobile/widgets/bottom_bar.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
 import 'package:hank_talker_mobile/widgets/inputs.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
@@ -19,14 +21,52 @@ class _LoginPageState extends State<LoginPage> {
   final formGlobalKey = GlobalKey<FormState>();
   bool showPassword = false;
 
-  void login() {
+  void login() async {
     if (formGlobalKey.currentState!.validate()) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => HomePage()),
-      );
-    } else {
-      // print("No Validado"); // ejecutando
+      final loginResponse = await context
+          .read<AuthProvider>()
+          .login(emailController.text, passwordController.text);
+      if (loginResponse.code == 200) {
+        await showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('Bienvenido'),
+                content: Text(loginResponse.message),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text('Aceptar'),
+                  ),
+                ],
+              );
+            });
+
+        await Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const BottomBar()),
+          (Route<dynamic> route) => false,
+        );
+      } else {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('Error'),
+                content: Text(loginResponse.message),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text('Aceptar'),
+                  ),
+                ],
+              );
+            });
+      }
     }
   }
 

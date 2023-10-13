@@ -20,9 +20,9 @@ class HttpBaseResponde {
       );
 
   Map<String, dynamic> toJson() => {
-        "code": code,
-        "data": data.toJson(),
-        "message": message,
-        "detail": detail,
+        'code': code,
+        'data': data.toJson(),
+        'message': message,
+        'detail': detail,
       };
 }

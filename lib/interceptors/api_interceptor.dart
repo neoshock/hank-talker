@@ -5,8 +5,8 @@ class ApiInterceptor {
   final String apiUrl = AppConstants.API_BASE_URL;
 
   final Map<String, String> defaultHeaders = {
-    'Authorization': 'Bearer tu_token_de_autenticacion',
     'Content-Type': 'application/json',
+    'Accept': 'application/json',
   };
 
   Future<http.Response> get(String url) async {
@@ -14,8 +14,11 @@ class ApiInterceptor {
   }
 
   Future<http.Response> post(String url, dynamic body) async {
-    return http.post(Uri.parse(apiUrl + url),
-        headers: defaultHeaders, body: body);
+    return http.post(
+      Uri.parse(apiUrl + url),
+      headers: defaultHeaders,
+      body: body,
+    );
   }
 
   Future<http.Response> put(String url, dynamic body) async {
