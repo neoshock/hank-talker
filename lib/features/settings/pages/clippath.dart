@@ -3,8 +3,8 @@ import 'package:hank_talker_mobile/features/login/pages/login_page.dart';
 import 'package:hank_talker_mobile/features/register/pages/register_nac.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
 
-class RegisterPage extends StatelessWidget {
-  const RegisterPage({Key? key});
+class MyClippath extends StatelessWidget {
+  const MyClippath({Key? key});
 
   @override
   Widget build(BuildContext context) {
