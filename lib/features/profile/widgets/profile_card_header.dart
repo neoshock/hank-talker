@@ -102,7 +102,7 @@ class ProfileCardHeader extends StatelessWidget {
                 ],
               ),
             ],
-          )
+          ),
         ],
       ),
     );
