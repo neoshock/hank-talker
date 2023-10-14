@@ -12,6 +12,7 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          toolbarHeight: 90,
           automaticallyImplyLeading: false,
           title: const Text(
             'Ajustes',
@@ -23,8 +24,8 @@ class SettingsPage extends StatelessWidget {
           ),
           leadingWidth: 76,
           leading: Container(
-            margin: const EdgeInsets.only(left: 15),
-            padding: const EdgeInsets.all(3),
+            margin: const EdgeInsets.only(left: 18),
+            padding: const EdgeInsets.symmetric(vertical: 18),
             child: CustomBackButton(context, () {
               Navigator.pop(context);
             }),
@@ -38,13 +39,13 @@ class SettingsPage extends StatelessWidget {
                 const SizedBox(height: 30),
                 CustomCardWidget(children: [
                   Text('Pais',
-                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           color: Theme.of(context).colorScheme.onSecondary)),
                   const ListTileCountry()
                 ]),
                 CustomCardWidget(children: [
                   Text('Otros ajustes',
-                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           color: Theme.of(context).colorScheme.onSecondary)),
                   const SizedBox(height: 15),
                   CustomSettingsListTile(title: 'Notificaciones', onTap: () {}),

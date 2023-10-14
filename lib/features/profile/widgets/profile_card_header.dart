@@ -7,7 +7,7 @@ class ProfileCardHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.sizeOf(context).height * 0.33,
+      height: MediaQuery.sizeOf(context).height * 0.36,
       width: MediaQuery.sizeOf(context).width,
       padding: const EdgeInsets.all(30),
       child: Column(
@@ -30,7 +30,7 @@ class ProfileCardHeader extends StatelessWidget {
                     height: 6,
                   ),
                   Text(
-                    'novato',
+                    'Novato',
                     style: Theme.of(context).textTheme.bodyLarge,
                   )
                 ],
@@ -46,7 +46,6 @@ class ProfileCardHeader extends StatelessWidget {
               )
             ],
           ),
-          const SizedBox(height: 15),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -60,13 +59,13 @@ class ProfileCardHeader extends StatelessWidget {
               )
             ],
           ),
-          const SizedBox(height: 15),
+          const SizedBox(height: 6),
           Divider(
             height: 0,
             color: Theme.of(context).colorScheme.onSecondary.withOpacity(0.25),
             thickness: 1,
           ),
-          const SizedBox(height: 15),
+          const SizedBox(height: 6),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [

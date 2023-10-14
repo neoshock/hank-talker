@@ -34,7 +34,7 @@ class _ProfilePageState extends State<ProfilePage> {
             CustomCardWidget(
               children: [
                 Text('Panel',
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         color: Theme.of(context).colorScheme.onSecondary)),
                 const SizedBox(height: 15),
                 CustomListtileWidget(
@@ -69,7 +69,7 @@ class _ProfilePageState extends State<ProfilePage> {
             CustomCardWidget(
               children: [
                 Text('Cuenta',
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         color: Theme.of(context).colorScheme.onSecondary)),
                 const SizedBox(height: 15),
                 Row(

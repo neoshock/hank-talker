@@ -13,6 +13,7 @@ class WelcomePage extends StatelessWidget {
           bottom: false,
           child: Column(
             children: [
+              SizedBox(height: 50),
               Image.asset('assets/images/Logo.png'),
               const Spacer(),
               Container(
