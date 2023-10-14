@@ -22,11 +22,14 @@ class App extends StatelessWidget {
         ],
         builder: (context, child) {
           return MaterialApp(
-              theme: CustomThemeData.lightTheme,
-              darkTheme: CustomThemeData.darkTheme,
-              localizationsDelegates: AppLocalizations.localizationsDelegates,
-              supportedLocales: AppLocalizations.supportedLocales,
-              home: RegisterPage());
+            theme: CustomThemeData.lightTheme,
+            darkTheme: CustomThemeData.darkTheme,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            home: Provider.of<AuthProvider>(context).isAuth
+                ? const BottomBar()
+                : const WelcomePage(),
+          );
         });
   }
 }

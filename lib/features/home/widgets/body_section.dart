@@ -17,7 +17,7 @@ class BodySection extends StatelessWidget {
             topRight: Radius.circular(30),
           ),
         ),
-        child: SingleChildScrollView(
+        child: Padding(
           padding: const EdgeInsets.all(15),
           child: Column(
             children: [
