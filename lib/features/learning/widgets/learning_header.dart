@@ -8,13 +8,13 @@ class LearningHeader extends StatelessWidget {
     return Container(
         width: MediaQuery.sizeOf(context).width,
         height: MediaQuery.sizeOf(context).height * 0.24,
-        decoration: BoxDecoration(color: Theme.of(context).primaryColor),
+        decoration: const BoxDecoration(color: Color(0XFF3A85A5)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
               child: Padding(
-                padding: EdgeInsets.all(15),
+                padding: const EdgeInsets.all(15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -24,7 +24,7 @@ class LearningHeader extends StatelessWidget {
                             Theme.of(context).textTheme.displayMedium!.copyWith(
                                   color: Colors.white,
                                 )),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     Text('Aprende lenguaje de señas rápido y fácil',
