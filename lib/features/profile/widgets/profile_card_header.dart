@@ -62,6 +62,7 @@ class ProfileCardHeader extends StatelessWidget {
           ),
           const SizedBox(height: 15),
           Divider(
+            height: 0,
             color: Theme.of(context).colorScheme.onSecondary.withOpacity(0.25),
             thickness: 1,
           ),
