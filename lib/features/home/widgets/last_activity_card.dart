@@ -52,6 +52,7 @@ class LastActivityCard extends StatelessWidget {
                     height: 6,
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SizedBox(
                         width: MediaQuery.sizeOf(context).width * 0.5,
@@ -67,7 +68,7 @@ class LastActivityCard extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        width: 15,
+                        width: 6,
                       ),
                       Text(
                         '3/5',

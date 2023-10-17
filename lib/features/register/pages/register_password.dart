@@ -6,7 +6,9 @@ import 'package:hank_talker_mobile/features/home/pages/home_page.dart';
 import 'package:hank_talker_mobile/features/login/pages/login_page.dart';
 import 'package:hank_talker_mobile/features/register/pages/register_email.dart';
 import 'package:hank_talker_mobile/features/register/pages/register_page.dart';
+import 'package:hank_talker_mobile/utils/dialogs_events.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
+import 'package:hank_talker_mobile/widgets/custom_appbar_widget.dart';
 import 'package:hank_talker_mobile/widgets/custom_widgets.dart';
 import 'package:hank_talker_mobile/widgets/inputs.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
@@ -26,66 +28,70 @@ class _RegisterPasswordState extends State<RegisterPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: CustomAppbarWidget(context, showBackButton: true),
         body: SafeArea(
             child: SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(18.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
+          child: Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomBackButton(context, () {
-                  Navigator.pop(context);
-                })
+                const Center(
+                  child: Text(
+                    'Configura tu contraseña',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 40),
+                CustomImputPassword(
+                    passwordController,
+                    TextInputType.visiblePassword,
+                    context,
+                    const Icon(PhosphorIcons.lock),
+                    'Contraseña', (value) {
+                  if (value == null || value == '') {
+                    return 'Contraseña es requerida';
+                  }
+                  return null;
+                }, () {
+                  setState(() {
+                    showPassword = !showPassword;
+                  });
+                }, false, showPassword),
+                const SizedBox(height: 40),
+                SizedBox(
+                  width: MediaQuery.sizeOf(context).width,
+                  child: CusttomButtonRounded(
+                    context,
+                    intoPassword,
+                    'Comenzar',
+                  ),
+                )
               ],
             ),
-            const SizedBox(height: 45),
-            const Center(
-              child: Text(
-                'Configura tu contraseña',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            const SizedBox(height: 40),
-            CustomImputPassword(
-                passwordController,
-                TextInputType.visiblePassword,
-                context,
-                const Icon(PhosphorIcons.lock),
-                'Contraseña', (value) {
-              if (value == null || value == '') {
-                return 'Contraseña es requerida';
-              }
-              return null;
-            }, () {
-              setState(() {
-                showPassword = !showPassword;
-              });
-            }, false, showPassword),
-            const SizedBox(height: 40),
-            SizedBox(
-              width: MediaQuery.sizeOf(context).width,
-              child: CusttomButtonRounded(context, () {
-                intoPassword();
-                Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context) => LoginPage()),
-                    (route) => false);
-              }, 'Comenzar'),
-            )
-          ],
-        ),
-      ),
-    )));
+          ),
+        )));
   }
 
-  void intoPassword() async {
+  Future<void> intoPassword() async {
     final result =
         await context.read<RegiProvider>().register(passwordController.text);
-    print(result.message);
+    if (result.code == 200) {
+      // ignore: use_build_context_synchronously
+      await showSuccessDialog('Felicidades', result.message, context);
+      // ignore: use_build_context_synchronously
+      await Navigator.pushAndRemoveUntil(
+        context,
+        // ignore: inference_failure_on_instance_creation
+        MaterialPageRoute(builder: (context) => const LoginPage()),
+        (route) => false,
+      );
+    } else {
+      // ignore: use_build_context_synchronously
+      await showErrorDialog('Error', result.message, context);
+    }
   }
 }

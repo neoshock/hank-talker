@@ -16,6 +16,7 @@ class _ExperienceChartWidgetState extends State<ExperienceChartWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final chartColor = Theme.of(context).colorScheme.secondary;
     return Card(
       elevation: 1,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -24,7 +25,7 @@ class _ExperienceChartWidgetState extends State<ExperienceChartWidget> {
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.all(15),
+                padding: const EdgeInsets.all(15),
                 child: Row(
                   children: [
                     Expanded(
@@ -35,7 +36,7 @@ class _ExperienceChartWidgetState extends State<ExperienceChartWidget> {
                             'Experiencia obtenida',
                             style: Theme.of(context).textTheme.bodyMedium,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 6,
                           ),
                           Text(
@@ -49,10 +50,7 @@ class _ExperienceChartWidgetState extends State<ExperienceChartWidget> {
                       width: 50,
                       height: 50,
                       decoration: BoxDecoration(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .primary
-                              .withOpacity(0.2),
+                          color: chartColor.withOpacity(0.5),
                           borderRadius: BorderRadius.circular(15)),
                       child: Center(
                         child: Text(
@@ -64,16 +62,16 @@ class _ExperienceChartWidgetState extends State<ExperienceChartWidget> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               AspectRatio(
                 aspectRatio: 2,
                 child: LineChart(LineChartData(
-                  gridData: FlGridData(
+                  gridData: const FlGridData(
                     show: false,
                   ),
-                  titlesData: FlTitlesData(
+                  titlesData: const FlTitlesData(
                     show: false,
                   ),
                   borderData: FlBorderData(
@@ -85,35 +83,28 @@ class _ExperienceChartWidgetState extends State<ExperienceChartWidget> {
                   maxY: 6,
                   lineBarsData: [
                     LineChartBarData(
-                      belowBarData: BarAreaData(
-                          show: true,
-                          gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                Theme.of(context)
-                                    .colorScheme
-                                    .primary
-                                    .withOpacity(0.25),
-                                Theme.of(context)
-                                    .colorScheme
-                                    .primary
-                                    .withOpacity(0)
-                              ])),
-                      spots: const [
-                        FlSpot(0, 3),
-                        FlSpot(2.6, 2),
-                        FlSpot(4.9, 5),
-                        FlSpot(6.8, 3.1),
-                        FlSpot(8, 4),
-                        FlSpot(9.5, 3),
-                        FlSpot(11, 4),
-                      ],
-                      isCurved: true,
-                      barWidth: 5,
-                      isStrokeCapRound: true,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
+                        belowBarData: BarAreaData(
+                            show: true,
+                            gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  chartColor.withOpacity(0.3),
+                                  chartColor.withOpacity(0.1),
+                                ])),
+                        spots: const [
+                          FlSpot(0, 3),
+                          FlSpot(2.6, 2),
+                          FlSpot(4.9, 5),
+                          FlSpot(6.8, 3.1),
+                          FlSpot(8, 4),
+                          FlSpot(9.5, 3),
+                          FlSpot(11, 4),
+                        ],
+                        isCurved: true,
+                        barWidth: 5,
+                        isStrokeCapRound: true,
+                        color: chartColor),
                   ],
                 )),
               ),

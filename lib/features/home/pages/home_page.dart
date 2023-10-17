@@ -14,16 +14,13 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     // ignore: use_colored_box
     return Container(
-      color: Theme.of(context).colorScheme.primary,
+      color: const Color(0XFF3AA590),
       child: const SafeArea(
           bottom: false,
-          child: Column(
-            children: [
-              HeaderSection(),
-              SizedBox(
-                height: 15,
-              ),
-              BodySection()
+          child: CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(child: HeaderSection()),
+              SliverFillRemaining(hasScrollBody: false, child: BodySection())
             ],
           )),
     );
