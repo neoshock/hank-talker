@@ -25,13 +25,13 @@ class CurvedBackgroundClipper extends CustomClipper<Path> {
       ..lineTo(0, size.height)
       ..quadraticBezierTo(
         size.width / 4,
-        size.height - 180,
-        size.width / 2,
         size.height - 150,
+        size.width / 2,
+        size.height - 120,
       )
       ..quadraticBezierTo(
         3 / 4 * size.width,
-        size.height - 120,
+        size.height - 90,
         size.width,
         size.height - 210,
       )

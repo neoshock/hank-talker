@@ -4,6 +4,7 @@ import 'package:hank_talker_mobile/core/register/providers/regi_provider.dart';
 import 'package:hank_talker_mobile/features/register/pages/register_nane.dart';
 import 'package:hank_talker_mobile/features/register/pages/register_password.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
+import 'package:hank_talker_mobile/widgets/custom_appbar_widget.dart';
 import 'package:hank_talker_mobile/widgets/custom_widgets.dart';
 import 'package:hank_talker_mobile/widgets/inputs.dart';
 import 'package:provider/provider.dart';
@@ -38,6 +39,7 @@ class _RegisterEmailState extends State<RegisterEmail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppbarWidget(context, showBackButton: true),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -47,14 +49,6 @@ class _RegisterEmailState extends State<RegisterEmail> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        CustomBackButton(context, () {
-                          Navigator.pop(context);
-                        })
-                      ],
-                    ),
-                    const SizedBox(height: 45),
                     const Center(
                       child: Text(
                         '¿Cuál es tu correo electrónico?',
