@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:hank_talker_mobile/core/auth/models/user_model.dart';
+import 'package:hank_talker_mobile/core/auth/providers/auth_provider.dart';
 import 'package:hank_talker_mobile/features/profile/widgets/curved_background.dart';
 import 'package:hank_talker_mobile/features/profile/widgets/profile_card_header.dart';
+import 'package:hank_talker_mobile/features/settings/pages/privacy_page.dart';
 import 'package:hank_talker_mobile/features/settings/pages/settings_page.dart';
 import 'package:hank_talker_mobile/widgets/custom_card_widget.dart';
 import 'package:hank_talker_mobile/widgets/custom_listtile_widget.dart';
+import 'package:provider/provider.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -14,6 +18,18 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  UserModel? user;
+
+  @override
+  void initState() {
+    super.initState();
+    getUserData();
+  }
+
+  Future<void> getUserData() async {
+    user = Provider.of<AuthProvider>(context, listen: false).user;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -22,13 +38,23 @@ class _ProfilePageState extends State<ProfilePage> {
             child: Column(
           children: [
             Stack(
-              alignment: Alignment.topCenter,
+              alignment: AlignmentDirectional.topCenter,
               children: [
                 SizedBox(
-                  height: MediaQuery.sizeOf(context).height * 0.45,
+                  height: MediaQuery.sizeOf(context).height * 0.36,
                 ),
                 const CurvedBackground(),
-                const Positioned(bottom: 0, child: ProfileCardHeader())
+                Positioned(
+                  top: MediaQuery.of(context).size.height * 0.12,
+                  child: ProfileCardHeader(
+                    photoUrl: user!.photoUrl!,
+                    name: user!.displayName!,
+                    joinedDate: '12/12/2012',
+                    status: 'Novato',
+                    totalLessons: 15,
+                    totalRewards: 20,
+                  ),
+                )
               ],
             ),
             CustomCardWidget(
@@ -60,10 +86,15 @@ class _ProfilePageState extends State<ProfilePage> {
                       size: 30,
                     ),
                     color: Theme.of(context).colorScheme.onSecondary,
-                    onTap: () {}),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PrivacyPage()));
+                    }),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             CustomCardWidget(
