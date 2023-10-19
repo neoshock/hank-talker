@@ -28,4 +28,15 @@ class AuthProvider with ChangeNotifier {
     notifyListeners();
     return respose;
   }
+
+  Future<UserModel> getUser() {
+    return Future.value(_user);
+  }
+
+  Future<void> updateUserData(UserModel user) {
+    _user.displayName = user.displayName;
+    _user.photoUrl = user.photoUrl;
+    notifyListeners();
+    return Future.value();
+  }
 }

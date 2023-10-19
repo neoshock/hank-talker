@@ -23,11 +23,6 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     super.initState();
-    getUserData();
-  }
-
-  Future<void> getUserData() async {
-    user = Provider.of<AuthProvider>(context, listen: false).user;
   }
 
   @override
@@ -45,16 +40,30 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 const CurvedBackground(),
                 Positioned(
-                  top: MediaQuery.of(context).size.height * 0.12,
-                  child: ProfileCardHeader(
-                    photoUrl: user!.photoUrl!,
-                    name: user!.displayName!,
-                    joinedDate: '12/12/2012',
-                    status: 'Novato',
-                    totalLessons: 15,
-                    totalRewards: 20,
-                  ),
-                )
+                    top: MediaQuery.sizeOf(context).height * 0.12,
+                    child: Consumer<AuthProvider>(
+                      builder: (context, value, child) {
+                        return FutureBuilder<UserModel>(
+                            future: value.getUser(),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                user = snapshot.data;
+                                return ProfileCardHeader(
+                                  name: user!.displayName!,
+                                  photoUrl: user!.photoUrl!,
+                                  status: 'Novato',
+                                  joinedDate: '12/12/2012',
+                                  totalLessons: 12,
+                                  totalRewards: 32,
+                                );
+                              } else {
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              }
+                            });
+                      },
+                    )),
               ],
             ),
             CustomCardWidget(
