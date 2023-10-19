@@ -4,6 +4,7 @@ class UserNew {
   String lastName;
   String password;
   String dateBirthday;
+  String photoUrl;
 
   UserNew({
     this.email = '',
@@ -11,6 +12,7 @@ class UserNew {
     this.lastName = '',
     this.password = '',
     this.dateBirthday = '',
+    this.photoUrl = '',
   });
 
   factory UserNew.fromJson(Map<String, dynamic> json) => UserNew(
