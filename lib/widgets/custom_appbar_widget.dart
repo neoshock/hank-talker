@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:hank_talker_mobile/widgets/custom_widgets.dart';
 
-PreferredSizeWidget CustomAppbarWidget(BuildContext context,
-    {String? title,
-    bool showBackButton = false,
-    Color? textColor = Colors.black}) {
+// ignore: non_constant_identifier_names
+PreferredSizeWidget CustomAppbarWidget(
+  BuildContext context, {
+  String? title,
+  bool showBackButton = false,
+  Color? textColor = Colors.black,
+  List<Widget>? actions,
+}) {
   return AppBar(
     toolbarHeight: 90,
     backgroundColor: Colors.transparent,
@@ -17,6 +21,7 @@ PreferredSizeWidget CustomAppbarWidget(BuildContext context,
           )
         : null,
     leadingWidth: 66,
+    actions: actions ?? [],
     leading: showBackButton
         ? Container(
             margin: const EdgeInsets.only(left: 15),

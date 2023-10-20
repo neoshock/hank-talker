@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:hank_talker_mobile/core/auth/models/user_model.dart';
+import 'package:hank_talker_mobile/core/auth/providers/auth_provider.dart';
 import 'package:hank_talker_mobile/features/profile/widgets/curved_background.dart';
 import 'package:hank_talker_mobile/features/settings/widgets/custom_avatar_edit.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
 import 'package:hank_talker_mobile/widgets/custom_appbar_widget.dart';
 import 'package:hank_talker_mobile/widgets/inputs.dart';
+import 'package:provider/provider.dart';
 
 class PrivacyPage extends StatefulWidget {
   const PrivacyPage({Key? key}) : super(key: key);
@@ -23,8 +26,23 @@ class _PrivacyPageState extends State<PrivacyPage> {
   };
   bool _showPassword = false;
 
+  Future<void> updateUserData() async {
+    if (formKey.currentState!.validate()) {
+      final user = UserModel(
+        uid: Provider.of<AuthProvider>(context, listen: false).user.uid,
+        displayName: textControllers['name']!.text,
+        email: textControllers['email']!.text,
+        photoUrl:
+            Provider.of<AuthProvider>(context, listen: false).user.photoUrl,
+      );
+      await Provider.of<AuthProvider>(context, listen: false)
+          .updateUserData(user);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final user = context.watch<AuthProvider>().user;
     return Scaffold(
       body: SafeArea(
         top: false,
@@ -48,7 +66,7 @@ class _PrivacyPageState extends State<PrivacyPage> {
                   Positioned(
                     bottom: 0,
                     child: Text(
-                      'John Doe',
+                      user.displayName!,
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                   ),
@@ -80,12 +98,7 @@ class _PrivacyPageState extends State<PrivacyPage> {
                         TextInputType.name,
                         context,
                         const Icon(PhosphorIcons.user_circle_bold),
-                        (value) {
-                          if (value!.isEmpty) {
-                            return 'El apellido no puede estar vacío';
-                          }
-                          return null;
-                        },
+                        (value) {},
                       ),
                       const SizedBox(height: 15),
                       CustomTextImputWithLabel(
@@ -94,19 +107,14 @@ class _PrivacyPageState extends State<PrivacyPage> {
                         TextInputType.emailAddress,
                         context,
                         const Icon(PhosphorIcons.envelope),
-                        (value) {
-                          if (value!.isEmpty) {
-                            return 'El correo electrónico no puede estar vacío';
-                          }
-                          return null;
-                        },
+                        (value) {},
                       ),
                       const SizedBox(height: 30),
                       SizedBox(
                         width: MediaQuery.of(context).size.width,
                         child: CusttomButtonRounded(
                           context,
-                          () {},
+                          updateUserData,
                           'Guardar',
                         ),
                       ),
