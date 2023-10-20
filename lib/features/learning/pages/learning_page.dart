@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hank_talker_mobile/features/learning/models/category_model.dart';
+import 'package:hank_talker_mobile/features/learning/pages/category_list_page.dart';
 import 'package:hank_talker_mobile/features/learning/providers/learning_provider.dart';
 import 'package:hank_talker_mobile/features/learning/widgets/category_list_horizontal.dart';
 import 'package:hank_talker_mobile/features/learning/widgets/custom_searchbar_delegate.dart';
@@ -43,7 +44,13 @@ class _LearningPageState extends State<LearningPage> {
                                 style: Theme.of(context).textTheme.bodyLarge,
                               )),
                               TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              CategoryPage()));
+                                },
                                 child: const Text(
                                   'Ver mas',
                                   style: TextStyle(
