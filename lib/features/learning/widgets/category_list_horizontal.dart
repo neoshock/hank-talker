@@ -22,7 +22,9 @@ class CategoryListHorizontal extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => const CategoryDetailPage(),
+                  builder: (_) => const CategoryDetailPage(
+                    idCategory: 1,
+                  ),
                 ),
               );
             },
