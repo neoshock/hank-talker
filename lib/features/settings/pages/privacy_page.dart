@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
-import 'package:hank_talker_mobile/core/auth/models/user_model.dart';
 import 'package:hank_talker_mobile/core/auth/providers/auth_provider.dart';
+import 'package:hank_talker_mobile/features/profile/pages/profile_page.dart';
 import 'package:hank_talker_mobile/features/profile/widgets/curved_background.dart';
 import 'package:hank_talker_mobile/features/settings/widgets/custom_avatar_edit.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
@@ -26,23 +26,23 @@ class _PrivacyPageState extends State<PrivacyPage> {
   };
   bool _showPassword = false;
 
-  Future<void> updateUserData() async {
-    if (formKey.currentState!.validate()) {
-      final user = UserModel(
-        uid: Provider.of<AuthProvider>(context, listen: false).user.uid,
-        displayName: textControllers['name']!.text,
-        email: textControllers['email']!.text,
-        photoUrl:
-            Provider.of<AuthProvider>(context, listen: false).user.photoUrl,
-      );
-      await Provider.of<AuthProvider>(context, listen: false)
-          .updateUserData(user);
+  bool updateUser(BuildContext cont) {
+    final upSelf = Provider.of<AuthProvider>(context, listen: false);
+    if (upSelf.updateUser(textControllers['name']!.text,
+        textControllers['lastName']!.text, cont)) {
+      return true;
+    } else {
+      print('Error');
+      return false;
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final user = context.watch<AuthProvider>().user;
+    textControllers['name']?.text = user.firstname;
+    textControllers['lastName']?.text = user.lastName;
+    textControllers['email']?.text = user.email;
     return Scaffold(
       body: SafeArea(
         top: false,
@@ -66,7 +66,7 @@ class _PrivacyPageState extends State<PrivacyPage> {
                   Positioned(
                     bottom: 0,
                     child: Text(
-                      user.displayName!,
+                      '${user!.firstname} ${user!.lastName}',
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                   ),
@@ -79,7 +79,7 @@ class _PrivacyPageState extends State<PrivacyPage> {
                   child: Column(
                     children: [
                       CustomTextImputWithLabel(
-                        'Nombres',
+                        user.firstname,
                         textControllers['name']!,
                         TextInputType.name,
                         context,
@@ -93,7 +93,7 @@ class _PrivacyPageState extends State<PrivacyPage> {
                       ),
                       const SizedBox(height: 15),
                       CustomTextImputWithLabel(
-                        'Apellidos',
+                        user.lastName,
                         textControllers['lastName']!,
                         TextInputType.name,
                         context,
@@ -102,7 +102,7 @@ class _PrivacyPageState extends State<PrivacyPage> {
                       ),
                       const SizedBox(height: 15),
                       CustomTextImputWithLabel(
-                        'Correo electrónico',
+                        user.email,
                         textControllers['email']!,
                         TextInputType.emailAddress,
                         context,
@@ -114,7 +114,15 @@ class _PrivacyPageState extends State<PrivacyPage> {
                         width: MediaQuery.of(context).size.width,
                         child: CusttomButtonRounded(
                           context,
-                          updateUserData,
+                          () {
+                            if (updateUser(context)) {
+                              Navigator.pop(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ProfilePage()));
+                            }
+                          },
                           'Guardar',
                         ),
                       ),
