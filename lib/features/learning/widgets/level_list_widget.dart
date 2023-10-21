@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:hank_talker_mobile/features/content/models/lesson_model.dart';
 import 'package:hank_talker_mobile/features/content/pages/loading_screen.dart';
 import 'package:hank_talker_mobile/features/content/pages/test_content_page.dart';
 
 class LevelListWidget extends StatelessWidget {
-  const LevelListWidget({Key? key}) : super(key: key);
+  final List<LessonModel> lessons;
+  const LevelListWidget({Key? key, required this.lessons}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
         child: GridView.builder(
       padding: EdgeInsets.zero,
-      itemCount: 10,
+      itemCount: lessons.length,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2, mainAxisExtent: 180),
       itemBuilder: (context, index) {
@@ -28,13 +30,16 @@ class LevelListWidget extends StatelessWidget {
                 margin: const EdgeInsets.all(15),
                 padding: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Theme.of(context).colorScheme.primary),
+                  borderRadius: BorderRadius.circular(15),
+                  color: lessons[index].isCompleted
+                      ? Theme.of(context).colorScheme.primary
+                      : Theme.of(context).colorScheme.onSecondary,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Abecedario',
+                    Text(lessons[index].description,
                         style: Theme.of(context)
                             .textTheme
                             .displaySmall!
@@ -44,7 +49,7 @@ class LevelListWidget extends StatelessWidget {
                     const Spacer(),
                     Row(
                       children: [
-                        Text('Nivel 1',
+                        Text(lessons[index].title,
                             style: Theme.of(context)
                                 .textTheme
                                 .displayMedium!
@@ -60,12 +65,6 @@ class LevelListWidget extends StatelessWidget {
                         )
                       ],
                     ),
-                    const Spacer(),
-                    Text(
-                      'Preguntas 3/12',
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color: Theme.of(context).colorScheme.onPrimary),
-                    )
                   ],
                 )));
       },
