@@ -98,12 +98,7 @@ class _PrivacyPageState extends State<PrivacyPage> {
                         TextInputType.name,
                         context,
                         const Icon(PhosphorIcons.user_circle_bold),
-                        (value) {
-                          if (value!.isEmpty) {
-                            return 'El apellido no puede estar vacío';
-                          }
-                          return null;
-                        },
+                        (value) {},
                       ),
                       const SizedBox(height: 15),
                       CustomTextImputWithLabel(
@@ -112,12 +107,7 @@ class _PrivacyPageState extends State<PrivacyPage> {
                         TextInputType.emailAddress,
                         context,
                         const Icon(PhosphorIcons.envelope),
-                        (value) {
-                          if (value!.isEmpty) {
-                            return 'El correo electrónico no puede estar vacío';
-                          }
-                          return null;
-                        },
+                        (value) {},
                       ),
                       const SizedBox(height: 30),
                       SizedBox(
