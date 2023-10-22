@@ -25,7 +25,7 @@ class App extends StatelessWidget {
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
             home: !Provider.of<AuthProvider>(context).isAuth
-                ? const BottomBar()
+                ? const WelcomePage()
                 : const WelcomePage(),
           );
         });

@@ -15,7 +15,7 @@ class _WelcomeSmoothPageWidgetState extends State<WelcomeSmoothPageWidget> {
     {
       'title': 'Bienvenido a Hank Talker',
       'description':
-          'Hank Talker es una aplicación que te ayudará a comunicarte con tus seres queridos 1.',
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eget nunc vi',
     },
     {
       'title': 'Bienvenido a Hank Talker',
