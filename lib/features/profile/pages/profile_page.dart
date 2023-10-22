@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:hank_talker_mobile/core/auth/models/user_model.dart';
 import 'package:hank_talker_mobile/core/auth/providers/auth_provider.dart';
+import 'package:hank_talker_mobile/core/repositories/user_new.dart';
 import 'package:hank_talker_mobile/features/profile/widgets/curved_background.dart';
 import 'package:hank_talker_mobile/features/profile/widgets/profile_card_header.dart';
 import 'package:hank_talker_mobile/features/settings/pages/privacy_page.dart';
@@ -18,20 +19,16 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  UserModel? user;
+  UserNew? user;
 
   @override
   void initState() {
     super.initState();
-    getUserData();
-  }
-
-  Future<void> getUserData() async {
-    user = Provider.of<AuthProvider>(context, listen: false).user;
   }
 
   @override
   Widget build(BuildContext context) {
+    user = context.watch<AuthProvider>().user;
     return SafeArea(
         top: false,
         child: SingleChildScrollView(
@@ -47,8 +44,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 Positioned(
                   top: MediaQuery.of(context).size.height * 0.12,
                   child: ProfileCardHeader(
-                    photoUrl: user!.photoUrl!,
-                    name: user!.displayName!,
+                    photoUrl: user!.photoUrl,
+                    name: '${user!.firstname} ${user!.lastName}',
                     joinedDate: '12/12/2012',
                     status: 'Novato',
                     totalLessons: 15,
