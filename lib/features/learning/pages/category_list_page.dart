@@ -64,7 +64,6 @@ class CategoryItem extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.all(15),
       decoration: BoxDecoration(
-        //color: Color.fromARGB(115, 78, 236, 241),
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(15),
         boxShadow: Theme.of(context).brightness == Brightness.light
