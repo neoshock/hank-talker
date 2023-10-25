@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
-import 'package:hank_talker_mobile/features/learning/models/cateogry_detail_model.dart';
+import 'package:hank_talker_mobile/features/content/pages/content_list_page.dart';
 import 'package:hank_talker_mobile/features/learning/providers/learning_provider.dart';
 import 'package:hank_talker_mobile/features/learning/widgets/level_list_widget.dart';
 import 'package:hank_talker_mobile/features/learning/widgets/status_info_container.dart';
@@ -101,7 +101,14 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                                         child: IconButton(
                                           iconSize: 24,
                                           padding: EdgeInsets.zero,
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ContentListPage(),
+                                                ));
+                                          },
                                           icon: const Icon(
                                             PhosphorIcons.book_bookmark_bold,
                                             size: 30,

@@ -4,12 +4,12 @@ import 'package:hank_talker_mobile/features/learning/providers/learning_provider
 import 'package:hank_talker_mobile/widgets/custom_appbar_widget.dart';
 import 'package:provider/provider.dart';
 
-class ContenidoPage extends StatefulWidget {
+class ContentListPage extends StatefulWidget {
   @override
-  _ContenidoPageState createState() => _ContenidoPageState();
+  _ContentListPageState createState() => _ContentListPageState();
 }
 
-class _ContenidoPageState extends State<ContenidoPage> {
+class _ContentListPageState extends State<ContentListPage> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -26,7 +26,7 @@ class _ContenidoPageState extends State<ContenidoPage> {
                 children: <Widget>[
                   Container(
                     height: MediaQuery.of(context).size.height * 0.30,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage('assets/images/contenido.png'),
                         fit: BoxFit.cover,
@@ -34,7 +34,9 @@ class _ContenidoPageState extends State<ContenidoPage> {
                       ),
                     ),
                   ),
-                  Positioned(
+                  const Positioned(
+                    top: 110,
+                    left: 20,
                     child: Text(
                       'Alfabeto',
                       style: TextStyle(
@@ -42,13 +44,13 @@ class _ContenidoPageState extends State<ContenidoPage> {
                           fontSize: 24,
                           fontWeight: FontWeight.bold),
                     ),
-                    top: 110,
-                    left: 20,
                   ),
                   Positioned(
+                    top: 140,
+                    left: 20,
                     child: SizedBox(
                       width: MediaQuery.of(context).size.width * 0.90,
-                      child: Text(
+                      child: const Text(
                         'Loren ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                         style: TextStyle(
                             color: Colors.white,
@@ -56,8 +58,6 @@ class _ContenidoPageState extends State<ContenidoPage> {
                             fontWeight: FontWeight.normal),
                       ),
                     ),
-                    top: 140,
-                    left: 20,
                   )
                 ],
               ),
@@ -115,7 +115,7 @@ class CategoryItem extends StatelessWidget {
         color: color,
       ),
       child: ListTile(
-        contentPadding: EdgeInsets.all(15),
+        contentPadding: const EdgeInsets.all(15),
         leading: CircleAvatar(
           radius: 60,
           child: Image.network(
@@ -124,7 +124,7 @@ class CategoryItem extends StatelessWidget {
           ),
         ),
         title: Text(category.title),
-        subtitle: Text(
+        subtitle: const Text(
             'Loren ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'),
         onTap: () {
           // Handle onTap event if needed
