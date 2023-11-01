@@ -7,7 +7,9 @@ Widget CustomTextImputWithLabel(
     TextInputType keyboardType,
     BuildContext context,
     Icon icon,
-    String? Function(String?)? validator) {
+    String? Function(String?)? validator,
+    bool readOnly
+    ) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -18,6 +20,7 @@ Widget CustomTextImputWithLabel(
           controller: controller,
           validator: validator,
           keyboardType: keyboardType,
+          readOnly: readOnly,
           decoration: InputDecoration(
             filled: true,
             errorBorder: OutlineInputBorder(

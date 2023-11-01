@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hank_talker_mobile/core/auth/providers/auth_provider.dart';
 import 'package:hank_talker_mobile/features/home/pages/home_page.dart';
 import 'package:hank_talker_mobile/features/register/pages/register_page.dart';
+import 'package:hank_talker_mobile/features/settings/pages/recovery_password.dart';
 import 'package:hank_talker_mobile/utils/dialogs_events.dart';
 import 'package:hank_talker_mobile/widgets/bottom_bar.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
@@ -50,8 +51,8 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SingleChildScrollView(
-            padding: EdgeInsets.all(15),
-            child: Center(
+            padding: const EdgeInsets.all(15),
+            child: SafeArea(
                 child: Form(
                     key: formGlobalKey,
                     child: Column(
@@ -60,35 +61,37 @@ class _LoginPageState extends State<LoginPage> {
                         // Agrega la imagen centrada en la parte superior
                         Center(
                           child: Container(
-                            margin: EdgeInsets.only(
+                            margin: const EdgeInsets.only(
                                 bottom:
                                     20), // Ajusta el margen inferior según sea necesario
                             child: Image.asset(
-                              'assets/images/Logo.png', // Ruta de la imagen en tus assets
+                              'assets/images/Logo_HT_general.png',
+                              fit: BoxFit.cover,
+                              width: MediaQuery.sizeOf(
+                                    context,
+                                  ).width *
+                                  0.6,
                             ),
                           ),
                         ),
-
+                        const SizedBox(height: 30),
                         CustomTextImputWithLabel(
-                          'Correo electrónico',
-                          emailController,
-                          TextInputType.emailAddress,
-                          context,
-                          const Icon(PhosphorIcons.envelope),
-                          (value) {
-                            if (value == null || value == '') {
-                              return 'Correo electrónico es requerido';
-                            }
-                            String emailPattern =
-                                r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+';
-                            RegExp regex = RegExp(emailPattern);
-                            if (!regex.hasMatch(value!)) {
-                              return 'Ingrese un correo electrónico válido';
-                            }
-
-                            return null;
-                          },
-                        ),
+                            'Correo electrónico',
+                            emailController,
+                            TextInputType.emailAddress,
+                            context,
+                            const Icon(PhosphorIcons.envelope), (value) {
+                          if (value == null || value == '') {
+                            return 'Correo electrónico es requerido';
+                          }
+                          const emailPattern =
+                              r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+';
+                          final regex = RegExp(emailPattern);
+                          if (!regex.hasMatch(value!)) {
+                            return 'Ingrese un correo electrónico válido';
+                          }
+                          return null;
+                        }, false),
                         const SizedBox(height: 15),
                         CustomImputPassword(
                             passwordController,
@@ -109,20 +112,38 @@ class _LoginPageState extends State<LoginPage> {
                         SizedBox(
                           width: MediaQuery.sizeOf(context).width,
                           child: CusttomButtonRounded(
-                              context, () => login(), 'Iniciar Sesión'),
+                              context, login, 'Iniciar Sesión',),
                         ),
-                        const SizedBox(height: 60),
+                        const SizedBox(height: 15),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                // ignore: inference_failure_on_instance_creation
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const RecoveryPasswordPage()));
+                          },
+                          child: const Text(
+                            '¿Olvidaste tu contraseña?',
+                            style: TextStyle(
+                              color: Colors.green,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 45),
                         GestureDetector(
                           onTap: () {
                             //  print("Registrarse Tocado"); // ejecutando
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => RegisterPage()),
+                                  builder: (context) => const RegisterPage()),
                             );
                           },
                           child: RichText(
-                            text: TextSpan(
+                            text: const TextSpan(
                               text: '¿No tienes una cuenta? ',
                               style: TextStyle(color: Colors.black),
                               children: <TextSpan>[

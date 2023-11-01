@@ -1,26 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:hank_talker_mobile/core/profile/models/profile_model.dart';
 import 'package:hank_talker_mobile/features/settings/pages/privacy_page.dart';
 
 class ProfileCardHeader extends StatelessWidget {
+  final UserProfileModel userProfileModel;
   const ProfileCardHeader({
-    required this.name,
-    required this.status,
-    required this.joinedDate,
-    required this.photoUrl,
-    required this.totalLessons,
-    required this.totalRewards,
     super.key,
+    required this.userProfileModel,
   });
-  final String name;
-  final String status;
-  final String joinedDate;
-  final String photoUrl;
-  final int totalLessons;
-  final int totalRewards;
 
   @override
   Widget build(BuildContext context) {
+    print(userProfileModel.urlPhoto);
     return Container(
       height: MediaQuery.sizeOf(context).height * 0.33,
       width: MediaQuery.sizeOf(context).width,
@@ -29,20 +21,35 @@ class ProfileCardHeader extends StatelessWidget {
         children: [
           Row(
             children: [
-              CircleAvatar(radius: 45, backgroundImage: NetworkImage(photoUrl)),
+              CircleAvatar(
+                  radius: 45,
+                  child: Image.network(
+                    userProfileModel.urlPhoto,
+                    errorBuilder: (context, error, stackTrace) {
+                      return const Icon(
+                        PhosphorIcons.user_circle_bold,
+                        size: 60,
+                      );
+                    },
+                  )),
               const SizedBox(width: 15),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    name,
-                    style: Theme.of(context).textTheme.displayLarge,
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.45,
+                    // ignore: lines_longer_than_80_chars
+                    child: Text(
+                      '${userProfileModel.firstName} ${userProfileModel.lastName}',
+                      style: Theme.of(context).textTheme.displayLarge,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                   const SizedBox(
                     height: 6,
                   ),
                   Text(
-                    status,
+                    userProfileModel.status ? 'Novato' : 'Experto',
                     style: Theme.of(context).textTheme.bodyLarge,
                   )
                 ],
@@ -71,7 +78,9 @@ class ProfileCardHeader extends StatelessWidget {
                 width: 15,
               ),
               Text(
-                joinedDate,
+                userProfileModel.registrationDate != null
+                    ? userProfileModel.registrationDate.toString()
+                    : '12/12/2012',
                 style: Theme.of(context).textTheme.displaySmall,
               )
             ],
@@ -89,7 +98,7 @@ class ProfileCardHeader extends StatelessWidget {
               Column(
                 children: [
                   Text(
-                    '+$totalLessons Lecciones',
+                    '+ ${userProfileModel.statistic.lessonsCompleted} Lecciones',
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                   const SizedBox(height: 6),
@@ -108,7 +117,7 @@ class ProfileCardHeader extends StatelessWidget {
               Column(
                 children: [
                   Text(
-                    totalRewards.toString(),
+                    '${userProfileModel.statistic.emeralds}',
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                   const SizedBox(height: 6),

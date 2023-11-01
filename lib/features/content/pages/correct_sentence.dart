@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:hank_talker_mobile/features/content/models/question_model.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
 
 class CorrectSentence extends StatefulWidget {
   final ValueSetter<String> onCheckAnswer;
+  final QuestionModel questionModel;
 
-  const CorrectSentence({Key? key, required this.onCheckAnswer})
+  const CorrectSentence(
+      {Key? key, required this.onCheckAnswer, required this.questionModel})
       : super(key: key);
 
   @override
@@ -81,7 +84,7 @@ class _CorrectSentenceState extends State<CorrectSentence> {
           ),
           Container(
               width: MediaQuery.sizeOf(context).width,
-              height: 180,
+              height: 150,
               padding: const EdgeInsets.all(15),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
@@ -113,7 +116,7 @@ class _CorrectSentenceState extends State<CorrectSentence> {
           ),
           Wrap(
               spacing: 6,
-              runSpacing: 15,
+              runSpacing: 6,
               children: List.generate(words.length, (index) {
                 return SizedBox(
                     width: (words[index].length + 15) * 6,
@@ -133,7 +136,7 @@ class _CorrectSentenceState extends State<CorrectSentence> {
           ),
           Wrap(
             spacing: 15,
-            runSpacing: 15,
+            runSpacing: 6,
             children: words.map((word) {
               return InkWell(
                   onTap: () {

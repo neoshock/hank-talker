@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
-import 'package:hank_talker_mobile/core/auth/models/user_model.dart';
 import 'package:hank_talker_mobile/core/auth/providers/auth_provider.dart';
-import 'package:hank_talker_mobile/core/repositories/user_new.dart';
+import 'package:hank_talker_mobile/core/profile/providers/profile_provider.dart';
+import 'package:hank_talker_mobile/features/login/pages/login_page.dart';
 import 'package:hank_talker_mobile/features/profile/widgets/curved_background.dart';
 import 'package:hank_talker_mobile/features/profile/widgets/profile_card_header.dart';
 import 'package:hank_talker_mobile/features/settings/pages/privacy_page.dart';
@@ -19,7 +19,20 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  UserNew? user;
+  Future<void> _logout() async {
+    final res = await context.read<AuthProvider>().logout();
+    if (res) {
+      // ignore: use_build_context_synchronously
+      await Navigator.pushAndRemoveUntil(
+        context,
+        // ignore: inference_failure_on_instance_creation
+        MaterialPageRoute(
+          builder: (context) => const LoginPage(),
+        ),
+        (route) => false,
+      );
+    }
+  }
 
   @override
   void initState() {
@@ -28,7 +41,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    user = context.watch<AuthProvider>().user;
+    final user = context.watch<ProfileProvider>().userProfileModel;
     return SafeArea(
         top: false,
         child: SingleChildScrollView(
@@ -44,12 +57,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 Positioned(
                   top: MediaQuery.of(context).size.height * 0.12,
                   child: ProfileCardHeader(
-                    photoUrl: user!.photoUrl,
-                    name: '${user!.firstname} ${user!.lastName}',
-                    joinedDate: '12/12/2012',
-                    status: 'Novato',
-                    totalLessons: 15,
-                    totalRewards: 20,
+                    userProfileModel: user,
                   ),
                 )
               ],
@@ -103,7 +111,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 Row(
                   children: [
                     TextButton(
-                        onPressed: () {},
+                        onPressed: _logout,
                         child: Text('Cerrar sesión',
                             style: Theme.of(context)
                                 .textTheme

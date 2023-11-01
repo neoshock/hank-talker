@@ -6,5 +6,5 @@ import 'package:hank_talker_mobile/features/profile/pages/profile_page.dart';
 final List<Widget> mainPages = [
   const HomePage(),
   const LearningPage(),
-  ProfilePage()
+  const ProfilePage()
 ];

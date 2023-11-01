@@ -67,6 +67,7 @@ class _RecoveryPasswordPageState extends State<RecoveryPasswordPage> {
                         }
                         return null;
                       },
+                      false,
                     ),
                   ],
                 ),

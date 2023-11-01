@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
 class CustomAvatarEdit extends StatefulWidget {
-  const CustomAvatarEdit({Key? key}) : super(key: key);
+  final String url;
+
+  const CustomAvatarEdit({Key? key, required this.url}) : super(key: key);
 
   @override
   _CustomAvatarEditState createState() => _CustomAvatarEditState();
@@ -19,12 +21,14 @@ class _CustomAvatarEditState extends State<CustomAvatarEdit> {
             Container(
               width: 120,
               height: 120,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
-                      image: NetworkImage(
-                          'https://img.freepik.com/premium-vector/female-user-profile-avatar-is-woman-character-screen-saver-with-emotions_505620-617.jpg'),
-                      fit: BoxFit.cover)),
+                    image: NetworkImage(
+                      widget.url,
+                    ),
+                    fit: BoxFit.cover,
+                  )),
             ),
             Positioned(
               bottom: 0,

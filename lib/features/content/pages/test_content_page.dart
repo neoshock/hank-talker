@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hank_talker_mobile/features/content/models/link_word_image_model.dart';
 import 'package:hank_talker_mobile/features/content/models/question_model.dart';
 import 'package:hank_talker_mobile/features/content/models/select_image_model.dart';
 import 'package:hank_talker_mobile/features/content/pages/correct_sentence.dart';
@@ -25,53 +26,91 @@ class _TestContentPageState extends State<TestContentPage> {
     QuestionModel(
       id: 1,
       title: 'Selecciona la imagen correcta',
+      content: LinkWordImageModel(images: [
+        LinkedImageModel(imageUrl: 'https://picsum.photos/200', value: '1'),
+        LinkedImageModel(imageUrl: 'https://picsum.photos/200', value: '2'),
+        LinkedImageModel(imageUrl: 'https://picsum.photos/200', value: '3'),
+        LinkedImageModel(imageUrl: 'https://picsum.photos/200', value: '4'),
+      ], words: [
+        LinkedWordModel(word: 'Uno', value: '1'),
+        LinkedWordModel(word: 'Dos', value: '2'),
+        LinkedWordModel(word: 'Tres', value: '3'),
+        LinkedWordModel(word: 'Cuatro', value: '4'),
+      ]),
+      answer: '1',
+      questionType: 'link_word_image',
+    ),
+    QuestionModel(
+      id: 2,
+      title: 'Selecciona la imagen correcta',
       content: [
         SelectImageModel(
-          name: 'Uno',
-          imageUrl: 'assets/images/Logo.png',
-          value: '1',
-        ),
+            name: 'Uno', imageUrl: 'https://picsum.photos/200', value: '1'),
         SelectImageModel(
-          name: 'Dos',
-          imageUrl: 'assets/images/Logo.png',
-          value: '2',
-        ),
+            name: 'Dos', imageUrl: 'https://picsum.photos/200', value: '2'),
         SelectImageModel(
-          name: 'Tres',
-          imageUrl: 'assets/images/Logo.png',
-          value: '3',
-        ),
+            name: 'Tres', imageUrl: 'https://picsum.photos/200', value: '3'),
         SelectImageModel(
-          name: 'Cuatro',
-          imageUrl: 'assets/images/Logo.png',
-          value: '4',
-        ),
+            name: 'Cuatro', imageUrl: 'https://picsum.photos/200', value: '4'),
       ],
       answer: '1',
       questionType: 'select_correct_image',
     ),
     QuestionModel(
-      id: 2,
-      title: 'Selecciona la imagen correcta',
-      content: null,
-      answer: '1',
-      questionType: 'correct_sentence',
-    ),
-    QuestionModel(
       id: 3,
-      title: 'Selecciona la imagen correcta',
-      content: null,
+      title: 'Selecciona la palabra correcta',
+      content: [],
       answer: '1',
       questionType: 'select_correct_word',
     ),
     QuestionModel(
       id: 4,
-      title: 'Selecciona la imagen correcta',
-      content: null,
+      title: 'Selecciona la palabra correcta',
+      content: [],
       answer: '1',
-      questionType: 'link_word_image',
+      questionType: 'select_correct_word',
+    ),
+    QuestionModel(
+      id: 5,
+      title: 'Selecciona la palabra correcta',
+      content: [
+        SelectImageModel(
+            name: 'Uno', imageUrl: 'https://picsum.photos/200', value: '1'),
+        SelectImageModel(
+            name: 'Dos', imageUrl: 'https://picsum.photos/200', value: '2'),
+        SelectImageModel(
+            name: 'Tres', imageUrl: 'https://picsum.photos/200', value: '3'),
+        SelectImageModel(
+            name: 'Cuatro', imageUrl: 'https://picsum.photos/200', value: '4'),
+      ],
+      answer: '1',
+      questionType: 'select_correct_image',
+    ),
+    QuestionModel(
+      id: 6,
+      title: 'Selecciona la palabra correcta',
+      content: [
+        SelectImageModel(
+            name: 'Uno', imageUrl: 'https://picsum.photos/200', value: '1'),
+        SelectImageModel(
+            name: 'Dos', imageUrl: 'https://picsum.photos/200', value: '2'),
+        SelectImageModel(
+            name: 'Tres', imageUrl: 'https://picsum.photos/200', value: '3'),
+        SelectImageModel(
+            name: 'Cuatro', imageUrl: 'https://picsum.photos/200', value: '4'),
+      ],
+      answer: '1',
+      questionType: 'select_correct_image',
+    ),
+    QuestionModel(
+      id: 7,
+      title: 'Arme la oración correcta',
+      content: [],
+      answer: '1',
+      questionType: 'correct_sentence',
     ),
   ];
+
   int currentQuestion = 0;
   bool dataLoaded = false;
   bool isFinished = false;
@@ -124,9 +163,27 @@ class _TestContentPageState extends State<TestContentPage> {
     List.generate(
       questions.length,
       (index) {
-        questionsPages.add(LinkWordImage(
-          onCheckAnswer: checkAnswer,
-        ));
+        if (questions[index].questionType == 'link_word_image') {
+          return questionsPages.add(LinkWordImage(
+            onCheckAnswer: checkAnswer,
+            questionModel: questions[index],
+          ));
+        } else if (questions[index].questionType == 'select_correct_image') {
+          return questionsPages.add(SelectCorrectImage(
+            onCheckAnswer: checkAnswer,
+            questionModel: questions[index],
+          ));
+        } else if (questions[index].questionType == 'select_correct_word') {
+          return questionsPages.add(SelectCorrectWord(
+            onCheckAnswer: checkAnswer,
+            questionModel: questions[index],
+          ));
+        } else if (questions[index].questionType == 'correct_sentence') {
+          return questionsPages.add(CorrectSentence(
+            onCheckAnswer: checkAnswer,
+            questionModel: questions[index],
+          ));
+        }
       },
     );
     setState(() {

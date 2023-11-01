@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:hank_talker_mobile/features/content/models/question_model.dart';
+import 'package:hank_talker_mobile/features/content/models/select_image_model.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
 
 class SelectCorrectImage extends StatefulWidget {
-  const SelectCorrectImage({required this.onCheckAnswer, super.key});
+  const SelectCorrectImage(
+      {required this.onCheckAnswer, required this.questionModel, super.key});
 
   final ValueSetter<String> onCheckAnswer;
+  final QuestionModel questionModel;
 
   @override
   _SelectCorrectImageState createState() => _SelectCorrectImageState();
@@ -12,12 +16,7 @@ class SelectCorrectImage extends StatefulWidget {
 
 class _SelectCorrectImageState extends State<SelectCorrectImage> {
   int? currentImage;
-  List<String> images = [
-    'assets/images/Logo.png',
-    'assets/images/Logo.png',
-    'assets/images/Logo.png',
-    'assets/images/Logo.png',
-  ];
+  late final _images = widget.questionModel.content as List<SelectImageModel>;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +33,7 @@ class _SelectCorrectImageState extends State<SelectCorrectImage> {
             height: 45,
           ),
           Text(
-            '¿Cuál es el numero uno?',
+            widget.questionModel.title,
             style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                   color: Theme.of(context).colorScheme.primary,
                 ),
@@ -46,7 +45,7 @@ class _SelectCorrectImageState extends State<SelectCorrectImage> {
               child: GridView.builder(
             padding: EdgeInsets.zero,
             physics: const NeverScrollableScrollPhysics(),
-            itemCount: images.length,
+            itemCount: _images.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2),
             itemBuilder: (context, index) {
@@ -59,6 +58,7 @@ class _SelectCorrectImageState extends State<SelectCorrectImage> {
                 borderRadius: BorderRadius.circular(15),
                 child: Container(
                   margin: const EdgeInsets.all(15),
+                  padding: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
                       boxShadow: [
                         BoxShadow(
@@ -73,8 +73,8 @@ class _SelectCorrectImageState extends State<SelectCorrectImage> {
                           ? Theme.of(context).colorScheme.primary
                           : Theme.of(context).colorScheme.surface,
                       borderRadius: BorderRadius.circular(15)),
-                  child: Image.asset(
-                    images[index],
+                  child: Image.network(
+                    _images[index].imageUrl,
                     fit: BoxFit.contain,
                   ),
                 ),

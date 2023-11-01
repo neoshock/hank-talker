@@ -13,7 +13,7 @@ final List<CategoryModel> categoriesModel = [
       completedLeves: 3,
       totalLeves: 6,
       imageUrl:
-          'https://www.wannapik.com/media/W1siZiIsIjIwMTYvMDgvMjQvN3YydmE2MGM1Yl83Yjh1azN2enpoX3ZjMDk4MDA5LnBuZyJdXQ/17a6e5ec789e0363/7b8uk3vzzh_vc098009.png',
+          'https://i.graphicmama.com/blog/wp-content/uploads/2018/01/24111702/01315360772831.5a5f37af060d0.jpg',
       idLanguage: 1,
       idDificult: 1),
   CategoryModel(
@@ -24,7 +24,7 @@ final List<CategoryModel> categoriesModel = [
       completedLeves: 5,
       totalLeves: 15,
       imageUrl:
-          'https://www.wannapik.com/media/W1siZiIsIjIwMTYvMDgvMjQvN3YydmE2MGM1Yl83Yjh1azN2enpoX3ZjMDk4MDA5LnBuZyJdXQ/17a6e5ec789e0363/7b8uk3vzzh_vc098009.png',
+          'https://i.graphicmama.com/blog/wp-content/uploads/2018/01/24111702/01315360772831.5a5f37af060d0.jpg',
       idLanguage: 1,
       idDificult: 1),
   CategoryModel(
@@ -35,7 +35,7 @@ final List<CategoryModel> categoriesModel = [
       completedLeves: 5,
       totalLeves: 6,
       imageUrl:
-          'https://www.wannapik.com/media/W1siZiIsIjIwMTYvMDgvMjQvN3YydmE2MGM1Yl83Yjh1azN2enpoX3ZjMDk4MDA5LnBuZyJdXQ/17a6e5ec789e0363/7b8uk3vzzh_vc098009.png',
+          'https://i.graphicmama.com/blog/wp-content/uploads/2018/01/24111702/01315360772831.5a5f37af060d0.jpg',
       idLanguage: 1,
       idDificult: 1),
 ];
