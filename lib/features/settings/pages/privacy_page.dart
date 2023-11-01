@@ -4,6 +4,7 @@ import 'package:hank_talker_mobile/core/auth/providers/auth_provider.dart';
 import 'package:hank_talker_mobile/core/profile/providers/profile_provider.dart';
 import 'package:hank_talker_mobile/features/profile/pages/profile_page.dart';
 import 'package:hank_talker_mobile/features/profile/widgets/curved_background.dart';
+import 'package:hank_talker_mobile/features/settings/pages/change_password.dart';
 import 'package:hank_talker_mobile/features/settings/widgets/custom_avatar_edit.dart';
 import 'package:hank_talker_mobile/utils/dialogs_events.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
@@ -127,6 +128,34 @@ class _PrivacyPageState extends State<PrivacyPage> {
                           const Icon(PhosphorIcons.envelope),
                           (value) {},
                           true),
+                      const SizedBox(height: 15),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  // ignore: inference_failure_on_instance_creation
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const ChangePasswordPage(),
+                                  ),
+                                );
+                              },
+                              child: Text(
+                                'Cambiar contraseña',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .displaySmall!
+                                    .copyWith(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary,
+                                    ),
+                              )),
+                        ],
+                      ),
                       const SizedBox(height: 30),
                       SizedBox(
                         width: MediaQuery.of(context).size.width,
