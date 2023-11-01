@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:hank_talker_mobile/core/auth/providers/auth_provider.dart';
+import 'package:hank_talker_mobile/core/profile/providers/profile_provider.dart';
 import 'package:hank_talker_mobile/features/profile/pages/profile_page.dart';
 import 'package:hank_talker_mobile/features/profile/widgets/curved_background.dart';
 import 'package:hank_talker_mobile/features/settings/widgets/custom_avatar_edit.dart';
+import 'package:hank_talker_mobile/utils/dialogs_events.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
 import 'package:hank_talker_mobile/widgets/custom_appbar_widget.dart';
 import 'package:hank_talker_mobile/widgets/inputs.dart';
@@ -26,23 +28,37 @@ class _PrivacyPageState extends State<PrivacyPage> {
   };
   bool _showPassword = false;
 
-  bool updateUser(BuildContext cont) {
-    final upSelf = Provider.of<AuthProvider>(context, listen: false);
-    if (upSelf.updateUser(textControllers['name']!.text,
-        textControllers['lastName']!.text, cont)) {
-      return true;
-    } else {
-      print('Error');
-      return false;
+  Future<void> updateUser() async {
+    if (formKey.currentState!.validate()) {
+      final updateResponse =
+          await context.read<ProfileProvider>().updateProfile(
+                textControllers['name']!.text,
+                textControllers['lastName']!.text,
+                '12/12/2000',
+              );
+      if (updateResponse.code == 200) {
+        // ignore: use_build_context_synchronously
+        await showSuccessDialog('Exito', updateResponse.message, context);
+      } else {
+        // ignore: use_build_context_synchronously
+        await showErrorDialog(
+            'Hubo un problema', updateResponse.message, context);
+      }
     }
   }
 
   @override
-  Widget build(BuildContext context) {
-    final user = context.watch<AuthProvider>().user;
-    textControllers['name']?.text = user.firstname;
+  void initState() {
+    super.initState();
+    final user = context.read<ProfileProvider>().userProfileModel;
+    textControllers['name']?.text = user.firstName;
     textControllers['lastName']?.text = user.lastName;
     textControllers['email']?.text = user.email;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final user = context.watch<ProfileProvider>().userProfileModel;
     return Scaffold(
       body: SafeArea(
         top: false,
@@ -62,11 +78,15 @@ class _PrivacyPageState extends State<PrivacyPage> {
                     title: 'Privacidad',
                     textColor: Colors.white,
                   ),
-                  const Positioned(bottom: 15, child: CustomAvatarEdit()),
+                  Positioned(
+                      bottom: 15,
+                      child: CustomAvatarEdit(
+                        url: user.urlPhoto,
+                      )),
                   Positioned(
                     bottom: 0,
                     child: Text(
-                      '${user!.firstname} ${user!.lastName}',
+                      '${user!.firstName} ${user!.lastName}',
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                   ),
@@ -79,50 +99,40 @@ class _PrivacyPageState extends State<PrivacyPage> {
                   child: Column(
                     children: [
                       CustomTextImputWithLabel(
-                        user.firstname,
-                        textControllers['name']!,
-                        TextInputType.name,
-                        context,
-                        const Icon(PhosphorIcons.user_circle_bold),
-                        (value) {
-                          if (value!.isEmpty) {
-                            return 'El nombre no puede estar vacío';
-                          }
-                          return null;
-                        },
-                      ),
+                          'Nombres',
+                          textControllers['name']!,
+                          TextInputType.name,
+                          context,
+                          const Icon(PhosphorIcons.user_circle_bold), (value) {
+                        if (value!.isEmpty) {
+                          return 'El nombre no puede estar vacío';
+                        }
+                        return null;
+                      }, false),
                       const SizedBox(height: 15),
                       CustomTextImputWithLabel(
-                        user.lastName,
-                        textControllers['lastName']!,
-                        TextInputType.name,
-                        context,
-                        const Icon(PhosphorIcons.user_circle_bold),
-                        (value) {},
-                      ),
+                          'Apellidos',
+                          textControllers['lastName']!,
+                          TextInputType.name,
+                          context,
+                          const Icon(PhosphorIcons.user_circle_bold),
+                          (value) {},
+                          false),
                       const SizedBox(height: 15),
                       CustomTextImputWithLabel(
-                        user.email,
-                        textControllers['email']!,
-                        TextInputType.emailAddress,
-                        context,
-                        const Icon(PhosphorIcons.envelope),
-                        (value) {},
-                      ),
+                          'Correo electrónico',
+                          textControllers['email']!,
+                          TextInputType.emailAddress,
+                          context,
+                          const Icon(PhosphorIcons.envelope),
+                          (value) {},
+                          true),
                       const SizedBox(height: 30),
                       SizedBox(
                         width: MediaQuery.of(context).size.width,
                         child: CusttomButtonRounded(
                           context,
-                          () {
-                            if (updateUser(context)) {
-                              Navigator.pop(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const ProfilePage()));
-                            }
-                          },
+                          updateUser,
                           'Guardar',
                         ),
                       ),

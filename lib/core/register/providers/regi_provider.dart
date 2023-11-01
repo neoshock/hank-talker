@@ -20,13 +20,14 @@ class RegiProvider with ChangeNotifier {
 
   void enterDateBirthday(String dateBirthday) {
     this.user.dateBirthday = dateBirthday;
+    print('fecha ${user.dateBirthday}');
   }
 
   Future<HttpBaseResponde> register(
     String password,
   ) async {
     final response = await regiService.register(
-        user.email, user.firstname, user.lastName, password);
+        user.email, user.firstname, user.lastName, password, user.dateBirthday);
     return response;
   }
 

@@ -14,7 +14,14 @@ class WelcomePage extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(height: 50),
-              Image.asset('assets/images/Logo.png'),
+              Image.asset(
+                'assets/images/Logo_HT_general.png',
+                fit: BoxFit.cover,
+                width: MediaQuery.sizeOf(
+                      context,
+                    ).width *
+                    0.8,
+              ),
               const Spacer(),
               Container(
                 width: MediaQuery.sizeOf(

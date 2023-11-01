@@ -51,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
         body: SingleChildScrollView(
             padding: EdgeInsets.all(15),
-            child: Center(
+            child: SafeArea(
                 child: Form(
                     key: formGlobalKey,
                     child: Column(
@@ -64,31 +64,34 @@ class _LoginPageState extends State<LoginPage> {
                                 bottom:
                                     20), // Ajusta el margen inferior según sea necesario
                             child: Image.asset(
-                              'assets/images/Logo.png', // Ruta de la imagen en tus assets
+                              'assets/images/Logo_HT_general.png',
+                              fit: BoxFit.cover,
+                              width: MediaQuery.sizeOf(
+                                    context,
+                                  ).width *
+                                  0.6,
                             ),
                           ),
                         ),
-
+                        const SizedBox(height: 30),
                         CustomTextImputWithLabel(
-                          'Correo electrónico',
-                          emailController,
-                          TextInputType.emailAddress,
-                          context,
-                          const Icon(PhosphorIcons.envelope),
-                          (value) {
-                            if (value == null || value == '') {
-                              return 'Correo electrónico es requerido';
-                            }
-                            String emailPattern =
-                                r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+';
-                            RegExp regex = RegExp(emailPattern);
-                            if (!regex.hasMatch(value!)) {
-                              return 'Ingrese un correo electrónico válido';
-                            }
+                            'Correo electrónico',
+                            emailController,
+                            TextInputType.emailAddress,
+                            context,
+                            const Icon(PhosphorIcons.envelope), (value) {
+                          if (value == null || value == '') {
+                            return 'Correo electrónico es requerido';
+                          }
+                          String emailPattern =
+                              r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+';
+                          RegExp regex = RegExp(emailPattern);
+                          if (!regex.hasMatch(value!)) {
+                            return 'Ingrese un correo electrónico válido';
+                          }
 
-                            return null;
-                          },
-                        ),
+                          return null;
+                        }, false),
                         const SizedBox(height: 15),
                         CustomImputPassword(
                             passwordController,

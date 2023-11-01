@@ -47,6 +47,7 @@ class _LearningPageState extends State<LearningPage> {
                                 onPressed: () {
                                   Navigator.push(
                                       context,
+                                      // ignore: inference_failure_on_instance_creation
                                       MaterialPageRoute(
                                           builder: (context) =>
                                               CategoryPage()));
@@ -68,7 +69,7 @@ class _LearningPageState extends State<LearningPage> {
                               if (snapshot.hasData) {
                                 return CategoryListHorizontal(
                                   categories:
-                                      snapshot.data as List<CategoryModel>,
+                                      snapshot.data!,
                                 );
                               } else {
                                 return const Padding(
@@ -104,7 +105,7 @@ class _LearningPageState extends State<LearningPage> {
                               if (snapshot.hasData) {
                                 return LastClassesVisitedList(
                                   categories:
-                                      snapshot.data as List<CategoryModel>,
+                                      snapshot.data!,
                                 );
                               } else {
                                 return const Padding(

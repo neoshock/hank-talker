@@ -69,6 +69,7 @@ class _RegisterNaneState extends State<RegisterNane> {
                         }
                         return null;
                       },
+                      false
                     ),
                     const SizedBox(height: 20),
                     CustomTextImputWithLabel(
@@ -83,6 +84,7 @@ class _RegisterNaneState extends State<RegisterNane> {
                         }
                         return null;
                       },
+                      false
                     ),
                     const SizedBox(height: 30),
                     SizedBox(

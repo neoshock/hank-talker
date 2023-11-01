@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:hank_talker_mobile/features/content/models/question_model.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
 
 class SelectCorrectWord extends StatefulWidget {
   final ValueSetter<String> onCheckAnswer;
+  final QuestionModel questionModel;
 
-  const SelectCorrectWord({Key? key, required this.onCheckAnswer})
+  const SelectCorrectWord({Key? key, required this.onCheckAnswer, required this.questionModel})
       : super(key: key);
 
   @override
