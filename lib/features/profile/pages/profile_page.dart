@@ -51,7 +51,7 @@ class _ProfilePageState extends State<ProfilePage> {
               alignment: AlignmentDirectional.topCenter,
               children: [
                 SizedBox(
-                  height: MediaQuery.sizeOf(context).height * 0.36,
+                  height: MediaQuery.sizeOf(context).height * 0.4,
                 ),
                 const CurvedBackground(),
                 Positioned(

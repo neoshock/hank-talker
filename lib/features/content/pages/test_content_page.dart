@@ -223,7 +223,7 @@ class _TestContentPageState extends State<TestContentPage> {
                           Expanded(
                             child: PageView.builder(
                               controller: pageController,
-                              physics: NeverScrollableScrollPhysics(),
+                              physics: const NeverScrollableScrollPhysics(),
                               itemCount: questions.length,
                               itemBuilder: (context, index) {
                                 return questionsPages[index];

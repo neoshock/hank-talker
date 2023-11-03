@@ -18,7 +18,7 @@ class LinkWordImage extends StatefulWidget {
 class _LinkWordImageState extends State<LinkWordImage> {
   late final LinkWordImageModel _linkWordImageModel =
       widget.questionModel.content as LinkWordImageModel;
-  List<Offset> _points = [];
+  final List<Offset> _points = [];
   int _selectedImage = -1;
 
   Future<void> _handleTapWord(int index) async {
@@ -27,12 +27,19 @@ class _LinkWordImageState extends State<LinkWordImage> {
     }
     setState(() {
       // validate if point has drawer
-      if (_points.length > _selectedImage) {
-        _points[_selectedImage] = Offset(0, index * 150);
+      if (_selectedImage < _points.length) {
+        _points[_selectedImage] = Offset(MediaQuery.sizeOf(context).width * 0.3,
+            index * (MediaQuery.sizeOf(context).height * 0.15));
         return;
       }
-      _points.add(Offset(MediaQuery.sizeOf(context).width * 0.24, 0));
-      _points[_selectedImage] = Offset(0, index * 150);
+      if (_selectedImage > _points.length) {
+        return;
+      }
+      if (_points.length == _linkWordImageModel.images.length) {
+        return;
+      }
+      _points.add(Offset(MediaQuery.sizeOf(context).width * 0.3,
+          index * (MediaQuery.sizeOf(context).height * 0.15)));
     });
   }
 
@@ -45,14 +52,11 @@ class _LinkWordImageState extends State<LinkWordImage> {
   @override
   void initState() {
     super.initState();
-    _points = List.generate(_linkWordImageModel.images.length, (index) {
-      return Offset(0, index * 150);
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SingleChildScrollView(
       padding: const EdgeInsets.all(15),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -64,9 +68,8 @@ class _LinkWordImageState extends State<LinkWordImage> {
           const SizedBox(
             height: 30,
           ),
-          Expanded(
-              child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -75,13 +78,10 @@ class _LinkWordImageState extends State<LinkWordImage> {
                   return Stack(
                     alignment: Alignment.centerLeft,
                     children: [
-                      const SizedBox(
-                        width: 120,
-                        height: 120,
-                      ),
                       Container(
                         width: 90,
                         height: 90,
+                        margin: const EdgeInsets.all(15),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
                             image: DecorationImage(
@@ -98,34 +98,40 @@ class _LinkWordImageState extends State<LinkWordImage> {
                             ]),
                       ),
                       Positioned(
-                          right: 0,
-                          child: InkWell(
-                            onTap: () {
-                              _handleTapImage(index);
-                            },
-                            borderRadius: BorderRadius.circular(100),
-                            splashFactory: InkRipple.splashFactory,
-                            child: Container(
-                              width: 15,
-                              height: 15,
-                              margin: const EdgeInsets.all(15),
-                              decoration: BoxDecoration(
-                                  color: _selectedImage == index
-                                      ? Theme.of(context).primaryColor
-                                      : Theme.of(context)
-                                          .secondaryHeaderColor
-                                          .withOpacity(0.75),
-                                  shape: BoxShape.circle),
+                        right: 0,
+                        child: InkWell(
+                          onTap: () {
+                            _handleTapImage(index);
+                          },
+                          borderRadius: BorderRadius.circular(100),
+                          splashFactory: InkRipple.splashFactory,
+                          child: Container(
+                            width: 15,
+                            height: 90,
+                            margin: const EdgeInsets.all(15),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(100),
+                                  bottomRight: Radius.circular(100)),
+                              color: _selectedImage == index
+                                  ? Theme.of(context).primaryColor
+                                  : Theme.of(context)
+                                      .secondaryHeaderColor
+                                      .withOpacity(0.75),
                             ),
-                          ))
+                          ),
+                        ),
+                      )
                     ],
                   );
                 }),
               ),
               CustomPaint(
-                size: Size(MediaQuery.sizeOf(context).width * 0.24,
-                    MediaQuery.sizeOf(context).height * 0.53),
-                painter: LinePainter(points: _points),
+                isComplex: true,
+                willChange: true,
+                size: Size(MediaQuery.sizeOf(context).width * 0.25,
+                    MediaQuery.sizeOf(context).height * 0.45),
+                painter: LinePainter(points: _points, context: context),
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -155,22 +161,23 @@ class _LinkWordImageState extends State<LinkWordImage> {
                             borderRadius: BorderRadius.circular(100),
                             splashFactory: InkRipple.splashFactory,
                             child: Container(
-                              width: 15,
-                              height: 15,
-                              margin: const EdgeInsets.all(15),
-                              decoration: BoxDecoration(
-                                  color: Theme.of(context)
-                                      .secondaryHeaderColor
-                                      .withOpacity(0.75),
-                                  shape: BoxShape.circle),
-                            ),
+                                width: 15,
+                                height: 45,
+                                margin: const EdgeInsets.all(15),
+                                decoration: BoxDecoration(
+                                    color: Theme.of(context)
+                                        .secondaryHeaderColor
+                                        .withOpacity(0.75),
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(15),
+                                        bottomLeft: Radius.circular(15)))),
                           ))
                     ],
                   );
                 }),
               )
             ],
-          )),
+          ),
           const SizedBox(
             height: 30,
           ),
@@ -188,8 +195,9 @@ class _LinkWordImageState extends State<LinkWordImage> {
 
 class LinePainter extends CustomPainter {
   final List<Offset> points;
+  final BuildContext context;
 
-  LinePainter({required this.points});
+  LinePainter({required this.points, required this.context});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -205,9 +213,14 @@ class LinePainter extends CustomPainter {
       //     Offset(0, i * 120), Offset(size.width, points[i].dy), paint);
       canvas.drawPath(
           Path()
-            ..moveTo(0, i * 150)
-            ..cubicTo(size.width * 0.25, i * 150, size.width * 0.75,
-                points[i].dy, size.width, points[i].dy),
+            ..moveTo(0, i * MediaQuery.of(context).size.height * 0.15)
+            ..cubicTo(
+                size.width * 0.3,
+                i * MediaQuery.of(context).size.height * 0.15,
+                size.width * 0.75,
+                points[i].dy,
+                size.width,
+                points[i].dy),
           paint);
     }
   }
