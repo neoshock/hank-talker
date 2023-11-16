@@ -16,6 +16,7 @@ class LastActivityCard extends StatelessWidget {
               Container(
                 width: 80,
                 height: 80,
+                padding: EdgeInsets.all(9),
                 margin: EdgeInsets.all(9),
                 decoration: BoxDecoration(
                     boxShadow: [
@@ -29,6 +30,7 @@ class LastActivityCard extends StatelessWidget {
                     ],
                     color: Theme.of(context).colorScheme.primary,
                     borderRadius: BorderRadius.circular(15)),
+                child: Image.asset('assets/images/category.png'),
               ),
               SizedBox(
                 width: 15,

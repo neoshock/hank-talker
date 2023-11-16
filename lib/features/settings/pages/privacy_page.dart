@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
-import 'package:hank_talker_mobile/core/auth/providers/auth_provider.dart';
 import 'package:hank_talker_mobile/core/profile/providers/profile_provider.dart';
-import 'package:hank_talker_mobile/features/profile/pages/profile_page.dart';
 import 'package:hank_talker_mobile/features/profile/widgets/curved_background.dart';
 import 'package:hank_talker_mobile/features/settings/pages/change_password.dart';
 import 'package:hank_talker_mobile/features/settings/widgets/custom_avatar_edit.dart';
@@ -79,10 +77,11 @@ class _PrivacyPageState extends State<PrivacyPage> {
                     title: 'Privacidad',
                     textColor: Colors.white,
                   ),
-                  Positioned(
+                  const Positioned(
                       bottom: 15,
                       child: CustomAvatarEdit(
-                        url: user.urlPhoto,
+                        url:
+                            'https://cdn.pixabay.com/photo/2014/04/03/00/33/hand-308667_640.png',
                       )),
                   Positioned(
                     bottom: 0,

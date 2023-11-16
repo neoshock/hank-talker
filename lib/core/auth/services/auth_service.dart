@@ -5,7 +5,7 @@ import 'dart:convert';
 class AuthService {
   final ApiInterceptor api = ApiInterceptor();
 
-  Future<HttpBaseResponde> login(String email, String password) async {
+  Future<HttpBaseResponse> login(String email, String password) async {
     try {
       final response = await api.post(
           '/Auth/login',
@@ -15,11 +15,11 @@ class AuthService {
           }));
       final decodedData = json.decode(response.body);
       if (response.statusCode == 200) {
-        return HttpBaseResponde.fromJson(decodedData as Map<String, dynamic>);
+        return HttpBaseResponse.fromJson(decodedData as Map<String, dynamic>);
       }
-      return HttpBaseResponde.fromJson(decodedData as Map<String, dynamic>);
+      return HttpBaseResponse.fromJson(decodedData as Map<String, dynamic>);
     } catch (e) {
-      return HttpBaseResponde(
+      return HttpBaseResponse(
           code: 500,
           data: null,
           message: 'Hubo un problema al iniciar sesion',

@@ -1,18 +1,18 @@
-class HttpBaseResponde {
+class HttpBaseResponse {
   int code;
   dynamic data;
   String message;
   dynamic detail;
 
-  HttpBaseResponde({
+  HttpBaseResponse({
     required this.code,
     required this.data,
     required this.message,
     required this.detail,
   });
 
-  factory HttpBaseResponde.fromJson(Map<String, dynamic> json) =>
-      HttpBaseResponde(
+  factory HttpBaseResponse.fromJson(Map<String, dynamic> json) =>
+      HttpBaseResponse(
         code: json['code'] as int,
         data: json['data'],
         message: json['message'].toString(),

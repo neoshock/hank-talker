@@ -1,15 +1,15 @@
-import 'dart:convert';
-
-import 'package:hank_talker_mobile/core/profile/models/profile_model.dart';
 import 'package:hank_talker_mobile/core/repositories/http_model.dart';
 import 'package:hank_talker_mobile/interceptors/api_interceptor.dart';
+import 'dart:convert';
 
-class ProfileService {
-  final _api = ApiInterceptor();
+class LearningService {
+  final ApiInterceptor _apiInterceptor = ApiInterceptor();
 
-  Future<HttpBaseResponse> getProfile() async {
+  //Get Categories by user and region
+  // /Learn/region/2/categories
+  Future<HttpBaseResponse> getCategoriesByUserAndRegion() async {
     try {
-      final response = await _api.get('/User/profile');
+      final response = await _apiInterceptor.get('/Learn/region/2/categories');
       final decodedData = json.decode(response.body);
       if (response.statusCode == 200) {
         return HttpBaseResponse.fromJson(decodedData as Map<String, dynamic>);
@@ -19,27 +19,26 @@ class ProfileService {
       return HttpBaseResponse(
           code: 500,
           data: null,
-          message: 'Hubo un problema al obtener el perfil',
+          message: 'Hubo un problema al obtener las categorias',
           detail: null);
     }
   }
 
-  Future<HttpBaseResponse> updateProfile(
-      UserProfileModel userProfileModel) async {
+  // Get Category Detail
+  // /Learn/category/2
+  Future<HttpBaseResponse> getCategoryDetail(int id) async {
     try {
-      final response = _api.put(
-          '/User/update-my-profile', jsonEncode(userProfileModel.toJson()));
-      final decodedData = json.decode((await response).body);
-      if ((await response).statusCode == 200) {
+      final response = await _apiInterceptor.get('/Learn/category/$id');
+      final decodedData = json.decode(response.body);
+      if (response.statusCode == 200) {
         return HttpBaseResponse.fromJson(decodedData as Map<String, dynamic>);
       }
       return HttpBaseResponse.fromJson(decodedData as Map<String, dynamic>);
     } catch (e) {
-      print(e);
       return HttpBaseResponse(
           code: 500,
           data: null,
-          message: 'Hubo un problema al actualizar el perfil',
+          message: 'Hubo un problema al obtener las categorias',
           detail: null);
     }
   }

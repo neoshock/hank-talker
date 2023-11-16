@@ -3,18 +3,18 @@ import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:hank_talker_mobile/features/content/models/lesson_model.dart';
 
 class StatusInfoContainer extends StatelessWidget {
-  final List<LessonModel> lessons;
+  final int totalTopics;
+  final int pendingTopics;
   final double paddingTop;
   const StatusInfoContainer(
-      {Key? key, required this.paddingTop, required this.lessons})
+      {Key? key,
+      required this.paddingTop,
+      required this.totalTopics,
+      required this.pendingTopics})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final totalLessons = lessons.length;
-    final completedLessons =
-        lessons.where((element) => element.isCompleted).length;
-
     return Container(
       padding: EdgeInsets.only(
         top: 6 + paddingTop,
@@ -37,7 +37,7 @@ class StatusInfoContainer extends StatelessWidget {
                 height: 6,
               ),
               Text(
-                '$completedLessons/$totalLessons',
+                '$pendingTopics/$totalTopics Temas',
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge!
@@ -53,9 +53,12 @@ class StatusInfoContainer extends StatelessWidget {
           Column(
             children: [
               Padding(
-                padding: EdgeInsets.all(12),
+                padding: const EdgeInsets.all(12),
                 child: CircularProgressIndicator(
-                  value: completedLessons / totalLessons,
+                  // validate if division by zero
+                  value: totalTopics == 0
+                      ? 0
+                      : pendingTopics / totalTopics.toDouble(),
                   strokeWidth: 9,
                   strokeCap: StrokeCap.round,
                   backgroundColor: Theme.of(context).colorScheme.onPrimary,

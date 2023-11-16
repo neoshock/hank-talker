@@ -66,7 +66,7 @@ class _ContentListPageState extends State<ContentListPage> {
                   future: context.read<LearningProvider>().getAllCategories(),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
-                      final categories = snapshot.data;
+                      final categories = snapshot.data!;
                       return ListView(
                         padding: EdgeInsets.zero,
                         children: <Widget>[
@@ -119,7 +119,7 @@ class CategoryItem extends StatelessWidget {
         leading: CircleAvatar(
           radius: 60,
           child: Image.network(
-            category.imageUrl,
+            category.iconUrl.toString(),
             fit: BoxFit.contain,
           ),
         ),

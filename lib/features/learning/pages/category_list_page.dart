@@ -24,7 +24,7 @@ class _CategoryPageState extends State<CategoryPage> {
             future: context.read<LearningProvider>().getAllCategories(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                final categories = snapshot.data;
+                final categories = snapshot.data!;
                 return ListView(
                   padding: EdgeInsets.only(top: 15),
                   children: <Widget>[
@@ -59,7 +59,7 @@ class CategoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double puntuacion = (category.completedLeves / category.totalLeves) * 5;
+    double puntuacion = (category.pendingTopics / category.totalTopics) * 5;
 
     return Container(
       margin: const EdgeInsets.all(15),
@@ -88,13 +88,13 @@ class CategoryItem extends StatelessWidget {
             leading: CircleAvatar(
               radius: 30,
               child: Image.network(
-                category.imageUrl,
+                category.iconUrl.toString(),
                 fit: BoxFit.contain,
               ),
             ),
             title: Text(category.title),
             subtitle: Text(
-                'Niveles completados ${category.completedLeves} / ${category.totalLeves}'),
+                'Niveles completados ${category.pendingTopics} / ${category.totalTopics}'),
             onTap: () {
               // Handle onTap event if needed
             },

@@ -39,7 +39,7 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
-  Future<HttpBaseResponde> login(String email, String password) async {
+  Future<HttpBaseResponse> login(String email, String password) async {
     final respose = await authService.login(email, password);
     if (respose.code == 200) {
       _isAuth = true;

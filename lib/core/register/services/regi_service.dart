@@ -6,7 +6,7 @@ import 'package:hank_talker_mobile/interceptors/api_interceptor.dart';
 class RegiService {
   final ApiInterceptor api = ApiInterceptor();
 
-  Future<HttpBaseResponde> register(String email, String name, String lastName,
+  Future<HttpBaseResponse> register(String email, String name, String lastName,
       String password, String birthDate) async {
     print(birthDate);
     try {
@@ -21,12 +21,12 @@ class RegiService {
           }));
       final decodedData = json.decode(response.body);
       if (response.statusCode == 200) {
-        return HttpBaseResponde.fromJson(decodedData as Map<String, dynamic>);
+        return HttpBaseResponse.fromJson(decodedData as Map<String, dynamic>);
       }
-      return HttpBaseResponde.fromJson(decodedData as Map<String, dynamic>);
+      return HttpBaseResponse.fromJson(decodedData as Map<String, dynamic>);
     } catch (e) {
       print(e);
-      return HttpBaseResponde(
+      return HttpBaseResponse(
           code: 500, data: null, message: 'Error al registrar', detail: null);
     }
   }

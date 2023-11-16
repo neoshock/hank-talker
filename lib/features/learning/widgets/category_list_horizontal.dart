@@ -22,8 +22,8 @@ class CategoryListHorizontal extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => const CategoryDetailPage(
-                    idCategory: 1,
+                  builder: (_) =>  CategoryDetailPage(
+                    idCategory: categories[index].id,
                   ),
                 ),
               );
@@ -52,7 +52,7 @@ class CategoryListHorizontal extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Image.network(
-                      categories[index].imageUrl,
+                      'https://cdn.pixabay.com/photo/2014/04/03/00/33/hand-308667_640.png',
                       fit: BoxFit.contain,
                     ),
                   ),

@@ -24,7 +24,7 @@ class ProfileCardHeader extends StatelessWidget {
               CircleAvatar(
                   radius: 45,
                   child: Image.network(
-                    userProfileModel.urlPhoto,
+                    'https://static.vecteezy.com/system/resources/previews/019/896/008/original/male-user-avatar-icon-in-flat-design-style-person-signs-illustration-png.png',
                     errorBuilder: (context, error, stackTrace) {
                       return const Icon(
                         PhosphorIcons.user_circle_bold,

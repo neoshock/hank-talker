@@ -12,7 +12,7 @@ class ProfileProvider with ChangeNotifier {
   UserProfileModel get userProfileModel => _userProfileModel;
   final Preferences _preferences = Preferences();
 
-  Future<HttpBaseResponde> getProfile() async {
+  Future<HttpBaseResponse> getProfile() async {
     final response = await _profileService.getProfile();
     if (response.code == 200) {
       _userProfileModel =
@@ -22,7 +22,7 @@ class ProfileProvider with ChangeNotifier {
     return response;
   }
 
-  Future<HttpBaseResponde> updateProfile(
+  Future<HttpBaseResponse> updateProfile(
     String firstName,
     String lastName,
     String birthdate,

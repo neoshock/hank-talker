@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
-import 'package:hank_talker_mobile/features/content/models/question_model.dart';
+import 'package:hank_talker_mobile/features/content/models/lesson_model.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
 
 class CorrectSentence extends StatefulWidget {
-  final ValueSetter<String> onCheckAnswer;
-  final QuestionModel questionModel;
+  final ValueSetter<bool> onCheckAnswer;
+  final Question questionModel;
 
   const CorrectSentence(
       {Key? key, required this.onCheckAnswer, required this.questionModel})
@@ -179,10 +179,7 @@ class _CorrectSentenceState extends State<CorrectSentence> {
           ),
           SizedBox(
               width: MediaQuery.sizeOf(context).width,
-              child: CusttomButtonRounded(context, () {
-                const answer = 'La respuesta es 42'; // Tu string
-                widget.onCheckAnswer(answer);
-              }, 'Revisar respuesta'))
+              child: CusttomButtonRounded(context, () {}, 'Revisar respuesta'))
         ],
       ),
     );

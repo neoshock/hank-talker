@@ -1,22 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:hank_talker_mobile/features/content/models/question_model.dart';
-import 'package:hank_talker_mobile/features/content/models/select_image_model.dart';
+import 'package:hank_talker_mobile/features/content/models/lesson_model.dart';
+import 'package:hank_talker_mobile/utils/file_type_interceptor.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
 
 class SelectCorrectImage extends StatefulWidget {
-  const SelectCorrectImage(
-      {required this.onCheckAnswer, required this.questionModel, super.key});
+  const SelectCorrectImage({
+    required this.onCheckAnswer,
+    required this.questionModel,
+    super.key,
+  });
 
-  final ValueSetter<String> onCheckAnswer;
-  final QuestionModel questionModel;
+  final ValueSetter<bool> onCheckAnswer;
+  final Question questionModel;
 
   @override
   _SelectCorrectImageState createState() => _SelectCorrectImageState();
 }
 
 class _SelectCorrectImageState extends State<SelectCorrectImage> {
+  final List<ContentElement> contents = [];
   int? currentImage;
-  late final _images = widget.questionModel.content as List<SelectImageModel>;
+  late final contentResponse = widget.questionModel.content as List;
+
+  Future<void> checkAnswer() async {
+    widget.onCheckAnswer(
+      contents[currentImage!].value == widget.questionModel.answer,
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    for (var i = 0; i < contentResponse.length; i++) {
+      contents.add(
+        ContentElement.fromJson(contentResponse[i] as Map<String, dynamic>),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,24 +62,25 @@ class _SelectCorrectImageState extends State<SelectCorrectImage> {
             height: 45,
           ),
           Expanded(
-              child: GridView.builder(
-            padding: EdgeInsets.zero,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: _images.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2),
-            itemBuilder: (context, index) {
-              return InkWell(
-                onTap: () {
-                  setState(() {
-                    currentImage = index;
-                  });
-                },
-                borderRadius: BorderRadius.circular(15),
-                child: Container(
-                  margin: const EdgeInsets.all(15),
-                  padding: const EdgeInsets.all(15),
-                  decoration: BoxDecoration(
+            child: GridView.builder(
+              padding: EdgeInsets.zero,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: contents.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+              ),
+              itemBuilder: (context, index) {
+                return InkWell(
+                  onTap: () {
+                    setState(() {
+                      currentImage = index;
+                    });
+                  },
+                  borderRadius: BorderRadius.circular(15),
+                  child: Container(
+                    margin: const EdgeInsets.all(15),
+                    padding: const EdgeInsets.all(15),
+                    decoration: BoxDecoration(
                       boxShadow: [
                         BoxShadow(
                           color: Theme.of(context)
@@ -67,27 +88,29 @@ class _SelectCorrectImageState extends State<SelectCorrectImage> {
                               .shadow
                               .withOpacity(0.25),
                           blurRadius: 6,
-                        )
+                        ),
                       ],
                       color: currentImage == index
                           ? Theme.of(context).colorScheme.primary
                           : Theme.of(context).colorScheme.surface,
-                      borderRadius: BorderRadius.circular(15)),
-                  child: Image.network(
-                    _images[index].imageUrl,
-                    fit: BoxFit.contain,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: FileTypeInterceptor(
+                      contents[index].valueUrl,
+                    ),
                   ),
-                ),
-              );
-            },
-          )),
+                );
+              },
+            ),
+          ),
           SizedBox(
-              width: MediaQuery.sizeOf(context).width,
-              child: CusttomButtonRounded(context, () {
-                String answer = "La respuesta es 42"; // Tu string
-                widget.onCheckAnswer(
-                    answer); // Llama a la función de retorno de llamada con el string como argumento
-              }, 'Revisar respuesta'))
+            width: MediaQuery.sizeOf(context).width,
+            child: CusttomButtonRounded(
+              context,
+              checkAnswer,
+              'Revisar respuesta',
+            ),
+          ),
         ],
       ),
     );
