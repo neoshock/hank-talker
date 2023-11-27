@@ -7,9 +7,10 @@ class LearningService {
 
   //Get Categories by user and region
   // /Learn/region/2/categories
-  Future<HttpBaseResponse> getCategoriesByUserAndRegion() async {
+  Future<HttpBaseResponse> getCategoriesByUserAndRegion(int regionId) async {
     try {
-      final response = await _apiInterceptor.get('/Learn/region/2/categories');
+      final response =
+          await _apiInterceptor.get('/Learn/region/$regionId/categories');
       final decodedData = json.decode(response.body);
       if (response.statusCode == 200) {
         return HttpBaseResponse.fromJson(decodedData as Map<String, dynamic>);

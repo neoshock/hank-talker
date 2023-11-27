@@ -55,6 +55,7 @@ class AuthProvider with ChangeNotifier {
   Future<bool> logout() async {
     _isAuth = false;
     await Preferences().erasedPreferences('token');
+    await Preferences().erasedPreferences('region');
     notifyListeners();
     return true;
   }

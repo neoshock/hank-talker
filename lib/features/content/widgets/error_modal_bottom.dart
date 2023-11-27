@@ -51,7 +51,11 @@ class ErrorModalBottom extends StatelessWidget {
                 },
                 child: const Text(
                   'Siguiente Pregunta',
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
                 ),
               )),
           SizedBox(height: 15),

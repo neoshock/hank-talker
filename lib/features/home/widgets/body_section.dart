@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hank_talker_mobile/core/profile/models/profile_model.dart';
 import 'package:hank_talker_mobile/features/home/widgets/experience_chart_widget.dart';
 import 'package:hank_talker_mobile/features/home/widgets/last_activity_card.dart';
 
 class BodySection extends StatelessWidget {
-  const BodySection({super.key});
+  final UserProfileModel userProfileModel;
+  const BodySection({super.key, required this.userProfileModel});
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +66,9 @@ class BodySection extends StatelessWidget {
             const SizedBox(
               height: 15,
             ),
-            const ExperienceChartWidget(),
+            ExperienceChartWidget(
+              experience: userProfileModel.statistic.acumulatedExperience,
+            ),
           ],
         ),
       ),

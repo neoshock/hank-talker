@@ -56,7 +56,10 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                             passwordActualController,
                             TextInputType.visiblePassword,
                             context,
-                            const Icon(PhosphorIcons.lock),
+                            const Icon(
+                              PhosphorIcons.lock,
+                              color: Colors.grey,
+                            ),
                             'Contraseña actual', (value) {
                           if (value == null || value == '') {
                             return 'Contraseña es requerida';
@@ -72,7 +75,10 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                             passwordNewController,
                             TextInputType.visiblePassword,
                             context,
-                            const Icon(PhosphorIcons.lock),
+                            const Icon(
+                              PhosphorIcons.lock,
+                              color: Colors.grey,
+                            ),
                             'Contraseña nueva', (value) {
                           if (value == null || value == '') {
                             return 'Contraseña es requerida';
@@ -88,7 +94,10 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                             passwordRepeatController,
                             TextInputType.visiblePassword,
                             context,
-                            const Icon(PhosphorIcons.lock),
+                            const Icon(
+                              PhosphorIcons.lock,
+                              color: Colors.grey,
+                            ),
                             'Repetir contraseña actual', (value) {
                           if (value == null || value == '') {
                             return 'Contraseña es requerida';

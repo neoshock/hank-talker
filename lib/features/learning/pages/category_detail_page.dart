@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:hank_talker_mobile/core/profile/providers/profile_provider.dart';
 import 'package:hank_talker_mobile/features/content/pages/content_list_page.dart';
 import 'package:hank_talker_mobile/features/learning/providers/learning_provider.dart';
 import 'package:hank_talker_mobile/features/learning/widgets/topic_tree_widget.dart';
@@ -96,24 +97,6 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                                           .colorScheme
                                           .secondary,
                                     ),
-                                    child: IconButton(
-                                      iconSize: 24,
-                                      padding: EdgeInsets.zero,
-                                      onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                ContentListPage(),
-                                          ),
-                                        );
-                                      },
-                                      icon: const Icon(
-                                        PhosphorIcons.book_bookmark_bold,
-                                        size: 30,
-                                        color: Colors.white,
-                                      ),
-                                    ),
                                   ),
                                 ],
                               ),
@@ -130,6 +113,11 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                                     totalTopics: categoryDetail.totalTopics,
                                     pendingTopics: categoryDetail.pendingTopics,
                                     paddingTop: value ? 45 : 0,
+                                    totalAttempts: context
+                                        .watch<ProfileProvider>()
+                                        .userProfileModel
+                                        .statistic
+                                        .remainingLive,
                                   );
                                 },
                               ),

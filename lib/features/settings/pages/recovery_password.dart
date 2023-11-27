@@ -42,7 +42,7 @@ class _RecoveryPasswordPageState extends State<RecoveryPasswordPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       'Loren ipsum dolor sit amet, consectetur adipiscing elit.',
                       style: TextStyle(
                         fontSize: 16,
@@ -54,7 +54,10 @@ class _RecoveryPasswordPageState extends State<RecoveryPasswordPage> {
                       emailController,
                       TextInputType.emailAddress,
                       context,
-                      const Icon(PhosphorIcons.envelope),
+                      const Icon(
+                        PhosphorIcons.envelope,
+                        color: Colors.grey,
+                      ),
                       (value) {
                         if (value == null || value == '') {
                           return 'Correo electrónico es requerido';

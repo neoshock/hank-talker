@@ -5,12 +5,14 @@ import 'package:hank_talker_mobile/features/content/models/lesson_model.dart';
 class StatusInfoContainer extends StatelessWidget {
   final int totalTopics;
   final int pendingTopics;
+  final int totalAttempts;
   final double paddingTop;
   const StatusInfoContainer(
       {Key? key,
       required this.paddingTop,
       required this.totalTopics,
-      required this.pendingTopics})
+      required this.pendingTopics,
+      required this.totalAttempts})
       : super(key: key);
 
   @override
@@ -24,6 +26,7 @@ class StatusInfoContainer extends StatelessWidget {
       decoration: BoxDecoration(color: Theme.of(context).colorScheme.secondary),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -51,9 +54,12 @@ class StatusInfoContainer extends StatelessWidget {
             color: Theme.of(context).colorScheme.onPrimary,
           ),
           Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(12),
+              Container(
+                height: 45,
+                width: 45,
+                padding: EdgeInsets.all(6),
                 child: CircularProgressIndicator(
                   // validate if division by zero
                   value: totalTopics == 0
@@ -83,6 +89,7 @@ class StatusInfoContainer extends StatelessWidget {
             color: Theme.of(context).colorScheme.onPrimary,
           ),
           Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Icon(
                 PhosphorIcons.heart_fill,
@@ -93,7 +100,7 @@ class StatusInfoContainer extends StatelessWidget {
                 height: 6,
               ),
               Text(
-                '3/5 Intentos',
+                '$totalAttempts/5 Intentos',
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge!

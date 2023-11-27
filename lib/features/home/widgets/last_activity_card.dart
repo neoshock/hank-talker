@@ -7,6 +7,7 @@ class LastActivityCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 1,
+      surfaceTintColor: Theme.of(context).colorScheme.primaryContainer,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Container(
           width: MediaQuery.of(context).size.width,

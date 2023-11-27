@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hank_talker_mobile/core/profile/providers/profile_provider.dart';
 import 'package:hank_talker_mobile/features/content/models/lesson_model.dart';
 import 'package:hank_talker_mobile/features/content/pages/correct_sentence.dart';
 import 'package:hank_talker_mobile/features/content/pages/finish_test_page.dart';
@@ -10,6 +11,7 @@ import 'package:hank_talker_mobile/features/content/provider/content_provider.da
 import 'package:hank_talker_mobile/features/content/widgets/custom_test_progress_bar.dart';
 import 'package:hank_talker_mobile/features/content/widgets/error_modal_bottom.dart';
 import 'package:hank_talker_mobile/features/content/widgets/success_modal_bottom.dart';
+import 'package:hank_talker_mobile/widgets/failed_page.dart';
 import 'package:provider/provider.dart';
 
 class TestContentPage extends StatefulWidget {
@@ -44,6 +46,9 @@ class _TestContentPageState extends State<TestContentPage> {
               );
       },
     );
+    if (!onCorrectAnswer) {
+      Provider.of<ProfileProvider>(context, listen: false).decrementHeart();
+    }
   }
 
   void onNextQuestion() {
@@ -60,11 +65,12 @@ class _TestContentPageState extends State<TestContentPage> {
   Widget getQuestionPage(String type, Question question, {int? length}) {
     // validate if is the last question
     if (currentQuestion >= length!) {
+      Provider.of<ProfileProvider>(context, listen: false)
+          .postLessonCompletionRecord(widget.lessonId);
       return const FinishTestPage(
         totalExp: 300,
       );
     }
-    print(question);
     switch (type) {
       case 'select_correct_word':
         return SelectCorrectWord(
@@ -124,7 +130,18 @@ class _TestContentPageState extends State<TestContentPage> {
                   );
                 }
                 final lessonDetail = response.data as LessonDetailModel;
-                print(lessonDetail.questions.length);
+                final totalHeart = context
+                    .watch<ProfileProvider>()
+                    .userProfileModel
+                    .statistic
+                    .remainingLive;
+                if (totalHeart <= 0) {
+                  return const FailedPage(
+                    title: 'Atención',
+                    description:
+                        'No tienes más vidas disponibles, espera a que se recarguen',
+                  );
+                }
                 return SafeArea(
                   child: Column(
                     children: [

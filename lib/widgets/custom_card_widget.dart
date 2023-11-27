@@ -7,6 +7,8 @@ class CustomCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+        color: Theme.of(context).cardColor,
+        surfaceTintColor: Theme.of(context).colorScheme.primaryContainer,
         elevation: 1,
         margin: const EdgeInsets.all(15),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),

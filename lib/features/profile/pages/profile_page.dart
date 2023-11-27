@@ -117,9 +117,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                 .textTheme
                                 .bodyLarge!
                                 .copyWith(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .secondary)))
+                                    color:
+                                        Theme.of(context).colorScheme.error)))
                   ],
                 )
               ],

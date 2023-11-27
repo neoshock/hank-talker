@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hank_talker_mobile/core/profile/models/region_model.dart';
 import 'package:hank_talker_mobile/core/profile/providers/profile_provider.dart';
 import 'package:hank_talker_mobile/features/home/widgets/body_section.dart';
 import 'package:hank_talker_mobile/features/home/widgets/header_section.dart';
@@ -24,7 +25,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> asyncInit() async {
-    await context.read<ProfileProvider>().getProfile();
+    if (!mounted) {
+      await context.read<ProfileProvider>().getProfile();
+      // ignore: use_build_context_synchronously
+      await context.read<ProfileProvider>().getRegion();
+    }
   }
 
   @override
@@ -40,9 +45,14 @@ class _HomePageState extends State<HomePage> {
               SliverToBoxAdapter(
                   child: HeaderSection(
                 name: name,
+                region: context.watch<ProfileProvider>().selectedRegion,
               )),
-              const SliverFillRemaining(
-                  hasScrollBody: false, child: BodySection())
+              SliverFillRemaining(
+                  hasScrollBody: false,
+                  child: BodySection(
+                    userProfileModel:
+                        context.watch<ProfileProvider>().userProfileModel,
+                  ))
             ],
           )),
     );

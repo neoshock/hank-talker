@@ -29,13 +29,15 @@ class ErrorDialogWidget extends StatelessWidget {
             height: 240,
           ),
           Positioned(
-            bottom: 0,
-            child: Text(
-              description,
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-          ),
+              bottom: 0,
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.8,
+                child: Text(
+                  description,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+              )),
         ],
       ),
       actions: [

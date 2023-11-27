@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:hank_talker_mobile/utils/file_type_interceptor.dart';
 
 Widget CustomTextImputWithLabel(
     String label,
@@ -8,8 +9,7 @@ Widget CustomTextImputWithLabel(
     BuildContext context,
     Icon icon,
     String? Function(String?)? validator,
-    bool readOnly
-    ) {
+    bool readOnly) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [

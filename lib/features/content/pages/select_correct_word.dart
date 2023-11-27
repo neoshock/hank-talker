@@ -20,7 +20,10 @@ class _SelectCorrectWordState extends State<SelectCorrectWord> {
   late final PurpleContent content;
 
   Future<void> checkAnswer() async {
-  
+    // validate if current word is null
+    if (currrentWord == null) {
+      return;
+    }
     widget.onCheckAnswer(currrentWord == widget.questionModel.answer);
   }
 

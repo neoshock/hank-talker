@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:hank_talker_mobile/core/profile/providers/profile_provider.dart';
+import 'package:provider/provider.dart';
 
 class CustomTestProgressBar extends StatelessWidget {
   // ignore: lines_longer_than_80_chars
@@ -47,7 +50,7 @@ class CustomTestProgressBar extends StatelessWidget {
                   },
                 )),
             const SizedBox(
-              width: 10,
+              width: 6,
             ),
             ...List.generate(totalQuestions, (index) {
               return Expanded(
@@ -64,7 +67,29 @@ class CustomTestProgressBar extends StatelessWidget {
                           .withOpacity(0.5),
                 ),
               ));
-            })
+            }),
+            const SizedBox(
+              width: 6,
+            ),
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                Icon(
+                  PhosphorIcons.heart_fill,
+                  size: 45,
+                  color: Theme.of(context).colorScheme.errorContainer,
+                ),
+                Text(
+                  context
+                      .watch<ProfileProvider>()
+                      .userProfileModel
+                      .statistic
+                      .remainingLive
+                      .toString(),
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+              ],
+            )
           ],
         ));
   }

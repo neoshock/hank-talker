@@ -63,7 +63,10 @@ class _RegisterEmailState extends State<RegisterEmail> {
                       emailController,
                       TextInputType.emailAddress,
                       context,
-                      const Icon(Icons.email),
+                      const Icon(
+                        Icons.email,
+                        color: Colors.grey,
+                      ),
                       'john.Doe@gmail.com',
                       (value) {
                         if (value == null || value == '') {

@@ -58,34 +58,34 @@ class _RegisterNaneState extends State<RegisterNane> {
                     ),
                     const SizedBox(height: 40),
                     CustomTextImputWithLabel(
-                      'Nombres',
-                      nameController,
-                      TextInputType.name,
-                      context,
-                      const Icon(Icons.person),
-                      (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Nombres requeridos';
-                        }
-                        return null;
-                      },
-                      false
-                    ),
+                        'Nombres',
+                        nameController,
+                        TextInputType.name,
+                        context,
+                        const Icon(
+                          Icons.person,
+                          color: Colors.grey,
+                        ), (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Nombres requeridos';
+                      }
+                      return null;
+                    }, false),
                     const SizedBox(height: 20),
                     CustomTextImputWithLabel(
-                      'Apellidos',
-                      lastNameController,
-                      TextInputType.name,
-                      context,
-                      const Icon(Icons.person),
-                      (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Apellidos requeridos';
-                        }
-                        return null;
-                      },
-                      false
-                    ),
+                        'Apellidos',
+                        lastNameController,
+                        TextInputType.name,
+                        context,
+                        const Icon(
+                          Icons.person,
+                          color: Colors.grey,
+                        ), (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Apellidos requeridos';
+                      }
+                      return null;
+                    }, false),
                     const SizedBox(height: 30),
                     SizedBox(
                       width: MediaQuery.sizeOf(context).width,

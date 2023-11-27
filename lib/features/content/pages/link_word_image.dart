@@ -32,7 +32,7 @@ class _LinkWordImageState extends State<LinkWordImage> {
       if (_selectedImage < _points.length) {
         _points[_selectedImage] = Offset(
           MediaQuery.sizeOf(context).width * 0.3,
-          index * (MediaQuery.sizeOf(context).height * 0.15),
+          index * (MediaQuery.sizeOf(context).height * 0.13),
         );
         return;
       }
@@ -45,7 +45,7 @@ class _LinkWordImageState extends State<LinkWordImage> {
       _points.add(
         Offset(
           MediaQuery.sizeOf(context).width * 0.3,
-          index * (MediaQuery.sizeOf(context).height * 0.15),
+          index * (MediaQuery.sizeOf(context).height * 0.13),
         ),
       );
     });
@@ -67,7 +67,7 @@ class _LinkWordImageState extends State<LinkWordImage> {
 
     for (var i = 0; i < _points.length; i++) {
       final expectedX = MediaQuery.sizeOf(context).width * 0.3;
-      final expectedY = i * (MediaQuery.sizeOf(context).height * 0.15);
+      final expectedY = i * (MediaQuery.sizeOf(context).height * 0.13);
 
       // Validar si las coordenadas del punto coinciden con las esperadas
       if (_points[i].dx != expectedX || _points[i].dy != expectedY) {
@@ -105,7 +105,7 @@ class _LinkWordImageState extends State<LinkWordImage> {
                 children:
                     List.generate(_linkWordImageModel.images!.length, (index) {
                   return Stack(
-                    alignment: Alignment.centerLeft,
+                    alignment: Alignment.center,
                     children: [
                       Container(
                         width: 90,
@@ -163,7 +163,9 @@ class _LinkWordImageState extends State<LinkWordImage> {
                 willChange: true,
                 size: Size(
                   MediaQuery.sizeOf(context).width * 0.25,
-                  MediaQuery.sizeOf(context).height * 0.45,
+                  // calculate the height of the canvas with the number of items
+                  MediaQuery.sizeOf(context).height *
+                      (0.1 * _linkWordImageModel.words.length),
                 ),
                 painter: LinePainter(points: _points, context: context),
               ),
@@ -252,10 +254,10 @@ class LinePainter extends CustomPainter {
       //     Offset(0, i * 120), Offset(size.width, points[i].dy), paint);
       canvas.drawPath(
         Path()
-          ..moveTo(0, i * MediaQuery.of(context).size.height * 0.15)
+          ..moveTo(0, i * MediaQuery.of(context).size.height * 0.13)
           ..cubicTo(
             size.width * 0.3,
-            i * MediaQuery.of(context).size.height * 0.15,
+            i * MediaQuery.of(context).size.height * 0.13,
             size.width * 0.75,
             points[i].dy,
             size.width,

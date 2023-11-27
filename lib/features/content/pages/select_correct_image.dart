@@ -23,6 +23,15 @@ class _SelectCorrectImageState extends State<SelectCorrectImage> {
   late final contentResponse = widget.questionModel.content as List;
 
   Future<void> checkAnswer() async {
+    // validate if image is selected
+    if (currentImage == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Selecciona una imagen'),
+        ),
+      );
+      return;
+    }
     widget.onCheckAnswer(
       contents[currentImage!].value == widget.questionModel.answer,
     );
@@ -95,8 +104,8 @@ class _SelectCorrectImageState extends State<SelectCorrectImage> {
                           : Theme.of(context).colorScheme.surface,
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    child: FileTypeInterceptor(
-                      contents[index].valueUrl,
+                    child: FileInterceptorWidget(
+                      fileUrl: contents[index].value,
                     ),
                   ),
                 );

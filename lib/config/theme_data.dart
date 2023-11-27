@@ -10,15 +10,20 @@ class CustomThemeData {
       foregroundColor: Color.fromRGBO(44, 44, 44, 1),
       elevation: 0,
     ),
+
+    cardColor: Colors.white,
+    iconTheme: const IconThemeData(color: Color.fromRGBO(44, 44, 44, 1)),
+    primaryIconTheme: const IconThemeData(color: Color.fromRGBO(44, 44, 44, 1)),
     scaffoldBackgroundColor:
         const Color(0xFFF1F5F9), // light grey, used for background
     colorScheme: const ColorScheme.light(
+      surfaceTint: Color(0xFFFFFFFF),
       primary: Color(0xFF4FA53A),
       secondary: Color(0xFFD29335),
       background: Color(0xFFF1F5F9),
       error: Color(0XFFFF2442),
       tertiary: Color(0xFFFACE33),
-      primaryContainer: Color(0xFF689F38),
+      primaryContainer: Color.fromARGB(255, 255, 255, 255),
       secondaryContainer: Color(0xFFD29335),
       inversePrimary: Color(0xFF1B7505),
       inverseSurface: Color(0xFFD29335),

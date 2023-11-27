@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 
 class ExperienceChartWidget extends StatefulWidget {
-  const ExperienceChartWidget({super.key});
+  final int experience;
+  const ExperienceChartWidget({super.key, required this.experience});
 
   @override
   _ExperienceChartWidgetState createState() => _ExperienceChartWidgetState();
@@ -19,6 +20,7 @@ class _ExperienceChartWidgetState extends State<ExperienceChartWidget> {
     final chartColor = Theme.of(context).colorScheme.secondary;
     return Card(
       elevation: 1,
+      surfaceTintColor: Theme.of(context).colorScheme.primaryContainer,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: Container(
           width: MediaQuery.sizeOf(context).width,
@@ -40,7 +42,7 @@ class _ExperienceChartWidgetState extends State<ExperienceChartWidget> {
                             height: 6,
                           ),
                           Text(
-                            '500 EXP',
+                            '${widget.experience} EXP',
                             style: Theme.of(context).textTheme.displayMedium,
                           )
                         ],
@@ -92,15 +94,6 @@ class _ExperienceChartWidgetState extends State<ExperienceChartWidget> {
                                   chartColor.withOpacity(0.3),
                                   chartColor.withOpacity(0.1),
                                 ])),
-                        spots: const [
-                          FlSpot(0, 3),
-                          FlSpot(2.6, 2),
-                          FlSpot(4.9, 5),
-                          FlSpot(6.8, 3.1),
-                          FlSpot(8, 4),
-                          FlSpot(9.5, 3),
-                          FlSpot(11, 4),
-                        ],
                         isCurved: true,
                         barWidth: 5,
                         isStrokeCapRound: true,

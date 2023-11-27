@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:hank_talker_mobile/features/learning/models/category_model.dart';
+import 'package:hank_talker_mobile/features/learning/pages/category_detail_page.dart';
 import 'package:hank_talker_mobile/features/learning/providers/learning_provider.dart';
+import 'package:hank_talker_mobile/utils/file_type_interceptor.dart';
 import 'package:hank_talker_mobile/widgets/custom_appbar_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -25,10 +27,18 @@ class _CategoryPageState extends State<CategoryPage> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 final categories = snapshot.data!;
+                if (categories.isEmpty) {
+                  return Center(
+                    child: Text(
+                      'No hay categorias disponibles',
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                  );
+                }
                 return ListView(
                   padding: EdgeInsets.only(top: 15),
                   children: <Widget>[
-                    ...List.generate(categories!.length, (index) {
+                    ...List.generate(categories.length, (index) {
                       return CategoryItem(
                         category: categories[index],
                       );
@@ -37,8 +47,8 @@ class _CategoryPageState extends State<CategoryPage> {
                 );
               }
               if (snapshot.hasError) {
-                return Center(
-                  child: Text(snapshot.error.toString()),
+                return const Center(
+                  child: Text('Parece que hubo un problema'),
                 );
               }
               return const Center(
@@ -59,7 +69,7 @@ class CategoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double puntuacion = (category.pendingTopics / category.totalTopics) * 5;
+    final puntuacion = (category.pendingTopics / category.totalTopics) * 5;
 
     return Container(
       margin: const EdgeInsets.all(15),
@@ -86,17 +96,21 @@ class CategoryItem extends StatelessWidget {
             ),
             tileColor: Theme.of(context).colorScheme.surface,
             leading: CircleAvatar(
-              radius: 30,
-              child: Image.network(
-                category.iconUrl.toString(),
-                fit: BoxFit.contain,
-              ),
-            ),
+                radius: 30,
+                child: FileInterceptorWidget(
+                    fileUrl: category.iconUrl.toString())),
             title: Text(category.title),
             subtitle: Text(
                 'Niveles completados ${category.pendingTopics} / ${category.totalTopics}'),
             onTap: () {
-              // Handle onTap event if needed
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => CategoryDetailPage(
+                    idCategory: category.id,
+                  ),
+                ),
+              );
             },
           ),
           Positioned(

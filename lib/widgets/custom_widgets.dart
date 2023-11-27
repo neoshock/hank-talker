@@ -18,9 +18,9 @@ Widget CustomBackButton(BuildContext context, Function onPressed) {
         ],
       ),
       child: IconButton(
+      
         alignment: Alignment.center,
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
           padding:
               MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.zero),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(

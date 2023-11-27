@@ -18,7 +18,7 @@ class LevelItemWidget extends StatelessWidget {
             children: [
               CircleAvatar(
                 backgroundColor: Colors.grey[300],
-                child: FileTypeInterceptor(lesson.iconUrl),
+                child: FileInterceptorWidget(fileUrl: lesson.iconUrl),
               ),
               const SizedBox(
                 width: 6,

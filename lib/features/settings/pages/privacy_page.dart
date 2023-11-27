@@ -103,7 +103,10 @@ class _PrivacyPageState extends State<PrivacyPage> {
                           textControllers['name']!,
                           TextInputType.name,
                           context,
-                          const Icon(PhosphorIcons.user_circle_bold), (value) {
+                          const Icon(
+                            PhosphorIcons.user_circle_bold,
+                            color: Colors.grey,
+                          ), (value) {
                         if (value!.isEmpty) {
                           return 'El nombre no puede estar vacío';
                         }
@@ -115,7 +118,10 @@ class _PrivacyPageState extends State<PrivacyPage> {
                           textControllers['lastName']!,
                           TextInputType.name,
                           context,
-                          const Icon(PhosphorIcons.user_circle_bold),
+                          const Icon(
+                            PhosphorIcons.user_circle_bold,
+                            color: Colors.grey,
+                          ),
                           (value) {},
                           false),
                       const SizedBox(height: 15),
@@ -124,7 +130,10 @@ class _PrivacyPageState extends State<PrivacyPage> {
                           textControllers['email']!,
                           TextInputType.emailAddress,
                           context,
-                          const Icon(PhosphorIcons.envelope),
+                          const Icon(
+                            PhosphorIcons.envelope,
+                            color: Colors.grey,
+                          ),
                           (value) {},
                           true),
                       const SizedBox(height: 15),

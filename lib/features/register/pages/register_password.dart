@@ -50,7 +50,10 @@ class _RegisterPasswordState extends State<RegisterPassword> {
                     passwordController,
                     TextInputType.visiblePassword,
                     context,
-                    const Icon(PhosphorIcons.lock),
+                    const Icon(
+                      PhosphorIcons.lock,
+                      color: Colors.grey,
+                    ),
                     'Contraseña', (value) {
                   if (value == null || value == '') {
                     return 'Contraseña es requerida';

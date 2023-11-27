@@ -62,7 +62,7 @@ class _BottomBarState extends State<BottomBar> {
             iconSize: 30,
             radius: 20,
             sizeInside: 69,
-            height: 45,
+            height: 50,
             chipStyle: ChipStyle(
               color: Theme.of(context).colorScheme.surface,
               background: Theme.of(context).colorScheme.primary,

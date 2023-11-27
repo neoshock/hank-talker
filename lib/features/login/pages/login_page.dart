@@ -80,7 +80,10 @@ class _LoginPageState extends State<LoginPage> {
                             emailController,
                             TextInputType.emailAddress,
                             context,
-                            const Icon(PhosphorIcons.envelope), (value) {
+                            const Icon(
+                              PhosphorIcons.envelope,
+                              color: Colors.grey,
+                            ), (value) {
                           if (value == null || value == '') {
                             return 'Correo electrónico es requerido';
                           }
@@ -97,7 +100,10 @@ class _LoginPageState extends State<LoginPage> {
                             passwordController,
                             TextInputType.visiblePassword,
                             context,
-                            const Icon(PhosphorIcons.lock),
+                            const Icon(
+                              PhosphorIcons.lock,
+                              color: Colors.grey,
+                            ),
                             'Contraseña', (value) {
                           if (value == null || value == '') {
                             return 'Contraseña es requerida';
@@ -112,7 +118,10 @@ class _LoginPageState extends State<LoginPage> {
                         SizedBox(
                           width: MediaQuery.sizeOf(context).width,
                           child: CusttomButtonRounded(
-                              context, login, 'Iniciar Sesión',),
+                            context,
+                            login,
+                            'Iniciar Sesión',
+                          ),
                         ),
                         const SizedBox(height: 15),
                         TextButton(
