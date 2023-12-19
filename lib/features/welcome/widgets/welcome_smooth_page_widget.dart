@@ -13,19 +13,19 @@ class _WelcomeSmoothPageWidgetState extends State<WelcomeSmoothPageWidget> {
   final controller = PageController();
   final List<Map<String, dynamic>> contents = [
     {
-      'title': 'Bienvenido a Hank Talker',
+      'title': 'Bienvenido a hand talker',
       'description':
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eget nunc vi',
+          'Descubre la belleza y la importancia de los lenguajes de señas en nuestra misión de construir puentes hacia la igualdad.',
     },
     {
-      'title': 'Bienvenido a Hank Talker',
+      'title': 'Diversidad lingüística',
       'description':
-          'Hank Talker es una aplicación que te ayudará a comunicarte con tus seres queridos 2.',
+          'Explora la diversidad lingüística que enriquece nuestras vidas y construye puentes de conexión más allá de las palabras.',
     },
     {
-      'title': 'Bienvenido a Hank Talker',
+      'title': 'Comunicación sin barreras',
       'description':
-          'Hank Talker es una aplicación que te ayudará a comunicarte con tus seres queridos 3.',
+          ' A medida que aprendes lenguajes de señas, desbloquearás nuevas formas de conectarte con personas de todo el mundo.',
     },
   ];
 
