@@ -23,7 +23,7 @@ class _RecoveryPasswordPageState extends State<RecoveryPasswordPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppbarWidget(context,
-          title: 'Recuperar Contraseña', showBackButton: true),
+          title: 'Recuperar contraseña', showBackButton: true),
       body: Form(
         key: formGlobalKey,
         child: Column(
@@ -75,7 +75,7 @@ class _RecoveryPasswordPageState extends State<RecoveryPasswordPage> {
                 child: CusttomButtonRounded(
                   context,
                   () => RecoveryPassword(),
-                  'Recuperar Contraseña',
+                  'Recuperar contraseña',
                 ),
               ),
             ),

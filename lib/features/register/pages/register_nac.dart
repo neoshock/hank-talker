@@ -52,7 +52,7 @@ class BirthDatePage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
-                          'Cual es tu fecha de nacimiento',
+                          '¿Cuál es tu fecha de nacimiento?',
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,

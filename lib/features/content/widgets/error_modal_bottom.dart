@@ -19,7 +19,7 @@ class ErrorModalBottom extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            'Opps!',
+            '¡Opps!',
             style: Theme.of(context)
                 .textTheme
                 .displayLarge!
@@ -50,7 +50,7 @@ class ErrorModalBottom extends StatelessWidget {
                   onSuccess();
                 },
                 child: const Text(
-                  'Siguiente Pregunta',
+                  'Siguiente pregunta',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w600,

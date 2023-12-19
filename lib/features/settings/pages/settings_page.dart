@@ -52,7 +52,7 @@ class _SettingsPageState extends State<SettingsPage> {
               children: [
                 const SizedBox(height: 30),
                 CustomCardWidget(children: [
-                  Text('Pais', style: Theme.of(context).textTheme.bodyMedium),
+                  Text('País', style: Theme.of(context).textTheme.bodyMedium),
                   FutureBuilder(
                     future: _getRegions(),
                     builder: (context, snapshot) {
@@ -76,10 +76,10 @@ class _SettingsPageState extends State<SettingsPage> {
                   CustomSettingsListTile(title: 'Notificaciones', onTap: () {}),
                   const SizedBox(height: 15),
                   CustomSettingsListTile(
-                      title: 'política de privacidad', onTap: () {}),
+                      title: 'Política de privacidad', onTap: () {}),
                   const SizedBox(height: 15),
                   CustomSettingsListTile(
-                      title: 'Términos y Condiciones', onTap: () {}),
+                      title: 'Términos y condiciones', onTap: () {}),
                 ]),
               ],
             ),
