@@ -62,13 +62,14 @@ class _TestContentPageState extends State<TestContentPage> {
     );
   }
 
-  Widget getQuestionPage(String type, Question question, {int? length}) {
+  Widget getQuestionPage(String type, Question question,
+      {int? length, int totalExp = 10}) {
     // validate if is the last question
     if (currentQuestion >= length!) {
       Provider.of<ProfileProvider>(context, listen: false)
           .postLessonCompletionRecord(widget.lessonId);
-      return const FinishTestPage(
-        totalExp: 300,
+      return FinishTestPage(
+        totalExp: totalExp,
       );
     }
     switch (type) {
@@ -168,6 +169,7 @@ class _TestContentPageState extends State<TestContentPage> {
                               lessonDetail.questions[index].questionDescription,
                               lessonDetail.questions[index],
                               length: lessonDetail.questions.length,
+                              totalExp: lessonDetail.totalExperience,
                             );
                           },
                         ),

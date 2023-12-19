@@ -68,4 +68,20 @@ class ProfileService {
           detail: null);
     }
   }
+
+  // {{LOCAL_URL_BACK}}/api/dashboard/experience-week
+  Future<HttpBaseResponse> getExperienceWeek() async {
+    try {
+      final response = await _api.get('/dashboard/experience-week');
+      final decodedData = json.decode(response.body);
+      return HttpBaseResponse.fromJson(decodedData as Map<String, dynamic>);
+    } catch (e) {
+      print(e);
+      return HttpBaseResponse(
+          code: 500,
+          data: null,
+          message: 'Hubo un problema al obtener la experiencia de la semana',
+          detail: null);
+    }
+  }
 }

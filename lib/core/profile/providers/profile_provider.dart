@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:hank_talker_mobile/core/profile/models/experience_week_model.dart';
 import 'package:hank_talker_mobile/core/profile/models/profile_model.dart';
 import 'package:hank_talker_mobile/core/profile/models/region_model.dart';
 import 'package:hank_talker_mobile/core/profile/services/profile_services.dart';
@@ -53,8 +54,18 @@ class ProfileProvider with ChangeNotifier {
   Future<RegionModel?> getRegion() async {
     final region = await _preferences.getPreferences('region');
     if (region != null) {
+      print(region.toString());
       _selectedRegion = RegionModel.fromJson(
-          jsonDecode(region.toString()) as Map<String, dynamic>);
+        jsonDecode(region.toString()) as Map<String, dynamic>,
+      );
+    } else {
+      await setRegion(
+        RegionModel.fromJson(
+          jsonDecode(
+            '{"id":18,"description":"Lengua de señas ecuatoriana","flagUrl":"https://fyc.uteq.edu.ec:9004/Upload/regions/638373138396521327.png"}',
+          ) as Map<String, dynamic>,
+        ),
+      );
     }
     notifyListeners();
     return _selectedRegion;
@@ -90,10 +101,23 @@ class ProfileProvider with ChangeNotifier {
     final response = await _contentService.postLessonCompletionRecord(lessonId);
     if (response.code == 200) {
       return HttpBaseResponse(
-          code: response.code,
-          data: response.data,
-          message: response.message,
-          detail: response.detail);
+        code: response.code,
+        data: response.data,
+        message: response.message,
+        detail: response.detail,
+      );
+    }
+    return response;
+  }
+
+  // get experience week
+  Future<HttpBaseResponse> getExperienceWeek() async {
+    final response = await _profileService.getExperienceWeek();
+    if (response.code == 200) {
+      final list = response.data as List;
+      response.data = list
+          .map((e) => ExperienceWeek.fromJson(e as Map<String, dynamic>))
+          .toList();
     }
     return response;
   }

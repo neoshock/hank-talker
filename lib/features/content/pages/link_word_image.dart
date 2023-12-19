@@ -107,50 +107,35 @@ class _LinkWordImageState extends State<LinkWordImage> {
                   return Stack(
                     alignment: Alignment.center,
                     children: [
-                      Container(
-                        width: 90,
-                        height: 90,
-                        margin: const EdgeInsets.all(15),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          image: DecorationImage(
-                            image: NetworkImage(
-                              _linkWordImageModel.images![index].valueUrl,
-                            ),
-                            fit: BoxFit.cover,
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.25),
-                              blurRadius: 6,
-                              offset: const Offset(0, 4),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Positioned(
-                        right: 0,
-                        child: InkWell(
-                          onTap: () {
-                            _handleTapImage(index);
-                          },
-                          borderRadius: BorderRadius.circular(100),
-                          splashFactory: InkRipple.splashFactory,
-                          child: Container(
-                            width: 15,
-                            height: 90,
-                            margin: const EdgeInsets.all(15),
-                            decoration: BoxDecoration(
-                              borderRadius: const BorderRadius.only(
-                                topRight: Radius.circular(100),
-                                bottomRight: Radius.circular(100),
+                      InkWell(
+                        onTap: () {
+                          _handleTapImage(index);
+                        },
+                        child: Container(
+                          width: 90,
+                          height: 90,
+                          margin: const EdgeInsets.all(15),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                _linkWordImageModel.images![index].valueUrl,
                               ),
-                              color: _selectedImage == index
-                                  ? Theme.of(context).primaryColor
-                                  : Theme.of(context)
-                                      .secondaryHeaderColor
-                                      .withOpacity(0.75),
+                              fit: BoxFit.cover,
                             ),
+                            border: _selectedImage == index
+                                ? Border.all(
+                                    color: Theme.of(context).primaryColor,
+                                    width: 3,
+                                  )
+                                : null,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.25),
+                                blurRadius: 6,
+                                offset: const Offset(0, 4),
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -162,7 +147,7 @@ class _LinkWordImageState extends State<LinkWordImage> {
                 isComplex: true,
                 willChange: true,
                 size: Size(
-                  MediaQuery.sizeOf(context).width * 0.24,
+                  MediaQuery.sizeOf(context).width * 0.3,
                   // calculate the height of the canvas with the number of items
                   MediaQuery.sizeOf(context).height *
                       (0.1 * _linkWordImageModel.words.length),
