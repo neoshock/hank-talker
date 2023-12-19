@@ -58,7 +58,7 @@ class BodySection extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  'Estadisticas',
+                  'Estadísticas',
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
               ],
