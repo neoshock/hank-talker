@@ -137,14 +137,14 @@ class _TestContentPageState extends State<TestContentPage> {
                     .remainingLive;
                 if (totalHeart <= 0) {
                   return const FailedPage(
-                    title: 'Atención',
+                    title: '¡Atención!',
                     description:
                         'No tienes más vidas disponibles, espera a que se recarguen',
                   );
                 }
                 if (lessonDetail.questions.isEmpty) {
                   return const FailedPage(
-                    title: 'Atención',
+                    title: '¡Atención!',
                     description: 'No hay preguntas disponibles',
                   );
                 }

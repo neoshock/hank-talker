@@ -33,7 +33,7 @@ class HeaderSection extends StatelessWidget {
                   ),
                   Text(
                       reggionName == ''
-                          ? 'Al parecer no ha seleccionado una region'
+                          ? 'Al parecer no ha seleccionado una región'
                           : 'Sigue aprendiendo mas de $reggionName con Hank Talker',
                       style: Theme.of(context).textTheme.displaySmall!.copyWith(
                           color: Theme.of(context).colorScheme.onPrimary)),

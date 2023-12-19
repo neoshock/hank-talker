@@ -53,7 +53,7 @@ class RegisterPage extends StatelessWidget {
                 child: const Align(
                   alignment: Alignment.topLeft,
                   child: Text(
-                    'Ahora!',
+                    '¡Ahora!',
                     style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
                   ),
                 ),

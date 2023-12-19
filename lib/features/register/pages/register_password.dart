@@ -84,7 +84,7 @@ class _RegisterPasswordState extends State<RegisterPassword> {
         await context.read<RegiProvider>().register(passwordController.text);
     if (result.code == 200) {
       // ignore: use_build_context_synchronously
-      await showSuccessDialog('Felicidades', result.message, context);
+      await showSuccessDialog('¡Felicidades!', result.message, context);
       // ignore: use_build_context_synchronously
       await Navigator.pushAndRemoveUntil(
         context,

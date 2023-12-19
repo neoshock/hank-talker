@@ -25,7 +25,7 @@ class _TopicTreeWidgetState extends State<TopicTreeWidget> {
         .remainingLive;
     if (totalLive <= 0) {
       await showErrorDialog(
-          'Atención',
+          '¡Atención!',
           'No tienes más vidas disponibles, espera a que se recarguen',
           context);
       return;
@@ -67,7 +67,7 @@ class _TopicTreeWidgetState extends State<TopicTreeWidget> {
                   child: FileInterceptorWidget(fileUrl: topic.iconUrl),
                 ),
                 title: Text(topic.name),
-                subtitle: Text('${topic.pendingLessons} Pendientes'),
+                subtitle: Text('${topic.pendingLessons} pendientes'),
                 children: [
                   ChangeNotifierProvider(
                     create: (_) => ContentProvider(),

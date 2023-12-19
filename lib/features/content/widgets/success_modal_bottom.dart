@@ -19,7 +19,7 @@ class SuccessModalBottom extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            'Felicidades!',
+            '¡Felicidades!',
             style: Theme.of(context)
                 .textTheme
                 .displayLarge!
@@ -39,7 +39,7 @@ class SuccessModalBottom extends StatelessWidget {
               child: CusttomButtonRounded(context, () {
                 Navigator.of(context).pop();
                 onSuccess();
-              }, 'Siguiente Pregunta')),
+              }, 'Siguiente pregunta')),
           SizedBox(height: 15),
         ],
       ),

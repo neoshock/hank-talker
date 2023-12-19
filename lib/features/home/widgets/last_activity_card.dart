@@ -41,7 +41,7 @@ class LastActivityCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Frases Comunes',
+                    'Frases comunes',
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                   SizedBox(
