@@ -34,11 +34,7 @@ class HeaderSection extends StatelessWidget {
                   Text(
                       reggionName == ''
                           ? 'Al parecer no ha seleccionado una región'
-<<<<<<< HEAD
                           : 'Sigue aprendiendo más de $reggionName con Hand talker',
-=======
-                          : 'Sigue aprendiendo más de $reggionName con hank talker',
->>>>>>> heydi
                       style: Theme.of(context).textTheme.displaySmall!.copyWith(
                           color: Theme.of(context).colorScheme.onPrimary)),
                 ],
