@@ -19,7 +19,7 @@ class ErrorModalBottom extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            '¡Opps!',
+            '¡Oops!',
             style: Theme.of(context)
                 .textTheme
                 .displayLarge!
