@@ -64,7 +64,7 @@ class StatusInfoContainer extends StatelessWidget {
                   // validate if division by zero
                   value: totalTopics == 0
                       ? 0
-                      : pendingTopics / totalTopics.toDouble(),
+                      : totalTopics.toDouble() / pendingTopics.toDouble(),
                   strokeWidth: 9,
                   strokeCap: StrokeCap.round,
                   backgroundColor: Theme.of(context).colorScheme.onPrimary,
