@@ -30,7 +30,7 @@ class _CategoryPageState extends State<CategoryPage> {
                 if (categories.isEmpty) {
                   return Center(
                     child: Text(
-                      'No hay categorias disponibles',
+                      'No hay categorías disponibles',
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                   );

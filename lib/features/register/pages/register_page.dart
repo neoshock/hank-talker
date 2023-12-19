@@ -43,7 +43,7 @@ class RegisterPage extends StatelessWidget {
               ),
               const Center(
                 child: Text(
-                  'perfil',
+                  'Perfil',
                   style: TextStyle(fontSize: 32),
                 ),
               ),

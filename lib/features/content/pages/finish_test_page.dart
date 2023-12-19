@@ -34,7 +34,7 @@ class FinishTestPage extends StatelessWidget {
                     width: MediaQuery.sizeOf(context).width,
                     child: CusttomButtonRounded(context, () {
                       Navigator.of(context).pop();
-                    }, 'Volver al menu'))
+                    }, 'Volver al menú'))
               ],
             )));
   }

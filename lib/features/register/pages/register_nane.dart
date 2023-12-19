@@ -49,7 +49,7 @@ class _RegisterNaneState extends State<RegisterNane> {
                   children: [
                     const Center(
                       child: Text(
-                        'Ayúdanos con tus Nombres',
+                        'Ayúdanos con tus nombres',
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,

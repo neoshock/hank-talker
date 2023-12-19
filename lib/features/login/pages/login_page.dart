@@ -122,7 +122,7 @@ class _LoginPageState extends State<LoginPage> {
                           child: CusttomButtonRounded(
                             context,
                             login,
-                            'Iniciar Sesión',
+                            'Iniciar sesión',
                           ),
                         ),
                         const SizedBox(height: 15),

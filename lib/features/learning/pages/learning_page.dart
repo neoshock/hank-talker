@@ -41,7 +41,7 @@ class _LearningPageState extends State<LearningPage> {
                         children: [
                           Expanded(
                             child: Text(
-                              'Categorias disponibles',
+                              'Categorías disponibles',
                               style: Theme.of(context).textTheme.bodyLarge,
                             ),
                           ),
@@ -56,7 +56,7 @@ class _LearningPageState extends State<LearningPage> {
                               );
                             },
                             child: const Text(
-                              'Ver mas',
+                              'Ver más',
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
@@ -73,14 +73,14 @@ class _LearningPageState extends State<LearningPage> {
                         builder: (context, snapshot) {
                           if (snapshot.hasError) {
                             return Text(
-                              'Hubo un problema al cargar las categorias, por favor seleccione una region en la seccion de perfil',
+                              'Hubo un problema al cargar las categorías, por favor seleccione una región en la sección de perfil',
                               style: Theme.of(context).textTheme.bodySmall,
                             );
                           }
                           if (snapshot.hasData) {
                             if (snapshot.data!.isEmpty) {
                               return Text(
-                                'No hay categorias disponibles',
+                                'No hay categorías disponibles',
                                 style: Theme.of(context).textTheme.bodyMedium,
                               );
                             }

@@ -30,7 +30,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: CustomAppbarWidget(context,
-            title: 'Cambiar Contraseña', showBackButton: true),
+            title: 'Cambiar contraseña', showBackButton: true),
         body: SingleChildScrollView(
             padding: const EdgeInsets.all(15),
             child: Center(
@@ -40,7 +40,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Text(
-                          'La contraseña debe tener al menos seis caracteres e incluir una combinación de números, letras y caracteres especiales(!@%)',
+                          'La contraseña debe tener al menos seis caracteres e incluir una combinación de números, letras y caracteres especiales (!@%)',
                           style: TextStyle(
                             fontSize: 16,
                           ),
@@ -105,8 +105,11 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                         const SizedBox(height: 30),
                         SizedBox(
                           width: MediaQuery.sizeOf(context).width,
-                          child: CusttomButtonRounded(context,
-                              ChangePassword, 'Cambiar Contraseña',),
+                          child: CusttomButtonRounded(
+                            context,
+                            ChangePassword,
+                            'Cambiar Contraseña',
+                          ),
                         ),
                       ],
                     )))));
