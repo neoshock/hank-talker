@@ -142,6 +142,12 @@ class _TestContentPageState extends State<TestContentPage> {
                         'No tienes más vidas disponibles, espera a que se recarguen',
                   );
                 }
+                if (lessonDetail.questions.isEmpty) {
+                  return const FailedPage(
+                    title: 'Atención',
+                    description: 'No hay preguntas disponibles',
+                  );
+                }
                 return SafeArea(
                   child: Column(
                     children: [

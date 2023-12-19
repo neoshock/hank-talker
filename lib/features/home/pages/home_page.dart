@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> asyncInit() async {
-    if (!mounted) {
+    if (mounted) {
       await context.read<ProfileProvider>().getProfile();
       // ignore: use_build_context_synchronously
       await context.read<ProfileProvider>().getRegion();

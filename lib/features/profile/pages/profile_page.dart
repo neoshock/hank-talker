@@ -23,6 +23,8 @@ class _ProfilePageState extends State<ProfilePage> {
     final res = await context.read<AuthProvider>().logout();
     if (res) {
       // ignore: use_build_context_synchronously
+      await context.read<ProfileProvider>().contentInit();
+      // ignore: use_build_context_synchronously
       await Navigator.pushAndRemoveUntil(
         context,
         // ignore: inference_failure_on_instance_creation

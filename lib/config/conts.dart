@@ -1,3 +1,3 @@
 class AppConstants {
-  static const String API_BASE_URL = 'http://10.0.2.2:9003/api';
+  static const String API_BASE_URL = 'https://fyc.uteq.edu.ec:9004/api';
 }

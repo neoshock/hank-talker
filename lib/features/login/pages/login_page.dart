@@ -32,8 +32,10 @@ class _LoginPageState extends State<LoginPage> {
         // ignore: use_build_context_synchronously
         await showSuccessDialog('Bienvenido', loginResponse.message, context);
 
-        Navigator.pushAndRemoveUntil(
+        // ignore: use_build_context_synchronously
+        await Navigator.pushAndRemoveUntil(
           context,
+          // ignore: inference_failure_on_instance_creation
           MaterialPageRoute(builder: (context) => const BottomBar()),
           (Route<dynamic> route) => false,
         );

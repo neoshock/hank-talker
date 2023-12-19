@@ -1,12 +1,6 @@
+// ignore_for_file: lines_longer_than_80_chars, non_constant_identifier_names
+
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hank_talker_mobile/core/auth/providers/auth_provider.dart';
-import 'package:hank_talker_mobile/features/home/pages/home_page.dart';
-import 'package:hank_talker_mobile/features/login/pages/login_page.dart';
-import 'package:hank_talker_mobile/features/register/pages/register_page.dart';
-import 'package:hank_talker_mobile/features/settings/pages/settings_page.dart';
-import 'package:hank_talker_mobile/utils/dialogs_events.dart';
-import 'package:hank_talker_mobile/widgets/bottom_bar.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
 import 'package:hank_talker_mobile/widgets/custom_appbar_widget.dart';
 import 'package:hank_talker_mobile/widgets/inputs.dart';
@@ -38,14 +32,14 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
         appBar: CustomAppbarWidget(context,
             title: 'Cambiar Contraseña', showBackButton: true),
         body: SingleChildScrollView(
-            padding: EdgeInsets.all(15),
+            padding: const EdgeInsets.all(15),
             child: Center(
                 child: Form(
                     key: formGlobalKey,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
+                        const Text(
                           'La contraseña debe tener al menos seis caracteres e incluir una combinación de números, letras y caracteres especiales(!@%)',
                           style: TextStyle(
                             fontSize: 16,
@@ -112,7 +106,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                         SizedBox(
                           width: MediaQuery.sizeOf(context).width,
                           child: CusttomButtonRounded(context,
-                              () => ChangePassword(), 'Cambiar Contraseña'),
+                              ChangePassword, 'Cambiar Contraseña',),
                         ),
                       ],
                     )))));

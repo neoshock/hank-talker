@@ -30,10 +30,13 @@ class _SuccesDialogWidgetState extends State<SuccesDialogWidget> {
         children: [
           Lottie.asset('assets/animations/animation_lnp29s7h.json',
               repeat: false),
-          Text(
-            widget.description,
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyLarge,
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.75,
+            child: Text(
+              widget.description,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
           ),
         ],
       ),

@@ -104,23 +104,6 @@ class BirthDatePage extends StatelessWidget {
                             'Siguiente',
                           ),
                         ),
-                        const SizedBox(height: 80),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            TextButton.icon(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.arrow_forward,
-                                color: Colors.green,
-                              ),
-                              label: const Text(
-                                'Saltar',
-                                style: TextStyle(color: Colors.green),
-                              ),
-                            ),
-                          ],
-                        ),
                       ],
                     ),
                   ))),

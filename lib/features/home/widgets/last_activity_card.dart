@@ -58,7 +58,7 @@ class LastActivityCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SizedBox(
-                        width: MediaQuery.sizeOf(context).width * 0.5,
+                        width: MediaQuery.sizeOf(context).width * 0.45,
                         child: LinearProgressIndicator(
                           value: 0.5,
                           minHeight: 9,
@@ -75,7 +75,7 @@ class LastActivityCard extends StatelessWidget {
                       ),
                       Text(
                         '3/5',
-                        style: Theme.of(context).textTheme.bodyMedium,
+                        style: Theme.of(context).textTheme.bodySmall,
                       )
                     ],
                   )

@@ -105,7 +105,7 @@ class _SelectCorrectImageState extends State<SelectCorrectImage> {
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: FileInterceptorWidget(
-                      fileUrl: contents[index].value,
+                      fileUrl: contents[index].valueUrl,
                     ),
                   ),
                 );

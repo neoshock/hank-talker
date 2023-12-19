@@ -13,12 +13,15 @@ class AuthService {
             'email': email,
             'password': password,
           }));
+      print(response.body);
       final decodedData = json.decode(response.body);
+
       if (response.statusCode == 200) {
         return HttpBaseResponse.fromJson(decodedData as Map<String, dynamic>);
       }
       return HttpBaseResponse.fromJson(decodedData as Map<String, dynamic>);
     } catch (e) {
+      print(e);
       return HttpBaseResponse(
           code: 500,
           data: null,

@@ -12,7 +12,7 @@ class ProfileCardHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(userProfileModel.urlPhoto);
+    print(userProfileModel.firstName);
     return Container(
       height: MediaQuery.sizeOf(context).height * 0.33,
       width: MediaQuery.sizeOf(context).width,
@@ -37,19 +37,20 @@ class ProfileCardHeader extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.45,
-                    // ignore: lines_longer_than_80_chars
+                    width: MediaQuery.of(context).size.width * 0.3,
+                    // ignore: lines_longer_than_80_chars, lines_longer_than_80_chars
                     child: Text(
                       '${userProfileModel.firstName} ${userProfileModel.lastName}',
-                      style: Theme.of(context).textTheme.displayLarge,
+                      style: Theme.of(context).textTheme.displayMedium,
                       overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
                     ),
                   ),
                   const SizedBox(
                     height: 6,
                   ),
                   Text(
-                    userProfileModel.status ? 'Novato' : 'Experto',
+                    !userProfileModel.status ? 'Novato' : 'Experto',
                     style: Theme.of(context).textTheme.bodyLarge,
                   )
                 ],
@@ -59,13 +60,14 @@ class ProfileCardHeader extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                       context,
+                      // ignore: inference_failure_on_instance_creation
                       MaterialPageRoute(
                           builder: (context) => const PrivacyPage()));
                 },
                 icon: Icon(
                   PhosphorIcons.note_pencil_bold,
                   color: Theme.of(context).colorScheme.onSecondary,
-                  size: 36,
+                  size: 30,
                 ),
               )
             ],
@@ -80,8 +82,8 @@ class ProfileCardHeader extends StatelessWidget {
               Text(
                 userProfileModel.registrationDate != null
                     ? userProfileModel.registrationDate.toString()
-                    : '12/12/2012',
-                style: Theme.of(context).textTheme.displaySmall,
+                    : '${userProfileModel.registrationDate ?? 'No disponible'}',
+                style: Theme.of(context).textTheme.bodyMedium,
               )
             ],
           ),

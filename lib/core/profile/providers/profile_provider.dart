@@ -19,6 +19,7 @@ class ProfileProvider with ChangeNotifier {
 
   Future<HttpBaseResponse> getProfile() async {
     final response = await _profileService.getProfile();
+    print(response.data);
     if (response.code == 200) {
       _userProfileModel =
           UserProfileModel.fromJson(response.data as Map<String, dynamic>);
@@ -54,8 +55,8 @@ class ProfileProvider with ChangeNotifier {
     if (region != null) {
       _selectedRegion = RegionModel.fromJson(
           jsonDecode(region.toString()) as Map<String, dynamic>);
-      notifyListeners();
     }
+    notifyListeners();
     return _selectedRegion;
   }
 
@@ -66,9 +67,15 @@ class ProfileProvider with ChangeNotifier {
       response.data = list
           .map((e) => RegionModel.fromJson(e as Map<String, dynamic>))
           .toList();
-      notifyListeners();
     }
+    notifyListeners();
     return response;
+  }
+
+  Future<void> contentInit() async {
+    _userProfileModel = UserProfileModel.empty();
+    _selectedRegion = null;
+    notifyListeners();
   }
 
   Future<void> decrementHeart() async {

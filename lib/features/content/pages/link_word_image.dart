@@ -162,7 +162,7 @@ class _LinkWordImageState extends State<LinkWordImage> {
                 isComplex: true,
                 willChange: true,
                 size: Size(
-                  MediaQuery.sizeOf(context).width * 0.25,
+                  MediaQuery.sizeOf(context).width * 0.24,
                   // calculate the height of the canvas with the number of items
                   MediaQuery.sizeOf(context).height *
                       (0.1 * _linkWordImageModel.words.length),
@@ -178,7 +178,7 @@ class _LinkWordImageState extends State<LinkWordImage> {
                     children: [
                       Container(
                         padding: const EdgeInsets.all(15),
-                        width: 120,
+                        width: 90,
                         height: 90,
                         margin: const EdgeInsets.all(15),
                         child: Center(

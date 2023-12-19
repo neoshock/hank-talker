@@ -25,7 +25,6 @@ class _PrivacyPageState extends State<PrivacyPage> {
     'email': TextEditingController(),
     'password': TextEditingController(),
   };
-  bool _showPassword = false;
 
   Future<void> updateUser() async {
     if (formKey.currentState!.validate()) {

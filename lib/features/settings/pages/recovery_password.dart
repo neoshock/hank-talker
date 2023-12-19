@@ -1,12 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hank_talker_mobile/core/auth/providers/auth_provider.dart';
-import 'package:hank_talker_mobile/features/home/pages/home_page.dart';
-import 'package:hank_talker_mobile/features/login/pages/login_page.dart';
-import 'package:hank_talker_mobile/features/register/pages/register_page.dart';
-import 'package:hank_talker_mobile/features/settings/pages/settings_page.dart';
-import 'package:hank_talker_mobile/utils/dialogs_events.dart';
-import 'package:hank_talker_mobile/widgets/bottom_bar.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
 import 'package:hank_talker_mobile/widgets/custom_appbar_widget.dart';
 import 'package:hank_talker_mobile/widgets/inputs.dart';
