@@ -5,8 +5,8 @@ import 'package:hank_talker_mobile/core/profile/providers/profile_provider.dart'
 import 'package:provider/provider.dart';
 
 class ExperienceChartWidget extends StatefulWidget {
+  const ExperienceChartWidget({required this.experience, super.key});
   final int experience;
-  const ExperienceChartWidget({super.key, required this.experience});
 
   @override
   _ExperienceChartWidgetState createState() => _ExperienceChartWidgetState();
@@ -112,9 +112,6 @@ class _ExperienceChartWidgetState extends State<ExperienceChartWidget> {
                   borderData: FlBorderData(
                     show: false,
                   ),
-                  minX: 0,
-                  minY: -15,
-                  maxY: 300,
                   lineBarsData: [
                     LineChartBarData(
                       spots: chartPoints,
@@ -137,6 +134,9 @@ class _ExperienceChartWidgetState extends State<ExperienceChartWidget> {
                   ],
                 ),
               ),
+            ),
+            const SizedBox(
+              height: 30,
             ),
           ],
         ),
