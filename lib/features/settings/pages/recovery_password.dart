@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hank_talker_mobile/core/auth/providers/auth_provider.dart';
+import 'package:hank_talker_mobile/utils/dialogs_events.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
 import 'package:hank_talker_mobile/widgets/custom_appbar_widget.dart';
 import 'package:hank_talker_mobile/widgets/inputs.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:provider/provider.dart';
 
 class RecoveryPasswordPage extends StatefulWidget {
   const RecoveryPasswordPage({Key? key});
@@ -15,8 +18,24 @@ class _RecoveryPasswordPageState extends State<RecoveryPasswordPage> {
   TextEditingController emailController = TextEditingController();
   final formGlobalKey = GlobalKey<FormState>();
 
-  Future<void> RecoveryPassword() async {
-    if (formGlobalKey.currentState!.validate()) {}
+  // ignore: non_constant_identifier_names
+  Future<void> recoveryPassword() async {
+    if (formGlobalKey.currentState!.validate()) {
+      final authResponse = await context
+          .read<AuthProvider>()
+          .recoveryPassword(emailController.text);
+      if (authResponse.code == 200) {
+        // ignore: use_build_context_synchronously
+        await showSuccessDialog('Atención!', authResponse.message, context);
+
+        // ignore: use_build_context_synchronously
+        Navigator.pop(context);
+      } else {
+        // ignore: use_build_context_synchronously
+        await showErrorDialog(
+            'Hubo un problema', authResponse.message, context);
+      }
+    }
   }
 
   @override
@@ -30,7 +49,7 @@ class _RecoveryPasswordPageState extends State<RecoveryPasswordPage> {
           children: [
             Expanded(
               child: SingleChildScrollView(
-                padding: EdgeInsets.all(15),
+                padding: const EdgeInsets.all(15),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -70,11 +89,11 @@ class _RecoveryPasswordPageState extends State<RecoveryPasswordPage> {
             ),
             Padding(
               padding: const EdgeInsets.all(15.0),
-              child: Container(
+              child: SizedBox(
                 width: double.infinity,
                 child: CusttomButtonRounded(
                   context,
-                  () => RecoveryPassword(),
+                  recoveryPassword,
                   'Recuperar contraseña',
                 ),
               ),

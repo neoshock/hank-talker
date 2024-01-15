@@ -155,7 +155,7 @@ Widget CustomImputPassword(
               },
               icon: Icon(
                 showPassword ? PhosphorIcons.eye_slash : PhosphorIcons.eye,
-                color: Theme.of(context).colorScheme.primaryContainer,
+                color: Theme.of(context).colorScheme.onSecondary,
               ),
             ),
             border: OutlineInputBorder(

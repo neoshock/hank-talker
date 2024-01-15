@@ -72,4 +72,26 @@ class AuthProvider with ChangeNotifier {
       return status;
     }
   }
+
+  // update password
+  Future<HttpBaseResponse> updatePassword(
+      String password, String newPassword) async {
+    final response = await authService.changePassword(
+      password,
+      newPassword,
+    );
+    if (response.code == 200) {
+      notifyListeners();
+    }
+    return response;
+  }
+
+  // recoveryPassword
+  Future<HttpBaseResponse> recoveryPassword(String email) async {
+    final response = await authService.recoveryPassword(email);
+    if (response.code == 200) {
+      notifyListeners();
+    }
+    return response;
+  }
 }

@@ -30,29 +30,29 @@ class _CustomAvatarEditState extends State<CustomAvatarEdit> {
                     fit: BoxFit.cover,
                   )),
             ),
-            Positioned(
-              bottom: 0,
-              right: 0,
-              child: Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      width: 2,
-                      color: Theme.of(context).colorScheme.onPrimary,
-                    ),
-                    color: Theme.of(context).colorScheme.primary),
-                child: IconButton(
-                  padding: EdgeInsets.zero,
-                  onPressed: () {},
-                  icon: const Icon(
-                    PhosphorIcons.pencil,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
+            // Positioned(
+            //   bottom: 0,
+            //   right: 0,
+            //   child: Container(
+            //     width: 40,
+            //     height: 40,
+            //     decoration: BoxDecoration(
+            //         shape: BoxShape.circle,
+            //         border: Border.all(
+            //           width: 2,
+            //           color: Theme.of(context).colorScheme.onPrimary,
+            //         ),
+            //         color: Theme.of(context).colorScheme.primary),
+            //     child: IconButton(
+            //       padding: EdgeInsets.zero,
+            //       onPressed: () {},
+            //       icon: const Icon(
+            //         PhosphorIcons.pencil,
+            //         color: Colors.white,
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ],
         ));
   }

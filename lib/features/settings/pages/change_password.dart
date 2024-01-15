@@ -1,10 +1,13 @@
 // ignore_for_file: lines_longer_than_80_chars, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
+import 'package:hank_talker_mobile/core/auth/providers/auth_provider.dart';
+import 'package:hank_talker_mobile/utils/dialogs_events.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
 import 'package:hank_talker_mobile/widgets/custom_appbar_widget.dart';
 import 'package:hank_talker_mobile/widgets/inputs.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:provider/provider.dart';
 
 class ChangePasswordPage extends StatefulWidget {
   const ChangePasswordPage({super.key});
@@ -23,7 +26,29 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
   bool showRepeatPassword = false;
 
   Future<void> ChangePassword() async {
-    if (formGlobalKey.currentState!.validate()) {}
+    if (formGlobalKey.currentState!.validate()) {
+      // validate if password is the same that password repeat
+      if (passwordNewController.text != passwordRepeatController.text) {
+        // ignore: use_build_context_synchronously
+        await showErrorDialog('Hubo un problema',
+            'Las contraseñas no coinciden, por favor verifique', context);
+        return;
+      }
+      final authResponse = await context.read<AuthProvider>().updatePassword(
+          passwordActualController.text, passwordNewController.text);
+
+      if (authResponse.code == 200) {
+        // ignore: use_build_context_synchronously
+        await showSuccessDialog(
+            'Contraseña actualizada', authResponse.message, context);
+        // ignore: use_build_context_synchronously
+        Navigator.pop(context);
+      } else {
+        // ignore: use_build_context_synchronously
+        await showErrorDialog(
+            'Hubo un problema', authResponse.message, context);
+      }
+    }
   }
 
   @override
@@ -92,7 +117,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                               PhosphorIcons.lock,
                               color: Colors.grey,
                             ),
-                            'Repetir contraseña actual', (value) {
+                            'Repetir nueva contraseña', (value) {
                           if (value == null || value == '') {
                             return 'Contraseña es requerida';
                           }

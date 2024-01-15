@@ -1,13 +1,57 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hank_talker_mobile/core/register/providers/regi_provider.dart';
 import 'package:hank_talker_mobile/features/register/pages/register_nane.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
 import 'package:hank_talker_mobile/widgets/custom_appbar_widget.dart';
 import 'package:provider/provider.dart';
 
-class BirthDatePage extends StatelessWidget {
+class BirthDatePage extends StatefulWidget {
+  @override
+  _BirthDatePageState createState() => _BirthDatePageState();
+}
+
+class _BirthDatePageState extends State<BirthDatePage> {
   final TextEditingController dateController = TextEditingController();
   final formGlobalKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    dateController.addListener(_formatBirthDate);
+  }
+
+  void _formatBirthDate() {
+    final text = dateController.text;
+    if (text.isNotEmpty && text.length <= 10) {
+      var newText =
+          text.replaceAll(RegExp(r'/'), ''); // Remueve las barras existentes
+
+      // Agrega las barras en las posiciones correctas
+      if (newText.length > 2) {
+        newText = '${newText.substring(0, 2)}/${newText.substring(2)}';
+      }
+      if (newText.length > 5) {
+        newText = '${newText.substring(0, 5)}/${newText.substring(5)}';
+      }
+
+      // Actualiza el controlador si el texto ha cambiado
+      if (newText != text) {
+        dateController.value = TextEditingValue(
+          text: newText,
+          selection: TextSelection.collapsed(offset: newText.length),
+        );
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    dateController
+      ..dispose()
+      ..removeListener(_formatBirthDate);
+    super.dispose();
+  }
 
   Future<void> _selectDate(BuildContext context) async {
     final pickedDate = await showDatePicker(
@@ -73,6 +117,7 @@ class BirthDatePage extends StatelessWidget {
                                   child: TextFormField(
                                     controller: dateController,
                                     keyboardType: TextInputType.datetime,
+                                    maxLength: 10,
                                     validator: (value) {
                                       if (value!.isEmpty) {
                                         // ignore: lines_longer_than_80_chars
@@ -83,6 +128,7 @@ class BirthDatePage extends StatelessWidget {
                                     decoration: const InputDecoration(
                                       hintText: 'DD/MM/YYYY',
                                       border: InputBorder.none,
+                                      counterText: '',
                                     ),
                                   ),
                                 ),
