@@ -147,7 +147,7 @@ class _LinkWordImageState extends State<LinkWordImage> {
                 isComplex: true,
                 willChange: true,
                 size: Size(
-                  MediaQuery.sizeOf(context).width * 0.3,
+                  MediaQuery.sizeOf(context).width * 0.39,
                   // calculate the height of the canvas with the number of items
                   MediaQuery.sizeOf(context).height *
                       (0.1 * _linkWordImageModel.words.length),
@@ -161,38 +161,29 @@ class _LinkWordImageState extends State<LinkWordImage> {
                   return Stack(
                     alignment: Alignment.center,
                     children: [
-                      Container(
-                        padding: const EdgeInsets.all(15),
-                        width: 90,
-                        height: 90,
-                        margin: const EdgeInsets.all(15),
-                        child: Center(
-                          child: Text(
-                            _linkWordImageModel.words[index].value,
-                            style: Theme.of(context).textTheme.bodyMedium,
+                      InkWell(
+                        onTap: () {
+                          _handleTapWord(index);
+                        },
+                        borderRadius: BorderRadius.circular(15),
+                        splashFactory: InkRipple.splashFactory,
+                        child: Container(
+                          padding: const EdgeInsets.all(15),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all(
+                              color: Theme.of(context).primaryColor,
+                              width: 1,
+                            ),
                           ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 0,
-                        child: InkWell(
-                          onTap: () {
-                            _handleTapWord(index);
-                          },
-                          borderRadius: BorderRadius.circular(100),
-                          splashFactory: InkRipple.splashFactory,
-                          child: Container(
-                            width: 15,
-                            height: 45,
-                            margin: const EdgeInsets.all(15),
-                            decoration: BoxDecoration(
-                              color: Theme.of(context)
-                                  .secondaryHeaderColor
-                                  .withOpacity(0.75),
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(15),
-                                bottomLeft: Radius.circular(15),
-                              ),
+                          width: 60,
+                          height: 90,
+                          margin: const EdgeInsets.all(15),
+                          child: Center(
+                            child: Text(
+                              _linkWordImageModel.words[index].value,
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.bodyMedium,
                             ),
                           ),
                         ),

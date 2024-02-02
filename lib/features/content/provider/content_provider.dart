@@ -12,6 +12,7 @@ class ContentProvider with ChangeNotifier {
     if (response.code == 200) {
       return TopicModel.fromJson(response.data as Map<String, dynamic>);
     }
+    print(response.data);
     return response;
   }
 

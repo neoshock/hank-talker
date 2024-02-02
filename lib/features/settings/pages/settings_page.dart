@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hank_talker_mobile/core/profile/models/region_model.dart';
 import 'package:hank_talker_mobile/core/profile/providers/profile_provider.dart';
 import 'package:hank_talker_mobile/core/repositories/http_model.dart';
+import 'package:hank_talker_mobile/features/settings/pages/about_us_page.dart';
+import 'package:hank_talker_mobile/features/settings/pages/terms_page.dart';
 import 'package:hank_talker_mobile/features/settings/widgets/custom_settings_list_tile.dart';
 import 'package:hank_talker_mobile/widgets/CustomFlagDropdownButton.dart';
 import 'package:hank_talker_mobile/widgets/custom_appbar_widget.dart';
@@ -73,13 +75,25 @@ class _SettingsPageState extends State<SettingsPage> {
                   Text('Otros ajustes',
                       style: Theme.of(context).textTheme.bodyMedium),
                   const SizedBox(height: 15),
-                  CustomSettingsListTile(title: 'Notificaciones', onTap: () {}),
-                  const SizedBox(height: 15),
                   CustomSettingsListTile(
-                      title: 'Política de privacidad', onTap: () {}),
+                      title: 'Términos y condiciones',
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const TermsPage(),
+                          ),
+                        );
+                      }),
                   const SizedBox(height: 15),
-                  CustomSettingsListTile(
-                      title: 'Términos y condiciones', onTap: () {}),
+                  CustomSettingsListTile(title: 'Acerca de', onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const AboutUsPage(),
+                      ),
+                    );
+                  }),
                 ]),
               ],
             ),

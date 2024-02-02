@@ -1,5 +1,7 @@
 // ignore_for_file: cascade_invocations
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:hank_talker_mobile/core/profile/providers/profile_provider.dart';
 import 'package:hank_talker_mobile/features/learning/models/category_model.dart';
@@ -10,7 +12,12 @@ import 'package:provider/provider.dart';
 class LearningProvider with ChangeNotifier {
   final LearningService _learningService = LearningService();
 
+  List<CategoryModel> _categories = [];
+  // get
+  List<CategoryModel> get categories => _categories;
+
   Future<List<CategoryModel>> getAllCategories() async {
+    _categories = [];
     final region = await ProfileProvider().getRegion();
     final response =
         await _learningService.getCategoriesByUserAndRegion(region!.id);
@@ -21,9 +28,42 @@ class LearningProvider with ChangeNotifier {
       });
       // order by orderNumber
       result.sort((a, b) => a.orderNumber.compareTo(b.orderNumber));
+      _categories = result;
+      notifyListeners();
       return result;
     }
     return [];
+  }
+
+  void findCategory(String query) async {
+    if (query.isEmpty) {
+      await getAllCategories(); // Esto ya llama a notifyListeners()
+    } else {
+      final result = _categories.where((element) {
+        return element.title.toLowerCase().contains(query.toLowerCase());
+      }).toList();
+      _categories = result;
+      notifyListeners();
+    }
+  }
+
+  Future<CategoryModel?> getCategoryRandom() async {
+    final region = await ProfileProvider().getRegion();
+
+    final response =
+        await _learningService.getCategoriesByUserAndRegion(region!.id);
+    if (response.code == 200) {
+      final list = response.data as List;
+      final randomIndex = Random().nextInt(list.length);
+      final result = List.generate(list!.length, (index) {
+        return CategoryModel.fromJson(list[index] as Map<String, dynamic>);
+      });
+      // order by orderNumber
+      result.sort((a, b) => a.orderNumber.compareTo(b.orderNumber));
+
+      return result[randomIndex];
+    }
+    return null;
   }
 
   Future<CategoryDetailModel> getCategoryDetail(int id) async {

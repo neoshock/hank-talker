@@ -17,115 +17,102 @@ class LearningPage extends StatefulWidget {
 
 class _LearningPageState extends State<LearningPage> {
   @override
+  void initState() {
+    super.initState();
+    context.read<LearningProvider>().getAllCategories();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => LearningProvider(),
-      builder: (context, child) {
-        return SafeArea(
-          top: false,
-          bottom: false,
-          child: CustomScrollView(
-            slivers: [
-              SliverPersistentHeader(
-                delegate: CustomSearchBarDelegate(),
-                pinned: true,
-              ),
-              SliverFillRemaining(
-                hasScrollBody: false,
-                child: Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: Column(
+    return SafeArea(
+      top: false,
+      bottom: false,
+      child: CustomScrollView(
+        slivers: [
+          SliverPersistentHeader(
+            delegate: CustomSearchBarDelegate(),
+            pinned: true,
+          ),
+          SliverFillRemaining(
+            hasScrollBody: false,
+            child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              'Categorías disponibles',
-                              style: Theme.of(context).textTheme.bodyLarge,
-                            ),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                // ignore: inference_failure_on_instance_creation
-                                MaterialPageRoute(
-                                  builder: (context) => CategoryPage(),
-                                ),
-                              );
-                            },
-                            child: const Text(
-                              'Ver más',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ],
+                      Expanded(
+                        child: Text(
+                          'Categorías disponibles',
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
                       ),
-                      FutureBuilder(
-                        future: Provider.of<LearningProvider>(
-                          context,
-                          listen: false,
-                        ).getAllCategories(),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasError) {
-                            return Text(
-                              'Hubo un problema al cargar las categorías, por favor seleccione una región en la sección de perfil',
-                              style: Theme.of(context).textTheme.bodySmall,
-                            );
-                          }
-                          if (snapshot.hasData) {
-                            if (snapshot.data!.isEmpty) {
-                              return Text(
-                                'No hay categorías disponibles',
-                                style: Theme.of(context).textTheme.bodyMedium,
-                              );
-                            }
-                            return CategoryListHorizontal(
-                              categories: snapshot.data!,
-                            );
-                          } else {
-                            return const Padding(
-                              padding: EdgeInsets.all(30),
-                              child: Center(
-                                child: CircularProgressIndicator(),
-                              ),
-                            );
-                          }
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            // ignore: inference_failure_on_instance_creation
+                            MaterialPageRoute(
+                              builder: (context) => CategoryPage(),
+                            ),
+                          );
                         },
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              'Temas recientes',
-                              style: Theme.of(context).textTheme.bodyLarge,
-                            ),
+                        child: const Text(
+                          'Ver más',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
                           ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Text(
-                        'No has visto ningún tema recientemente',
-                        style: Theme.of(context).textTheme.bodyMedium,
+                        ),
                       ),
                     ],
                   ),
-                ),
+                  Consumer<LearningProvider>(
+                    builder: (context, learningProvider, child) {
+                      final categories = learningProvider.categories;
+
+                      if (categories.isEmpty) {
+                        // Puedes considerar mostrar un indicador de carga o un mensaje
+                        // si la lista está vacía porque aún está cargando los datos.
+                        return Text(
+                          'No hay categorías disponibles',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        );
+                      }
+
+                      return CategoryListHorizontal(
+                        categories: categories,
+                      );
+                    },
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          'Temas recientes',
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Text(
+                    'No has visto ningún tema recientemente',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
-        );
-      },
+        ],
+      ),
     );
   }
 }

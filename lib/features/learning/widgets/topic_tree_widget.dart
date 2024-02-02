@@ -18,7 +18,7 @@ class TopicTreeWidget extends StatefulWidget {
 }
 
 class _TopicTreeWidgetState extends State<TopicTreeWidget> {
-  Future<void> _openTestContentPage(int lessonId) async {
+  Future<void> _openTestContentPage(Lesson lesson) async {
     final totalLive = Provider.of<ProfileProvider>(context, listen: false)
         .userProfileModel
         .statistic
@@ -30,15 +30,31 @@ class _TopicTreeWidgetState extends State<TopicTreeWidget> {
           context);
       return;
     }
+    if (!lesson.isCompleted) {
+      await showErrorDialog(
+          '¡Atención!',
+          'No puedes acceder a esta lección, primero debes completar las anteriores',
+          context);
+      return;
+    }
     await Navigator.push(
       context,
       // ignore: inference_failure_on_instance_creation
       MaterialPageRoute(
         builder: (context) => TestContentPage(
-          lessonId: lessonId,
+          lessonId: lesson.id,
         ),
       ),
     );
+  }
+
+  void markFirstIncompleteLessonAsComplete(List<Lesson> lessons) {
+    for (var lesson in lessons) {
+      if (!lesson.isCompleted) {
+        lesson.isCompleted = true;
+        break;
+      }
+    }
   }
 
   @override
@@ -79,6 +95,8 @@ class _TopicTreeWidgetState extends State<TopicTreeWidget> {
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
                             final topicDetail = snapshot.data as TopicModel;
+                            markFirstIncompleteLessonAsComplete(
+                                topicDetail.lessons);
                             return GridView.builder(
                               padding: EdgeInsets.zero,
                               shrinkWrap: true,
@@ -87,7 +105,7 @@ class _TopicTreeWidgetState extends State<TopicTreeWidget> {
                                   // ignore: lines_longer_than_80_chars
                                   const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
-                                mainAxisExtent: 180,
+                                mainAxisExtent: 210,
                                 childAspectRatio: 1.5,
                               ),
                               itemBuilder: (context, index) {
@@ -105,7 +123,7 @@ class _TopicTreeWidgetState extends State<TopicTreeWidget> {
                                   ),
                                   child: InkWell(
                                     onTap: () async {
-                                      await _openTestContentPage(lesson.id);
+                                      await _openTestContentPage(lesson);
                                     },
                                     child: LevelItemWidget(lesson: lesson),
                                   ),

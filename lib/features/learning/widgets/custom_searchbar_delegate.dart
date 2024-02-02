@@ -12,18 +12,16 @@ class CustomSearchBarDelegate extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    // Construye el widget del header persistente
     return Stack(
       alignment: Alignment.topCenter,
       children: [
         SizedBox(
           height: MediaQuery.sizeOf(context).height * 0.4,
         ),
-        const LearningHeader(), // Tu widget de encabezado
+        const LearningHeader(),
         const Positioned(
-          bottom:
-              0, // Ajusta la posición del campo de búsqueda según tus necesidades
-          child: CustomFindInputWidget(), // Tu widget de campo de búsqueda
+          bottom: 0,
+          child: CustomFindInputWidget(),
         ),
       ],
     );

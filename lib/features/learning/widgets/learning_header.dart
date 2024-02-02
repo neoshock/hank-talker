@@ -7,8 +7,20 @@ class LearningHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         width: MediaQuery.sizeOf(context).width,
-        height: MediaQuery.sizeOf(context).height * 0.24,
-        decoration: const BoxDecoration(color: Color(0XFF3A85A5)),
+        height: MediaQuery.sizeOf(context).height * 0.27,
+        decoration: const BoxDecoration(
+            color: Color(0XFF3A85A5),
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(18),
+              bottomRight: Radius.circular(18),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black12,
+                blurRadius: 10,
+                offset: Offset(0, 5),
+              )
+            ]),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

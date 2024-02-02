@@ -40,7 +40,7 @@ class StatusInfoContainer extends StatelessWidget {
                 height: 6,
               ),
               Text(
-                '$pendingTopics/$totalTopics Temas',
+                '${totalTopics - pendingTopics}/$totalTopics Temas',
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge!
@@ -59,12 +59,11 @@ class StatusInfoContainer extends StatelessWidget {
               Container(
                 height: 45,
                 width: 45,
-                padding: EdgeInsets.all(6),
+                padding: const EdgeInsets.all(6),
                 child: CircularProgressIndicator(
                   // validate if division by zero
-                  value: totalTopics == 0
-                      ? 0
-                      : totalTopics.toDouble() / pendingTopics.toDouble(),
+                  value: ((pendingTopics - totalTopics) /
+                      (totalTopics == 0 ? 1 : totalTopics)),
                   strokeWidth: 9,
                   strokeCap: StrokeCap.round,
                   backgroundColor: Theme.of(context).colorScheme.onPrimary,

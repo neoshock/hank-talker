@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:hank_talker_mobile/features/learning/providers/learning_provider.dart';
+import 'package:provider/provider.dart';
 
-class CustomFindInputWidget extends StatelessWidget {
-  final Function(String e)? onTyping;
+class CustomFindInputWidget extends StatefulWidget {
+  const CustomFindInputWidget({Key? key}) : super(key: key);
 
-  const CustomFindInputWidget({Key? key, this.onTyping}) : super(key: key);
+  @override
+  _CustomFindInputWidgetState createState() => _CustomFindInputWidgetState();
+}
+
+class _CustomFindInputWidgetState extends State<CustomFindInputWidget> {
+  void _onChanged(String value) {
+    Provider.of<LearningProvider>(context, listen: false).findCategory(value);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +39,7 @@ class CustomFindInputWidget extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 15),
                 child: TextField(
                   onChanged: (e) {
-                    onTyping!(e);
+                    _onChanged(e);
                   },
                   decoration: InputDecoration(
                       contentPadding: const EdgeInsets.symmetric(vertical: 18),

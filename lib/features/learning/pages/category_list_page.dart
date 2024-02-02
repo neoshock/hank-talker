@@ -69,7 +69,9 @@ class CategoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final puntuacion = (category.pendingTopics / category.totalTopics) * 5;
+    final puntuacion = ((category.totalTopics - category.pendingTopics) /
+            category.totalTopics) *
+        5;
 
     return Container(
       margin: const EdgeInsets.all(15),
@@ -101,10 +103,11 @@ class CategoryItem extends StatelessWidget {
                     fileUrl: category.iconUrl.toString())),
             title: Text(category.title),
             subtitle: Text(
-                'Niveles completados ${category.pendingTopics} / ${category.totalTopics}'),
+                'Temas completados ${(category.totalTopics - category.pendingTopics)} / ${category.totalTopics}'),
             onTap: () {
               Navigator.push(
                 context,
+                // ignore: inference_failure_on_instance_creation
                 MaterialPageRoute(
                   builder: (_) => CategoryDetailPage(
                     idCategory: category.id,
@@ -114,7 +117,7 @@ class CategoryItem extends StatelessWidget {
             },
           ),
           Positioned(
-            top: 15,
+            top: 6,
             right: 10,
             child: Row(
               children: <Widget>[

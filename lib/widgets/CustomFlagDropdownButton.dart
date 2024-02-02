@@ -24,7 +24,11 @@ class CustomFlagDropdownButton extends StatelessWidget {
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<RegionModel>(
-          value: selectedRegion ?? null,
+          value: selectedRegion == null
+              ? null
+              : regions.firstWhere(
+                  (element) => element.id == selectedRegion!.id,
+                  orElse: () => regions.first),
           icon: const Icon(Icons.arrow_drop_down),
           isExpanded: true,
           hint: const Text('Selecciona un país'),
@@ -37,7 +41,9 @@ class CustomFlagDropdownButton extends StatelessWidget {
                   SizedBox(
                       height: 30,
                       width: 30,
-                      child: FileInterceptorWidget(fileUrl: option.flagUrl,)),
+                      child: FileInterceptorWidget(
+                        fileUrl: option.flagUrl,
+                      )),
                   const SizedBox(width: 6),
                   Text(option.description),
                 ],

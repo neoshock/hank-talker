@@ -13,7 +13,7 @@ class _WelcomeSmoothPageWidgetState extends State<WelcomeSmoothPageWidget> {
   final controller = PageController();
   final List<Map<String, dynamic>> contents = [
     {
-      'title': 'Bienvenido a hand talker',
+      'title': 'Bienvenido a Hand Talker',
       'description':
           'Descubre la belleza y la importancia de los lenguajes de señas en nuestra misión de construir puentes hacia la igualdad.',
     },

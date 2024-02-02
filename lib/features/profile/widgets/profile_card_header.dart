@@ -12,7 +12,7 @@ class ProfileCardHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(userProfileModel.firstName);
+    print(userProfileModel.toJson());
     return Container(
       height: MediaQuery.sizeOf(context).height * 0.33,
       width: MediaQuery.sizeOf(context).width,
@@ -38,7 +38,7 @@ class ProfileCardHeader extends StatelessWidget {
                 children: [
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.3,
-                    // ignore: lines_longer_than_80_chars, lines_longer_than_80_chars
+
                     child: Text(
                       '${userProfileModel.firstName} ${userProfileModel.lastName}',
                       style: Theme.of(context).textTheme.displayMedium,
@@ -46,13 +46,6 @@ class ProfileCardHeader extends StatelessWidget {
                       maxLines: 1,
                     ),
                   ),
-                  const SizedBox(
-                    height: 6,
-                  ),
-                  Text(
-                    !userProfileModel.status ? 'Novato' : 'Experto',
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  )
                 ],
               ),
               const Spacer(),
@@ -124,7 +117,7 @@ class ProfileCardHeader extends StatelessWidget {
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    'Logros',
+                    'Esmeraldas',
                     style: Theme.of(context).textTheme.bodySmall,
                   )
                 ],
