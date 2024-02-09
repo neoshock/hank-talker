@@ -8,6 +8,7 @@ class CategoryModel {
     dynamic backgroundUrl;
     dynamic iconUrl;
     dynamic topics;
+    bool? isAvailable = true;
 
     CategoryModel({
         required this.id,

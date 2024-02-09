@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:hank_talker_mobile/core/profile/providers/profile_provider.dart';
 import 'package:hank_talker_mobile/features/content/models/lesson_model.dart';
@@ -165,6 +167,7 @@ class _TestContentPageState extends State<TestContentPage> {
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: lessonDetail.questions.length,
                           itemBuilder: (context, index) {
+                            print(lessonDetail.questions[index].toJson());
                             return getQuestionPage(
                               lessonDetail.questions[index].questionDescription,
                               lessonDetail.questions[index],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hank_talker_mobile/widgets/bottom_bar.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
 import 'package:lottie/lottie.dart';
 
@@ -33,7 +34,11 @@ class FinishTestPage extends StatelessWidget {
                 SizedBox(
                     width: MediaQuery.sizeOf(context).width,
                     child: CusttomButtonRounded(context, () {
-                      Navigator.of(context).pop();
+                      Navigator.pushAndRemoveUntil(context,
+                          MaterialPageRoute(builder: (context) {
+                        return const BottomBar();
+                      })
+                      , (route) => false);
                     }, 'Volver al menú'))
               ],
             )));
