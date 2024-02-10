@@ -26,6 +26,7 @@ class TestContentPage extends StatefulWidget {
 
 class _TestContentPageState extends State<TestContentPage> {
   final PageController pageController = PageController();
+  Future? lessonDetailFuture;
 
   int currentQuestion = 0;
   bool dataLoaded = false;
@@ -106,6 +107,9 @@ class _TestContentPageState extends State<TestContentPage> {
   @override
   void initState() {
     super.initState();
+    lessonDetailFuture = context
+        .read<ContentProvider>()
+        .getLessonDetail(widget.lessonId); // Llama a getLessonDetail aquí
   }
 
   @override
@@ -121,15 +125,13 @@ class _TestContentPageState extends State<TestContentPage> {
       builder: (context, child) {
         return Scaffold(
           body: FutureBuilder(
-            future: context
-                .read<ContentProvider>()
-                .getLessonDetail(widget.lessonId),
+            future: lessonDetailFuture,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 final response = snapshot.data;
                 if (response!.code != 200) {
                   return Center(
-                    child: Text(response.message),
+                    child: Text(response.message as String),
                   );
                 }
                 final lessonDetail = response.data as LessonDetailModel;

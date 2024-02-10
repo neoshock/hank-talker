@@ -32,7 +32,7 @@ class _LinkWordImageState extends State<LinkWordImage> {
       if (_selectedImage < _points.length) {
         _points[_selectedImage] = Offset(
           MediaQuery.sizeOf(context).width * 0.3,
-          index * (MediaQuery.sizeOf(context).height * 0.13),
+          index * (MediaQuery.sizeOf(context).height * 0.18),
         );
         return;
       }
@@ -45,7 +45,7 @@ class _LinkWordImageState extends State<LinkWordImage> {
       _points.add(
         Offset(
           MediaQuery.sizeOf(context).width * 0.3,
-          index * (MediaQuery.sizeOf(context).height * 0.13),
+          index * (MediaQuery.sizeOf(context).height * 0.18),
         ),
       );
     });
@@ -67,7 +67,7 @@ class _LinkWordImageState extends State<LinkWordImage> {
 
     for (var i = 0; i < _points.length; i++) {
       final expectedX = MediaQuery.sizeOf(context).width * 0.3;
-      final expectedY = i * (MediaQuery.sizeOf(context).height * 0.13);
+      final expectedY = i * (MediaQuery.sizeOf(context).height * 0.18);
 
       // Validar si las coordenadas del punto coinciden con las esperadas
       if (_points[i].dx != expectedX || _points[i].dy != expectedY) {
@@ -97,101 +97,111 @@ class _LinkWordImageState extends State<LinkWordImage> {
           const SizedBox(
             height: 30,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Stack(
+            alignment: Alignment.center,
             children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children:
-                    List.generate(_linkWordImageModel.images!.length, (index) {
-                  return Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          _handleTapImage(index);
-                        },
-                        child: Container(
-                          width: 90,
-                          height: 90,
-                          margin: const EdgeInsets.all(15),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            image: DecorationImage(
-                              image: NetworkImage(
-                                _linkWordImageModel.images![index].valueUrl,
+              SizedBox(
+                width: MediaQuery.sizeOf(context).width,
+                height: MediaQuery.sizeOf(context).height * 0.7,
+              ),
+              Positioned(
+                left: 0,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: List.generate(_linkWordImageModel.images!.length,
+                      (index) {
+                    return Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            _handleTapImage(index);
+                          },
+                          child: Container(
+                            width: MediaQuery.sizeOf(context).width * 0.24,
+                            height: MediaQuery.sizeOf(context).height * 0.13,
+                            margin: const EdgeInsets.all(15),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  _linkWordImageModel.images![index].valueUrl,
+                                ),
+                                fit: BoxFit.cover,
                               ),
-                              fit: BoxFit.cover,
+                              border: _selectedImage == index
+                                  ? Border.all(
+                                      color: Theme.of(context).primaryColor,
+                                      width: 3,
+                                    )
+                                  : null,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.25),
+                                  blurRadius: 6,
+                                  offset: const Offset(0, 4),
+                                ),
+                              ],
                             ),
-                            border: _selectedImage == index
-                                ? Border.all(
-                                    color: Theme.of(context).primaryColor,
-                                    width: 3,
-                                  )
-                                : null,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.25),
-                                blurRadius: 6,
-                                offset: const Offset(0, 4),
-                              ),
-                            ],
                           ),
                         ),
-                      ),
-                    ],
-                  );
-                }),
+                      ],
+                    );
+                  }),
+                ),
               ),
               CustomPaint(
                 isComplex: true,
                 willChange: true,
                 size: Size(
-                  MediaQuery.sizeOf(context).width * 0.33,
+                  MediaQuery.sizeOf(context).width * 0.36,
                   // calculate the height of the canvas with the number of items
                   MediaQuery.sizeOf(context).height *
-                      (0.1 * _linkWordImageModel.words.length),
+                      (0.14 * _linkWordImageModel.words.length),
                 ),
                 painter: LinePainter(points: _points, context: context),
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children:
-                    List.generate(_linkWordImageModel.words.length, (index) {
-                  return Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          _handleTapWord(index);
-                        },
-                        borderRadius: BorderRadius.circular(15),
-                        splashFactory: InkRipple.splashFactory,
-                        child: Container(
-                          padding: const EdgeInsets.all(15),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            border: Border.all(
-                              color: Theme.of(context).primaryColor,
-                              width: 1,
+              Positioned(
+                right: 0,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:
+                      List.generate(_linkWordImageModel.words.length, (index) {
+                    return Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            _handleTapWord(index);
+                          },
+                          borderRadius: BorderRadius.circular(15),
+                          splashFactory: InkRipple.splashFactory,
+                          child: Container(
+                            padding: const EdgeInsets.all(15),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              border: Border.all(
+                                color: Theme.of(context).primaryColor,
+                                width: 1,
+                              ),
                             ),
-                          ),
-                          width: 60,
-                          height: 90,
-                          margin: const EdgeInsets.all(15),
-                          child: Center(
-                            child: Text(
-                              _linkWordImageModel.words[index].value,
-                              textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.bodyMedium,
+                            width: MediaQuery.sizeOf(context).width * 0.24,
+                            height: MediaQuery.sizeOf(context).height * 0.13,
+                            margin: const EdgeInsets.all(15),
+                            child: Center(
+                              child: Text(
+                                _linkWordImageModel.words[index].value,
+                                textAlign: TextAlign.center,
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  );
-                }),
-              ),
+                      ],
+                    );
+                  }),
+                ),
+              )
             ],
           ),
           const SizedBox(
@@ -230,10 +240,10 @@ class LinePainter extends CustomPainter {
       //     Offset(0, i * 120), Offset(size.width, points[i].dy), paint);
       canvas.drawPath(
         Path()
-          ..moveTo(0, i * MediaQuery.of(context).size.height * 0.13)
+          ..moveTo(0, i * MediaQuery.of(context).size.height * 0.18)
           ..cubicTo(
             size.width * 0.3,
-            i * MediaQuery.of(context).size.height * 0.13,
+            i * MediaQuery.of(context).size.height * 0.18,
             size.width * 0.75,
             points[i].dy,
             size.width,

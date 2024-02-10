@@ -13,7 +13,7 @@ class WelcomePage extends StatelessWidget {
           bottom: false,
           child: Column(
             children: [
-              SizedBox(height: 50),
+              SizedBox(height: 45),
               Image.asset(
                 'assets/images/Logo_HT_general.png',
                 fit: BoxFit.cover,
@@ -56,7 +56,7 @@ class WelcomePage extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => LoginPage()),
                     );
                   }, 'Comenzar'),
-                  SizedBox(height: 30)
+                  SizedBox(height: 15)
                 ]),
               )
             ],

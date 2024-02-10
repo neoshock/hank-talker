@@ -4,6 +4,7 @@ import 'package:hank_talker_mobile/config/theme_data.dart';
 import 'package:hank_talker_mobile/core/auth/providers/auth_provider.dart';
 import 'package:hank_talker_mobile/core/profile/providers/profile_provider.dart';
 import 'package:hank_talker_mobile/core/register/providers/regi_provider.dart';
+import 'package:hank_talker_mobile/features/content/provider/content_provider.dart';
 import 'package:hank_talker_mobile/features/learning/providers/learning_provider.dart';
 import 'package:hank_talker_mobile/features/welcome/pages/welcome_page.dart';
 import 'package:hank_talker_mobile/widgets/bottom_bar.dart';
@@ -24,6 +25,7 @@ class App extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => RegiProvider()),
           ChangeNotifierProvider(create: (_) => ProfileProvider()),
           ChangeNotifierProvider(create: (_) => LearningProvider()),
+          ChangeNotifierProvider(create: (_) => ContentProvider()),
         ],
         builder: (context, child) {
           return MaterialApp(

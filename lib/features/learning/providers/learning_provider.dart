@@ -54,14 +54,23 @@ class LearningProvider with ChangeNotifier {
         await _learningService.getCategoriesByUserAndRegion(region!.id);
     if (response.code == 200) {
       final list = response.data as List;
-      final randomIndex = Random().nextInt(list.length);
-      final result = List.generate(list!.length, (index) {
+      final allCategories = List.generate(list.length, (index) {
         return CategoryModel.fromJson(list[index] as Map<String, dynamic>);
       });
-      // order by orderNumber
-      result.sort((a, b) => a.orderNumber.compareTo(b.orderNumber));
 
-      return result[randomIndex];
+      // Filtrar solo categorías disponibles
+      final availableCategories =
+          allCategories.where((category) => category.isAvailable!).toList();
+
+      if (availableCategories.isNotEmpty) {
+        // Ordenar por orderNumber
+        availableCategories
+            .sort((a, b) => a.orderNumber.compareTo(b.orderNumber));
+
+        // Seleccionar una categoría al azar de las disponibles
+        final randomIndex = Random().nextInt(availableCategories.length);
+        return availableCategories[randomIndex];
+      }
     }
     return null;
   }
