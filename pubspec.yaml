@@ -16,6 +16,7 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
   flutter_localizations:
     sdk: flutter
+  flutter_native_splash: ^2.3.10
   flutter_phosphor_icons: ^0.0.1+6
   flutter_svg: ^2.0.9
   http: ^1.1.0
@@ -38,6 +39,18 @@ flutter_launcher_icons:
   android_adaptive_icon: true
   image_path: "assets/images/ic_launcher-playstore.png"
   min_sdk_android: 21 # android min sdk min:16, default 21
+
+flutter_native_splash:
+  color: "#4FA53A"
+  #background_image: "assets/background.png"
+
+  android_12:
+    image: assets/images/ic_launcher-playstore.png
+
+    # Splash screen background color.
+    color: "#4FA53A"
+    # App icon background color.
+    icon_background_color: "#4FA53A"
 
 flutter:
   uses-material-design: true

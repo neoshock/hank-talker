@@ -23,6 +23,8 @@ class _LinkWordImageState extends State<LinkWordImage> {
   final List<Offset> _points = [];
   int _selectedImage = -1;
 
+  final Map<int, int> _selectedPairs = {};
+
   Future<void> _handleTapWord(int index) async {
     if (_selectedImage == -1) {
       return;
@@ -32,7 +34,7 @@ class _LinkWordImageState extends State<LinkWordImage> {
       if (_selectedImage < _points.length) {
         _points[_selectedImage] = Offset(
           MediaQuery.sizeOf(context).width * 0.3,
-          index * (MediaQuery.sizeOf(context).height * 0.18),
+          index * (MediaQuery.sizeOf(context).height * 0.17),
         );
         return;
       }
@@ -42,10 +44,12 @@ class _LinkWordImageState extends State<LinkWordImage> {
       if (_points.length == _linkWordImageModel.images!.length) {
         return;
       }
+      _selectedPairs[_selectedImage] = index;
+
       _points.add(
         Offset(
           MediaQuery.sizeOf(context).width * 0.3,
-          index * (MediaQuery.sizeOf(context).height * 0.18),
+          index * (MediaQuery.sizeOf(context).height * 0.17),
         ),
       );
     });
@@ -58,24 +62,27 @@ class _LinkWordImageState extends State<LinkWordImage> {
   }
 
   Future<void> checkAnswer() async {
-    // first validate if all points has been drawn
-    if (_points.length != _linkWordImageModel.images!.length) {
+    // Comprueba si todas las imágenes tienen una palabra asociada
+    if (_selectedPairs.length != _linkWordImageModel.images!.length) {
       return;
     }
 
-    var allLinesCorrect = true;
+    var allPairsCorrect = true;
 
-    for (var i = 0; i < _points.length; i++) {
-      final expectedX = MediaQuery.sizeOf(context).width * 0.3;
-      final expectedY = i * (MediaQuery.sizeOf(context).height * 0.18);
-
-      // Validar si las coordenadas del punto coinciden con las esperadas
-      if (_points[i].dx != expectedX || _points[i].dy != expectedY) {
-        allLinesCorrect = false;
-        break;
+    _selectedPairs.forEach((imageIndex, wordIndex) {
+      // Compara el valor de la imagen y la palabra seleccionada
+      if (_linkWordImageModel.images![imageIndex].value !=
+          _linkWordImageModel.words[wordIndex].value) {
+        allPairsCorrect = false;
       }
-    }
-    widget.onCheckAnswer(allLinesCorrect);
+    });
+
+    widget.onCheckAnswer(allPairsCorrect);
+
+    // Opcional: resetear las selecciones después de la verificación
+    setState(() {
+      _selectedPairs.clear();
+    });
   }
 
   @override
@@ -102,7 +109,8 @@ class _LinkWordImageState extends State<LinkWordImage> {
             children: [
               SizedBox(
                 width: MediaQuery.sizeOf(context).width,
-                height: MediaQuery.sizeOf(context).height * 0.7,
+                height: MediaQuery.sizeOf(context).height *
+                    (0.18 * _linkWordImageModel.words.length),
               ),
               Positioned(
                 left: 0,
@@ -240,10 +248,10 @@ class LinePainter extends CustomPainter {
       //     Offset(0, i * 120), Offset(size.width, points[i].dy), paint);
       canvas.drawPath(
         Path()
-          ..moveTo(0, i * MediaQuery.of(context).size.height * 0.18)
+          ..moveTo(0, i * MediaQuery.of(context).size.height * 0.17)
           ..cubicTo(
             size.width * 0.3,
-            i * MediaQuery.of(context).size.height * 0.18,
+            i * MediaQuery.of(context).size.height * 0.17,
             size.width * 0.75,
             points[i].dy,
             size.width,
