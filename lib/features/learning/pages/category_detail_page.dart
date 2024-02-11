@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:hank_talker_mobile/core/profile/providers/profile_provider.dart';
-import 'package:hank_talker_mobile/features/content/pages/content_list_page.dart';
 import 'package:hank_talker_mobile/features/learning/providers/learning_provider.dart';
 import 'package:hank_talker_mobile/features/learning/widgets/topic_tree_widget.dart';
 import 'package:hank_talker_mobile/features/learning/widgets/status_info_container.dart';

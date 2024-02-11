@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
-import 'package:hank_talker_mobile/features/content/models/lesson_model.dart';
 
 class StatusInfoContainer extends StatelessWidget {
   final int totalTopics;

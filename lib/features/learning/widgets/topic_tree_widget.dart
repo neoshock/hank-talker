@@ -59,92 +59,85 @@ class _TopicTreeWidgetState extends State<TopicTreeWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      padding: EdgeInsets.zero,
-      itemCount: widget.topics.length,
-      itemBuilder: (context, index) {
-        final topic = widget.topics[index];
-        return Column(
-          children: [
-            Card(
-              margin: const EdgeInsets.all(15),
-              elevation: 3,
+    return SingleChildScrollView(
+      child: Column(
+        children: widget.topics.map((topic) {
+          return Card(
+            margin: const EdgeInsets.all(15),
+            elevation: 3,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: ExpansionTile(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15),
               ),
-              child: ExpansionTile(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                onExpansionChanged: (value) {},
-                leading: CircleAvatar(
-                  backgroundColor: Colors.grey[300],
-                  child: FileInterceptorWidget(fileUrl: topic.iconUrl),
-                ),
-                title: Text(topic.name),
-                subtitle: Text('${topic.pendingLessons} pendientes'),
-                children: [
-                  ChangeNotifierProvider(
-                    create: (_) => ContentProvider(),
-                    builder: (context, child) {
-                      return FutureBuilder(
-                        future: context
-                            .read<ContentProvider>()
-                            .getTopicDetail(widget.topics[index].id),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            final topicDetail = snapshot.data as TopicModel;
-                            markFirstIncompleteLessonAsComplete(
-                                topicDetail.lessons);
-                            return GridView.builder(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-                              itemCount: topicDetail.lessons.length,
-                              gridDelegate:
-                                  // ignore: lines_longer_than_80_chars
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                mainAxisExtent: 210,
-                                childAspectRatio: 1.5,
-                              ),
-                              itemBuilder: (context, index) {
-                                final lesson = topicDetail.lessons[index];
-                                return Card(
-                                  color: lesson.isCompleted
-                                      ? Theme.of(context).colorScheme.primary
-                                      : Theme.of(context)
-                                          .colorScheme
-                                          .onSecondary,
-                                  margin: const EdgeInsets.all(15),
-                                  elevation: 3,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  child: InkWell(
-                                    onTap: () async {
-                                      await _openTestContentPage(lesson);
-                                    },
-                                    child: LevelItemWidget(lesson: lesson),
-                                  ),
-                                );
-                              },
-                            );
-                          } else {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          }
-                        },
-                      );
-                    },
-                  ),
-                ],
+              onExpansionChanged: (value) {},
+              leading: CircleAvatar(
+                backgroundColor: Colors.grey[300],
+                child: FileInterceptorWidget(fileUrl: topic.iconUrl),
               ),
+              title: Text(topic.name),
+              subtitle: Text('${topic.pendingLessons} pendientes'),
+              children: [
+                ChangeNotifierProvider(
+                  create: (_) => ContentProvider(),
+                  builder: (context, child) {
+                    return FutureBuilder(
+                      future: context
+                          .read<ContentProvider>()
+                          .getTopicDetail(topic.id),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          final topicDetail = snapshot.data as TopicModel;
+                          markFirstIncompleteLessonAsComplete(
+                              topicDetail.lessons);
+                          return GridView.builder(
+                            padding: EdgeInsets.zero,
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: topicDetail.lessons.length,
+                            gridDelegate:
+                                // ignore: lines_longer_than_80_chars
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              mainAxisExtent: 210,
+                              childAspectRatio: 1.5,
+                            ),
+                            itemBuilder: (context, index) {
+                              final lesson = topicDetail.lessons[index];
+                              return Card(
+                                color: lesson.isCompleted
+                                    ? Theme.of(context).colorScheme.primary
+                                    : Theme.of(context).colorScheme.onSecondary,
+                                margin: const EdgeInsets.all(15),
+                                elevation: 3,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: InkWell(
+                                  onTap: () async {
+                                    await _openTestContentPage(lesson);
+                                  },
+                                  child: LevelItemWidget(lesson: lesson),
+                                ),
+                              );
+                            },
+                          );
+                        } else {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                      },
+                    );
+                  },
+                ),
+              ],
             ),
-          ],
-        );
-      },
+          );
+        }).toList(),
+      ),
     );
   }
 }

@@ -54,7 +54,7 @@ class _RecoveryPasswordPageState extends State<RecoveryPasswordPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      'Loren ipsum dolor sit amet, consectetur adipiscing elit.',
+                      'Por favor ingrese su correo electrónico para recuperar su contraseña.',
                       style: TextStyle(
                         fontSize: 16,
                       ),

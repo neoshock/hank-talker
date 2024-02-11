@@ -25,7 +25,7 @@ class HeaderSection extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Hola ${name}',
+                  Text('Hola, ${name}',
                       style: Theme.of(context).textTheme.displayLarge!.copyWith(
                           color: Theme.of(context).colorScheme.onPrimary)),
                   const SizedBox(

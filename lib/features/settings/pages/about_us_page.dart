@@ -62,7 +62,7 @@ class AboutUsPage extends StatelessWidget {
             const AboutDeveloperItem(
               name: 'Heydi Litardo',
               role: 'Mobile Developer',
-              imageUrl: 'assets/images/category.png',
+              imageUrl: 'assets/images/contributors/armocito.jpeg',
               linkedinUrl: 'https://www.linkedin.com/in/jorge-lino-9b1b3b1b9/',
             ),
             const SizedBox(height: 10),
