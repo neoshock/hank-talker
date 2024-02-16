@@ -30,8 +30,8 @@ class App extends StatelessWidget {
         builder: (context, child) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            theme: CustomThemeData.lightTheme,
-            darkTheme: CustomThemeData.darkTheme,
+            themeMode: ThemeMode.light,
+            lightTheme: ThemeData.lightTheme,
             home: Provider.of<AuthProvider>(context).isAuth
                 ? const BottomBar()
                 : const WelcomePage(),
