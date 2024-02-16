@@ -16,6 +16,7 @@ class StatusInfoContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final completedTopics = totalTopics - pendingTopics;
     return Container(
       padding: EdgeInsets.only(
         top: 6 + paddingTop,
@@ -61,8 +62,7 @@ class StatusInfoContainer extends StatelessWidget {
                 padding: const EdgeInsets.all(6),
                 child: CircularProgressIndicator(
                   // validate if division by zero
-                  value: ((pendingTopics - totalTopics) /
-                      (totalTopics == 0 ? 1 : totalTopics)),
+                  value: totalTopics == 0 ? 0 : completedTopics / totalTopics,
                   strokeWidth: 9,
                   strokeCap: StrokeCap.round,
                   backgroundColor: Theme.of(context).colorScheme.onPrimary,

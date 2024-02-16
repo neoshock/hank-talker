@@ -49,6 +49,7 @@ class _ExperienceChartWidgetState extends State<ExperienceChartWidget> {
   @override
   Widget build(BuildContext context) {
     final chartColor = Theme.of(context).colorScheme.secondary;
+    print(chartPoints);
     return Card(
       elevation: 1,
       surfaceTintColor: Theme.of(context).colorScheme.primaryContainer,
@@ -77,20 +78,6 @@ class _ExperienceChartWidgetState extends State<ExperienceChartWidget> {
                           style: Theme.of(context).textTheme.displayMedium,
                         ),
                       ],
-                    ),
-                  ),
-                  Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: chartColor.withOpacity(0.5),
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Center(
-                      child: Text(
-                        '1',
-                        style: Theme.of(context).textTheme.displaySmall,
-                      ),
                     ),
                   ),
                 ],
@@ -126,7 +113,6 @@ class _ExperienceChartWidgetState extends State<ExperienceChartWidget> {
                           ],
                         ),
                       ),
-                      isCurved: true,
                       barWidth: 5,
                       isStrokeCapRound: true,
                       color: chartColor,

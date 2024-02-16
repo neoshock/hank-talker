@@ -30,7 +30,7 @@ class _TopicTreeWidgetState extends State<TopicTreeWidget> {
           context);
       return;
     }
-    if (!lesson.isCompleted) {
+    if (!lesson.isCompleted && !lesson.isPending) {
       await showErrorDialog(
           '¡Atención!',
           'No puedes acceder a esta lección, primero debes completar las anteriores',
@@ -51,7 +51,7 @@ class _TopicTreeWidgetState extends State<TopicTreeWidget> {
   void markFirstIncompleteLessonAsComplete(List<Lesson> lessons) {
     for (var lesson in lessons) {
       if (!lesson.isCompleted) {
-        lesson.isCompleted = true;
+        lesson.isPending = true;
         break;
       }
     }
@@ -109,7 +109,13 @@ class _TopicTreeWidgetState extends State<TopicTreeWidget> {
                               return Card(
                                 color: lesson.isCompleted
                                     ? Theme.of(context).colorScheme.primary
-                                    : Theme.of(context).colorScheme.onSecondary,
+                                    : lesson.isPending
+                                        ? Theme.of(context)
+                                            .colorScheme
+                                            .secondary
+                                        : Theme.of(context)
+                                            .colorScheme
+                                            .onSecondary,
                                 margin: const EdgeInsets.all(15),
                                 elevation: 3,
                                 shape: RoundedRectangleBorder(

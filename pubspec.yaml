@@ -45,14 +45,14 @@ flutter_native_splash:
   #background_image: "assets/background.png"
 
   android_12:
-    image: assets/images/splash_screen-removebg-preview.png
+    image: assets/images/splash_screen.png
 
     # Splash screen background color.
     color: "#FFFFFF"
     # App icon background color.
     icon_background_color: "#FFFFFF"
 
-    image_dark: assets/images/splash_screen-removebg-preview.png
+    image_dark: assets/images/splash_screen.png
     color_dark: "#FFFFFF"
     #icon_background_color_dark: "#eeeeee"
 
@@ -64,3 +64,4 @@ flutter:
     - assets/images/
     - assets/animations/
     - assets/images/contributors/
+    - assets/images/backgrounds/

@@ -48,6 +48,7 @@ class Lesson {
   dynamic orderNumber;
   bool isCompleted;
   dynamic questions;
+  bool isPending = false;
 
   Lesson({
     required this.id,

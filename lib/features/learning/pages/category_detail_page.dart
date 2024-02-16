@@ -1,8 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:hank_talker_mobile/config/conts.dart';
 import 'package:hank_talker_mobile/core/profile/providers/profile_provider.dart';
 import 'package:hank_talker_mobile/features/learning/providers/learning_provider.dart';
-import 'package:hank_talker_mobile/features/learning/widgets/topic_tree_widget.dart';
 import 'package:hank_talker_mobile/features/learning/widgets/status_info_container.dart';
+import 'package:hank_talker_mobile/features/learning/widgets/topic_tree_widget.dart';
 import 'package:hank_talker_mobile/widgets/custom_appbar_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -17,6 +20,7 @@ class CategoryDetailPage extends StatefulWidget {
 
 class _CategoryDetailPageState extends State<CategoryDetailPage> {
   final ValueNotifier<bool> _expandInfoContainer = ValueNotifier<bool>(false);
+  final backgrounds = Random().nextInt(imagesBackgrounds.length);
 
   @override
   Widget build(BuildContext context) {
@@ -60,11 +64,10 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                                 decoration: BoxDecoration(
                                   color:
                                       Theme.of(context).colorScheme.secondary,
-                                  image: const DecorationImage(
+                                  image: DecorationImage(
                                     fit: BoxFit.cover,
-                                    image: NetworkImage(
-                                      'https://i.pinimg.com/550x/0c/db/21/0cdb21c54f6ff1fc97caa7dfa670aaab.jpg',
-                                    ),
+                                    image: AssetImage(
+                                        imagesBackgrounds[backgrounds]),
                                   ),
                                 ),
                               ),

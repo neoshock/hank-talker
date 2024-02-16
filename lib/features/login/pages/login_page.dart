@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hank_talker_mobile/core/auth/providers/auth_provider.dart';
-import 'package:hank_talker_mobile/features/home/pages/home_page.dart';
 import 'package:hank_talker_mobile/features/register/pages/register_page.dart';
 import 'package:hank_talker_mobile/features/settings/pages/recovery_password.dart';
 import 'package:hank_talker_mobile/utils/dialogs_events.dart';

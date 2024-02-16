@@ -34,6 +34,8 @@ class _LastActivityCardState extends State<LastActivityCard> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 final category = snapshot.data!;
+                final completedTopics =
+                    category.totalTopics - category.pendingTopics;
                 return InkWell(
                     onTap: () => onClick(category),
                     child: Card(
@@ -100,11 +102,9 @@ class _LastActivityCardState extends State<LastActivityCard> {
                                             MediaQuery.sizeOf(context).width *
                                                 0.45,
                                         child: LinearProgressIndicator(
-                                          value: (category.totalTopics -
-                                                  category.pendingTopics) /
-                                              (category.pendingTopics == 0
-                                                  ? 1
-                                                  : category.pendingTopics),
+                                          // value: 0.5,
+                                          value: completedTopics /
+                                              category.totalTopics,
                                           minHeight: 9,
                                           borderRadius:
                                               BorderRadius.circular(15),
