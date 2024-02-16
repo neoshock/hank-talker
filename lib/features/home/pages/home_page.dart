@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hank_talker_mobile/core/profile/models/region_model.dart';
 import 'package:hank_talker_mobile/core/profile/providers/profile_provider.dart';
 import 'package:hank_talker_mobile/features/home/widgets/body_section.dart';
 import 'package:hank_talker_mobile/features/home/widgets/header_section.dart';

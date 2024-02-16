@@ -26,6 +26,8 @@ class HeaderSection extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('Hola, ${name}',
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.displayLarge!.copyWith(
                           color: Theme.of(context).colorScheme.onPrimary)),
                   const SizedBox(
@@ -34,7 +36,7 @@ class HeaderSection extends StatelessWidget {
                   Text(
                       reggionName == ''
                           ? 'Al parecer no ha seleccionado una región'
-                          : 'Sigue aprendiendo más de $reggionName con hand talker',
+                          : 'Sigue aprendiendo más de $reggionName con HandTalker',
                       style: Theme.of(context).textTheme.displaySmall!.copyWith(
                           color: Theme.of(context).colorScheme.onPrimary)),
                 ],

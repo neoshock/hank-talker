@@ -10,6 +10,14 @@ class ProfileService {
   Future<HttpBaseResponse> getProfile() async {
     try {
       final response = await _api.get('/User/profile');
+      // que pasa si recibimos un 401
+      if (response.statusCode == 401) {
+        return HttpBaseResponse(
+            code: 401,
+            data: null,
+            message: 'No autorizado',
+            detail: 'No autorizado');
+      }
       final decodedData = json.decode(response.body);
       return HttpBaseResponse.fromJson(decodedData as Map<String, dynamic>);
     } catch (e) {

@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
 
 class SuccessModalBottom extends StatelessWidget {
+  const SuccessModalBottom({required this.onSuccess, super.key});
   final VoidCallback onSuccess;
-  const SuccessModalBottom({Key? key, required this.onSuccess})
-      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(15.0),
-      margin: EdgeInsets.symmetric(vertical: 30, horizontal: 15),
+      padding: const EdgeInsets.all(15),
+      margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 15),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          color: Color.fromARGB(255, 188, 225, 178)),
+        borderRadius: BorderRadius.circular(15),
+        color: const Color.fromARGB(255, 188, 225, 178),
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -25,7 +25,7 @@ class SuccessModalBottom extends StatelessWidget {
                 .displayLarge!
                 .copyWith(color: Theme.of(context).colorScheme.primary),
           ),
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
           Text(
             'Respuesta correcta',
             style: Theme.of(context)
@@ -33,14 +33,19 @@ class SuccessModalBottom extends StatelessWidget {
                 .displayMedium!
                 .copyWith(color: Theme.of(context).colorScheme.primary),
           ),
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           SizedBox(
-              width: MediaQuery.sizeOf(context).width,
-              child: CusttomButtonRounded(context, () {
+            width: MediaQuery.sizeOf(context).width,
+            child: CusttomButtonRounded(
+              context,
+              () {
                 Navigator.of(context).pop();
                 onSuccess();
-              }, 'Siguiente pregunta')),
-          SizedBox(height: 15),
+              },
+              'Siguiente pregunta',
+            ),
+          ),
+          const SizedBox(height: 15),
         ],
       ),
     );

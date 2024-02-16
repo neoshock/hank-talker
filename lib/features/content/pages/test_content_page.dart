@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:hank_talker_mobile/core/profile/providers/profile_provider.dart';
 import 'package:hank_talker_mobile/features/content/models/lesson_model.dart';
@@ -40,13 +38,15 @@ class _TestContentPageState extends State<TestContentPage> {
       backgroundColor: Colors.transparent,
       barrierColor: Colors.transparent,
       builder: (BuildContext context) {
-        return onCorrectAnswer
-            ? SuccessModalBottom(
-                onSuccess: onNextQuestion,
-              )
-            : ErrorModalBottom(
-                onSuccess: onNextQuestion,
-              );
+        return PopScope(
+            canPop: false,
+            child: onCorrectAnswer
+                ? SuccessModalBottom(
+                    onSuccess: onNextQuestion,
+                  )
+                : ErrorModalBottom(
+                    onSuccess: onNextQuestion,
+                  ));
       },
     );
     if (!onCorrectAnswer) {

@@ -39,7 +39,7 @@ class LearningHeader extends StatelessWidget {
                     const SizedBox(
                       height: 15,
                     ),
-                    Text('Aprende lenguaje de señas rápido y fácil',
+                    Text('Aprende lengua de señas rápido y fácil',
                         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                               color: Colors.white,
                             ))

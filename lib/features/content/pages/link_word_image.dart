@@ -25,40 +25,42 @@ class _LinkWordImageState extends State<LinkWordImage> {
 
   final Map<int, int> _selectedPairs = {};
 
-  Future<void> _handleTapWord(int index) async {
+  Future<void> _handleTapWord(int wordIndex) async {
     if (_selectedImage == -1) {
-      return;
+      return; // Si no hay ninguna imagen seleccionada, no hacer nada.
     }
-    setState(() {
-      // validate if point has drawer
-      if (_selectedImage < _points.length) {
-        _points[_selectedImage] = Offset(
-          MediaQuery.sizeOf(context).width * 0.3,
-          index * (MediaQuery.sizeOf(context).height * 0.17),
-        );
-        return;
-      }
-      if (_selectedImage > _points.length) {
-        return;
-      }
-      if (_points.length == _linkWordImageModel.images!.length) {
-        return;
-      }
-      _selectedPairs[_selectedImage] = index;
 
-      _points.add(
-        Offset(
-          MediaQuery.sizeOf(context).width * 0.3,
-          index * (MediaQuery.sizeOf(context).height * 0.17),
-        ),
-      );
+    setState(() {
+      _selectedPairs[_selectedImage] =
+          wordIndex; // Asigna o reemplaza la palabra seleccionada para la imagen.
+
+      // Actualiza el punto de la línea para la nueva palabra si ya existe, de lo contrario, agrega un nuevo punto.
+      if (_selectedImage < _points.length) {
+        _points[_selectedImage] = _createOffset(wordIndex);
+      } else {
+        _points.add(_createOffset(wordIndex));
+      }
     });
   }
 
-  Future<void> _handleTapImage(int index) async {
+  Future<void> _handleTapImage(int imageIndex) async {
     setState(() {
-      _selectedImage = index;
+      if (_selectedImage == imageIndex) {
+        // Si la imagen ya estaba seleccionada, deseleccionarla.
+        _selectedImage = -1;
+      } else {
+        // Selecciona la nueva imagen.
+        _selectedImage = imageIndex;
+      }
     });
+  }
+
+  Offset _createOffset(int wordIndex) {
+    // Calcula y devuelve un nuevo Offset basado en la palabra seleccionada.
+    return Offset(
+      MediaQuery.of(context).size.width * 0.3,
+      wordIndex * (MediaQuery.of(context).size.height * 0.17),
+    );
   }
 
   Future<void> checkAnswer() async {
@@ -80,9 +82,7 @@ class _LinkWordImageState extends State<LinkWordImage> {
     widget.onCheckAnswer(allPairsCorrect);
 
     // Opcional: resetear las selecciones después de la verificación
-    setState(() {
-      _selectedPairs.clear();
-    });
+    setState(_selectedPairs.clear);
   }
 
   @override

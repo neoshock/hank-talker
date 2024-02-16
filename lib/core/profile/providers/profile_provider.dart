@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:hank_talker_mobile/core/profile/models/experience_week_model.dart';
 import 'package:hank_talker_mobile/core/profile/models/profile_model.dart';
@@ -8,6 +7,7 @@ import 'package:hank_talker_mobile/core/profile/services/profile_services.dart';
 import 'package:hank_talker_mobile/core/repositories/http_model.dart';
 import 'package:hank_talker_mobile/core/repositories/preferences.dart';
 import 'package:hank_talker_mobile/features/content/services/content_service.dart';
+import 'package:hank_talker_mobile/core/repositories/preferences.dart';
 
 class ProfileProvider with ChangeNotifier {
   final ProfileService _profileService = ProfileService();
@@ -20,7 +20,9 @@ class ProfileProvider with ChangeNotifier {
 
   Future<HttpBaseResponse> getProfile() async {
     final response = await _profileService.getProfile();
-    print(response.data);
+    if (response.code == 401) {
+      await Preferences().erasedPreferences('token');
+    }
     if (response.code == 200) {
       _userProfileModel =
           UserProfileModel.fromJson(response.data as Map<String, dynamic>);

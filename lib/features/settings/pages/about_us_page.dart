@@ -21,7 +21,7 @@ class AboutUsPage extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              'HandTalker es una aplicación móvil que permite a los usuarios aprender el lenguaje de señas de una manera fácil y divertida. La aplicación está dirigida a personas con discapacidad auditiva y a personas que desean aprender el lenguaje de señas.',
+              'HandTalker es una aplicación móvil que permite a los usuarios aprender la lengua de señas de una manera fácil y divertida. La aplicación está dirigida a personas con discapacidad auditiva y a personas que desean aprender el lenguaje de señas.',
               textAlign: TextAlign.justify,
               style: Theme.of(context).textTheme.bodyMedium,
             ),
