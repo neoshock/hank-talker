@@ -30,6 +30,13 @@ class _LinkWordImageState extends State<LinkWordImage> {
       return; // Si no hay ninguna imagen seleccionada, no hacer nada.
     }
 
+    // Revisa si la palabra ya ha sido seleccionada por otra imagen.
+    if (_selectedPairs.containsValue(wordIndex)) {
+      // Aquí puedes mostrar un mensaje de error o alguna indicación de que la acción no está permitida.
+      print('Esta palabra ya ha sido seleccionada.');
+      return;
+    }
+
     setState(() {
       _selectedPairs[_selectedImage] =
           wordIndex; // Asigna o reemplaza la palabra seleccionada para la imagen.
@@ -126,7 +133,7 @@ class _LinkWordImageState extends State<LinkWordImage> {
                             _handleTapImage(index);
                           },
                           child: Container(
-                            width: MediaQuery.sizeOf(context).width * 0.24,
+                            width: MediaQuery.sizeOf(context).width * 0.27,
                             height: MediaQuery.sizeOf(context).height * 0.13,
                             margin: const EdgeInsets.all(15),
                             decoration: BoxDecoration(
@@ -135,7 +142,7 @@ class _LinkWordImageState extends State<LinkWordImage> {
                                 image: NetworkImage(
                                   _linkWordImageModel.images![index].valueUrl,
                                 ),
-                                fit: BoxFit.cover,
+                                fit: BoxFit.contain,
                               ),
                               border: _selectedImage == index
                                   ? Border.all(
@@ -145,9 +152,9 @@ class _LinkWordImageState extends State<LinkWordImage> {
                                   : null,
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black.withOpacity(0.25),
+                                  color: Colors.black.withOpacity(0.1),
                                   blurRadius: 6,
-                                  offset: const Offset(0, 4),
+                                  offset: const Offset(0, 3),
                                 ),
                               ],
                             ),

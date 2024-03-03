@@ -8,4 +8,5 @@ final imagesBackgrounds = [
   'assets/images/backgrounds/3.jpg',
   'assets/images/backgrounds/4.jpg',
   'assets/images/backgrounds/5.jpg',
+  'assets/images/backgrounds/6.jpg',
 ];

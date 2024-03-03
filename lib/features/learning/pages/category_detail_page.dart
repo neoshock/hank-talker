@@ -71,6 +71,21 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                                   ),
                                 ),
                               ),
+                              Positioned(
+                                top: MediaQuery.sizeOf(context).height * 0.075,
+                                child: Container(
+                                  width: MediaQuery.sizeOf(context).width * 0.3,
+                                  height:
+                                      MediaQuery.sizeOf(context).height * 0.05,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .surface
+                                        .withOpacity(0.75),
+                                  ),
+                                ),
+                              ),
                               CustomAppbarWidget(
                                 context,
                                 title: categoryDetail!.title,
