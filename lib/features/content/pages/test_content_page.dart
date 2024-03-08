@@ -127,6 +127,13 @@ class _TestContentPageState extends State<TestContentPage> {
           body: FutureBuilder(
             future: lessonDetailFuture,
             builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return const FailedPage(
+                  title: '¡Atención!',
+                  description:
+                      'Ocurrió un error al cargar el contenido, por favor intenta de nuevo',
+                );
+              }
               if (snapshot.hasData) {
                 final response = snapshot.data;
                 if (response!.code != 200) {
@@ -147,6 +154,7 @@ class _TestContentPageState extends State<TestContentPage> {
                         'No tienes más vidas disponibles, espera a que se recarguen',
                   );
                 }
+
                 if (lessonDetail.questions.isEmpty) {
                   return const FailedPage(
                     title: '¡Atención!',
@@ -169,7 +177,6 @@ class _TestContentPageState extends State<TestContentPage> {
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: lessonDetail.questions.length,
                           itemBuilder: (context, index) {
-                            print(lessonDetail.questions[index].toJson());
                             return getQuestionPage(
                               lessonDetail.questions[index].questionDescription,
                               lessonDetail.questions[index],

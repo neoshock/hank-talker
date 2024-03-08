@@ -7,7 +7,6 @@ import 'package:hank_talker_mobile/core/profile/services/profile_services.dart';
 import 'package:hank_talker_mobile/core/repositories/http_model.dart';
 import 'package:hank_talker_mobile/core/repositories/preferences.dart';
 import 'package:hank_talker_mobile/features/content/services/content_service.dart';
-import 'package:hank_talker_mobile/core/repositories/preferences.dart';
 
 class ProfileProvider with ChangeNotifier {
   final ProfileService _profileService = ProfileService();

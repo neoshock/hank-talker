@@ -30,16 +30,25 @@ class _LinkWordImageState extends State<LinkWordImage> {
       return; // Si no hay ninguna imagen seleccionada, no hacer nada.
     }
 
-    // Revisa si la palabra ya ha sido seleccionada por otra imagen.
-    if (_selectedPairs.containsValue(wordIndex)) {
-      // Aquí puedes mostrar un mensaje de error o alguna indicación de que la acción no está permitida.
-      print('Esta palabra ya ha sido seleccionada.');
-      return;
-    }
+    // Encuentra si la palabra ya está vinculada a alguna imagen.
+    int? previousImageIndex;
+    _selectedPairs.forEach((key, value) {
+      if (value == wordIndex) {
+        previousImageIndex = key;
+      }
+    });
 
     setState(() {
-      _selectedPairs[_selectedImage] =
-          wordIndex; // Asigna o reemplaza la palabra seleccionada para la imagen.
+      // Si la palabra ya está vinculada a otra imagen, desvincula esa palabra de la imagen anterior.
+      if (previousImageIndex != null) {
+        _selectedPairs.remove(previousImageIndex);
+        // Actualiza los puntos para que la línea no se dibuje.
+        _points[previousImageIndex!] = _createOffset(-1);
+        print(_points[previousImageIndex!]);
+      }
+
+      // Asigna o reemplaza la palabra seleccionada para la imagen actual.
+      _selectedPairs[_selectedImage] = wordIndex;
 
       // Actualiza el punto de la línea para la nueva palabra si ya existe, de lo contrario, agrega un nuevo punto.
       if (_selectedImage < _points.length) {
@@ -63,7 +72,11 @@ class _LinkWordImageState extends State<LinkWordImage> {
   }
 
   Offset _createOffset(int wordIndex) {
-    // Calcula y devuelve un nuevo Offset basado en la palabra seleccionada.
+    if (wordIndex < 0) {
+      // Devuelve un Offset que representa una posición no válida.
+      return const Offset(-1, -1);
+    }
+    // De lo contrario, calcula y devuelve un nuevo Offset basado en la palabra seleccionada.
     return Offset(
       MediaQuery.of(context).size.width * 0.3,
       wordIndex * (MediaQuery.of(context).size.height * 0.17),
@@ -251,26 +264,39 @@ class LinePainter extends CustomPainter {
       ..strokeCap = StrokeCap.round;
 
     for (var i = 0; i < points.length; i++) {
-      // canvas.drawLine(
-      //     Offset(0, i * 120), Offset(size.width, points[i].dy), paint);
-      canvas.drawPath(
-        Path()
-          ..moveTo(0, i * MediaQuery.of(context).size.height * 0.17)
-          ..cubicTo(
-            size.width * 0.3,
-            i * MediaQuery.of(context).size.height * 0.17,
-            size.width * 0.75,
-            points[i].dy,
-            size.width,
-            points[i].dy,
-          ),
-        paint,
-      );
+      // Solo dibujar la línea si el punto no es el Offset que representa 'no dibujar línea'.
+      if (points[i] != Offset(-1, -1)) {
+        canvas.drawPath(
+          Path()
+            ..moveTo(0, i * MediaQuery.of(context).size.height * 0.17)
+            ..cubicTo(
+              size.width * 0.3,
+              i * MediaQuery.of(context).size.height * 0.17,
+              size.width * 0.75,
+              points[i].dy,
+              size.width,
+              points[i].dy,
+            ),
+          paint,
+        );
+      }
     }
   }
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
+    // Podrías hacer una comprobación más inteligente aquí, comparando los puntos antiguos y nuevos
+    // para ver si realmente necesitas repintar el canvas.
+    return oldDelegate is! LinePainter ||
+        listsDiffer(points, (oldDelegate as LinePainter).points);
+  }
+
+  // Una función de utilidad para comparar si dos listas de puntos son diferentes
+  bool listsDiffer(List<Offset> a, List<Offset> b) {
+    if (a.length != b.length) return true;
+    for (int i = 0; i < a.length; i++) {
+      if (a[i] != b[i]) return true;
+    }
+    return false;
   }
 }

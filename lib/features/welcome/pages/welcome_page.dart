@@ -10,38 +10,61 @@ class WelcomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          bottom: false,
-          child: Column(
-            children: [
-              SizedBox(height: 45),
-              Image.asset(
-                'assets/images/Logo_HT_general.png',
-                fit: BoxFit.cover,
-                width: MediaQuery.sizeOf(
-                      context,
-                    ).width *
-                    0.8,
-              ),
-              const Spacer(),
-              Container(
-                width: MediaQuery.sizeOf(
-                  context,
-                ).width,
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
-                  ),
-                  color: Theme.of(context).colorScheme.primary.withOpacity(0.9),
+        bottom: false,
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 30,
+            ),
+            Image.asset(
+              'assets/images/Logo_HT_general.png',
+              fit: BoxFit.cover,
+              width: MediaQuery.sizeOf(
+                    context,
+                  ).width *
+                  0.45,
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  'assets/images/splash_screen-removebg-preview.png',
+                  width: 180,
                 ),
-                padding: const EdgeInsets.all(15),
-                child: Column(children: [
+                const SizedBox(
+                  width: 30,
+                ),
+                Image.asset(
+                  'assets/images/image-4.png',
+                  width: 150,
+                ),
+              ],
+            ),
+            const Spacer(),
+            Container(
+              width: MediaQuery.sizeOf(
+                context,
+              ).width,
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                ),
+                color: Theme.of(context).colorScheme.primary.withOpacity(0.9),
+              ),
+              padding: const EdgeInsets.all(15),
+              child: Column(
+                children: [
                   Container(
                     width: 80,
                     height: 6,
                     decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.surface,
-                        borderRadius: BorderRadius.circular(15)),
+                      color: Theme.of(context).colorScheme.surface,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
                   ),
                   const SizedBox(
                     height: 30,
@@ -50,17 +73,24 @@ class WelcomePage extends StatelessWidget {
                   const SizedBox(
                     height: 30,
                   ),
-                  CustomButtonOutLine(context, () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => LoginPage()),
-                    );
-                  }, 'Comenzar'),
-                  SizedBox(height: 15)
-                ]),
-              )
-            ],
-          )),
+                  CustomButtonOutLine(
+                    context,
+                    () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LoginPage()),
+                      );
+                    },
+                    'Comenzar',
+                  ),
+                  const SizedBox(height: 15),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
