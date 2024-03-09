@@ -22,6 +22,7 @@ class _LinkWordImageState extends State<LinkWordImage> {
 
   final List<Offset> _points = [];
   int _selectedImage = -1;
+  int _lastSelectedImageIndex = -1;
 
   final Map<int, int> _selectedPairs = {};
 
@@ -39,18 +40,19 @@ class _LinkWordImageState extends State<LinkWordImage> {
     });
 
     setState(() {
-      // Si la palabra ya está vinculada a otra imagen, desvincula esa palabra de la imagen anterior.
-      if (previousImageIndex != null) {
+      if (previousImageIndex != null &&
+          previousImageIndex! >= 0 &&
+          previousImageIndex! < _points.length) {
         _selectedPairs.remove(previousImageIndex);
-        // Actualiza los puntos para que la línea no se dibuje.
-        _points[previousImageIndex!] = _createOffset(-1);
-        print(_points[previousImageIndex!]);
+        _points[previousImageIndex!] =
+            Offset(-1, -1); // Marca la posición como inválida.
+      } else {
+        // Maneja el caso de un índice no válido, si es necesario.
       }
 
-      // Asigna o reemplaza la palabra seleccionada para la imagen actual.
       _selectedPairs[_selectedImage] = wordIndex;
+      _lastSelectedImageIndex = _selectedImage;
 
-      // Actualiza el punto de la línea para la nueva palabra si ya existe, de lo contrario, agrega un nuevo punto.
       if (_selectedImage < _points.length) {
         _points[_selectedImage] = _createOffset(wordIndex);
       } else {
@@ -61,13 +63,13 @@ class _LinkWordImageState extends State<LinkWordImage> {
 
   Future<void> _handleTapImage(int imageIndex) async {
     setState(() {
-      if (_selectedImage == imageIndex) {
-        // Si la imagen ya estaba seleccionada, deseleccionarla.
-        _selectedImage = -1;
-      } else {
-        // Selecciona la nueva imagen.
-        _selectedImage = imageIndex;
-      }
+      if (imageIndex == 0 || _selectedPairs.containsKey(imageIndex - 1)) {
+        if (_selectedImage == imageIndex) {
+          _selectedImage = -1;
+        } else {
+          _selectedImage = imageIndex;
+        }
+      } else {}
     });
   }
 

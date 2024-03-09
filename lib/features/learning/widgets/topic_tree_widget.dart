@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:hank_talker_mobile/core/profile/providers/profile_provider.dart';
 import 'package:hank_talker_mobile/features/content/models/topic_model.dart';
 import 'package:hank_talker_mobile/features/content/pages/test_content_page.dart';
@@ -18,6 +19,8 @@ class TopicTreeWidget extends StatefulWidget {
 }
 
 class _TopicTreeWidgetState extends State<TopicTreeWidget> {
+  final _totalExpanded = ValueNotifier<int>(0);
+
   Future<void> _openTestContentPage(Lesson lesson) async {
     final totalLive = Provider.of<ProfileProvider>(context, listen: false)
         .userProfileModel
@@ -60,6 +63,9 @@ class _TopicTreeWidgetState extends State<TopicTreeWidget> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      physics: _totalExpanded.value > 1
+          ? const AlwaysScrollableScrollPhysics()
+          : const NeverScrollableScrollPhysics(),
       child: Column(
         children: widget.topics.map((topic) {
           return Card(
@@ -72,7 +78,17 @@ class _TopicTreeWidgetState extends State<TopicTreeWidget> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15),
               ),
-              onExpansionChanged: (value) {},
+              onExpansionChanged: (value) {
+                if (value) {
+                  setState(() {
+                    _totalExpanded.value++;
+                  });
+                } else {
+                  setState(() {
+                    _totalExpanded.value--;
+                  });
+                }
+              },
               leading: CircleAvatar(
                 backgroundColor: Colors.grey[300],
                 child: FileInterceptorWidget(fileUrl: topic.iconUrl),

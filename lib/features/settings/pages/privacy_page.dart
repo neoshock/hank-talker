@@ -36,7 +36,7 @@ class _PrivacyPageState extends State<PrivacyPage> {
               );
       if (updateResponse.code == 200) {
         // ignore: use_build_context_synchronously
-        await showSuccessDialog('Exito', updateResponse.message, context);
+        await showSuccessDialog('Éxito', updateResponse.message, context);
       } else {
         // ignore: use_build_context_synchronously
         await showErrorDialog(

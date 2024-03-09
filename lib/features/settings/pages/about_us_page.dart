@@ -21,19 +21,19 @@ class AboutUsPage extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              'HandTalker es una aplicación móvil que permite a los usuarios aprender la lengua de señas de una manera fácil y divertida. La aplicación está dirigida a personas con discapacidad auditiva y a personas que desean aprender el lenguaje de señas.',
+              'Hand talker es una aplicación móvil que permite a los usuarios aprender la lengua de señas de una manera fácil y divertida. La aplicación está dirigida a personas con discapacidad auditiva y a personas que desean aprender el lenguaje de señas.',
               textAlign: TextAlign.justify,
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             const SizedBox(height: 20),
             Text(
-              'Lideres de proyecto',
+              'Líderes de proyecto',
               style: Theme.of(context).textTheme.displayMedium,
             ),
             const SizedBox(height: 10),
             const AboutDeveloperItem(
               name: 'Andy Ninasunta',
-              role: 'Lider de proyecto',
+              role: 'Líder de proyecto',
               imageUrl: 'assets/images/contributors/andy.jpeg',
               linkedinUrl: 'https://www.linkedin.com/in/andy-ninasunta/',
               email: '',
@@ -41,7 +41,7 @@ class AboutUsPage extends StatelessWidget {
             const SizedBox(height: 10),
             const AboutDeveloperItem(
               name: 'Josue Alcivar',
-              role: 'Lider de desarrollo movil',
+              role: 'Líder de desarrollo móvil',
               imageUrl: 'assets/images/contributors/lino.jpeg',
               linkedinUrl: 'https://www.linkedin.com/in/josue-alcivar/',
               email: 'lino.alcivar2017@uteq.edu.ec',
@@ -49,7 +49,7 @@ class AboutUsPage extends StatelessWidget {
             const SizedBox(height: 10),
             const AboutDeveloperItem(
               name: 'Celso Turriago',
-              role: 'Lider de recursos',
+              role: 'Líder de recursos',
               imageUrl: 'assets/images/contributors/celso.jpeg',
               linkedinUrl: 'https://www.linkedin.com/in/jorge-lino-9b1b3b1b9/',
             ),
@@ -120,7 +120,7 @@ class AboutUsPage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Text(
-              'En la administración de',
+              'En la administración de:',
               style: Theme.of(context).textTheme.displayMedium,
             ),
             const SizedBox(height: 10),

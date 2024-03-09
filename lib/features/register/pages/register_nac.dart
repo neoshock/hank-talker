@@ -120,9 +120,34 @@ class _BirthDatePageState extends State<BirthDatePage> {
                                     maxLength: 10,
                                     validator: (value) {
                                       if (value!.isEmpty) {
-                                        // ignore: lines_longer_than_80_chars
                                         return 'Por favor ingrese su fecha de nacimiento';
                                       }
+                                      // Utiliza una expresión regular para validar el formato de la fecha
+                                      final dateRegExp =
+                                          RegExp(r'^\d{2}/\d{2}/\d{4}$');
+                                      if (!dateRegExp.hasMatch(value)) {
+                                        return 'Ingrese la fecha en el formato DD/MM/AAAA';
+                                      }
+                                      // Intenta convertir el texto en una fecha
+                                      final parts = value.split('/');
+                                      final day = int.tryParse(parts[0]);
+                                      final month = int.tryParse(parts[1]);
+                                      final year = int.tryParse(parts[2]);
+                                      if (day == null ||
+                                          month == null ||
+                                          year == null) {
+                                        return 'Fecha no válida';
+                                      }
+                                      final birthDate =
+                                          DateTime(year, month, day);
+                                      // Asegúrate de que la fecha no sea futura y tenga sentido
+                                      if (birthDate.isAfter(DateTime.now())) {
+                                        return 'La fecha de nacimiento no puede ser en el futuro';
+                                      }
+                                      if (birthDate.isBefore(DateTime(1900))) {
+                                        return 'Fecha de nacimiento demasiado antigua';
+                                      }
+                                      // Puedes añadir aquí más validaciones si lo necesitas
                                       return null;
                                     },
                                     decoration: const InputDecoration(
