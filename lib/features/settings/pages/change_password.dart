@@ -98,15 +98,6 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                     if (value == null || value.isEmpty) {
                       return 'Contraseña es requerida';
                     }
-                    if (value.length < 6) {
-                      return 'La contraseña debe tener al menos 6 caracteres';
-                    }
-                    const pattern =
-                        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{6,}$';
-                    final regExp = RegExp(pattern);
-                    if (!regExp.hasMatch(value)) {
-                      return r'Incluir números, letras y caracteres especiales (!@#$&*~)';
-                    }
                     return null;
                   },
                   () {
@@ -161,8 +152,17 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                   ),
                   'Repetir nueva contraseña',
                   (value) {
-                    if (value == null || value == '') {
+                    if (value == null || value.isEmpty) {
                       return 'Contraseña es requerida';
+                    }
+                    if (value.length < 6) {
+                      return 'La contraseña debe tener al menos 6 caracteres';
+                    }
+                    const pattern =
+                        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{6,}$';
+                    final regExp = RegExp(pattern);
+                    if (!regExp.hasMatch(value)) {
+                      return r'Incluir números, letras y caracteres especiales (!@#$&*~)';
                     }
                     return null;
                   },

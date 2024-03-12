@@ -8,7 +8,8 @@ class LoadingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Center(
-      child: LottieBuilder.asset('assets/animations/animation_lny43ngr.json'),
+      child: LottieBuilder.asset(
+          'assets/animations/Animation - 1710271718521.json'),
     ));
   }
 }

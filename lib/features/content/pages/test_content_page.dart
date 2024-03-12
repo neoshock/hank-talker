@@ -35,6 +35,7 @@ class _TestContentPageState extends State<TestContentPage> {
     showModalBottomSheet(
       context: context,
       isDismissible: false,
+      enableDrag: false,
       backgroundColor: Colors.transparent,
       barrierColor: Colors.transparent,
       builder: (BuildContext context) {

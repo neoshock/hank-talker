@@ -1,3 +1,5 @@
+// ignore_for_file: inference_failure_on_instance_creation
+
 import 'package:flutter/material.dart';
 import 'package:hank_talker_mobile/features/login/pages/login_page.dart';
 import 'package:hank_talker_mobile/features/welcome/widgets/welcome_smooth_page_widget.dart';
@@ -25,7 +27,7 @@ class WelcomePage extends StatelessWidget {
                   0.45,
             ),
             const SizedBox(
-              height: 30,
+              height: 15,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -67,11 +69,11 @@ class WelcomePage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(
-                    height: 30,
+                    height: 15,
                   ),
                   const WelcomeSmoothPageWidget(),
                   const SizedBox(
-                    height: 30,
+                    height: 15,
                   ),
                   CustomButtonOutLine(
                     context,

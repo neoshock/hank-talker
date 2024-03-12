@@ -16,12 +16,12 @@ class AboutUsPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Acerca de HandTalker',
+              'Acerca de hand talker',
               style: Theme.of(context).textTheme.displayLarge,
             ),
             const SizedBox(height: 10),
             Text(
-              'Hand talker es una aplicación móvil que permite a los usuarios aprender la lengua de señas de una manera fácil y divertida. La aplicación está dirigida a personas con discapacidad auditiva y a personas que desean aprender el lenguaje de señas.',
+              'Hand talker es una aplicación móvil que permite a los usuarios aprender la lengua de señas de una manera fácil y divertida. La aplicación está dirigida a personas con discapacidad auditiva y a personas que desean aprender la lengua de señas.',
               textAlign: TextAlign.justify,
               style: Theme.of(context).textTheme.bodyMedium,
             ),
@@ -70,7 +70,7 @@ class AboutUsPage extends StatelessWidget {
               name: 'Cristopher Zambrano',
               role: 'Mobile Developer',
               imageUrl: 'assets/images/category.png',
-              linkedinUrl: 'https://www.linkedin.com/in/jorge-lino-9b1b3b1b9/',
+              linkedinUrl: 'assets/images/contributors/crisito.jpeg',
             ),
             const SizedBox(height: 10),
             const AboutDeveloperItem(
@@ -103,6 +103,12 @@ class AboutUsPage extends StatelessWidget {
               name: 'Kelvin Estrada',
               role: 'Diseñador de niveles',
               imageUrl: 'assets/images/contributors/kelvin.jpeg',
+              linkedinUrl: 'https://www.linkedin.com/in/jorge-lino-9b1b3b1b9/',
+            ),
+            const AboutDeveloperItem(
+              name: 'Rosa Baren',
+              role: 'Diseñador de niveles',
+              imageUrl: 'assets/images/contributors/rosa.jpg',
               linkedinUrl: 'https://www.linkedin.com/in/jorge-lino-9b1b3b1b9/',
             ),
             const SizedBox(height: 10),
@@ -168,13 +174,6 @@ class AboutUsPage extends StatelessWidget {
               'Sergio Yépez (Colaborador Desarrollo Social GADM Quevedo)',
               style: Theme.of(context).textTheme.bodySmall,
             ),
-            //             © 2023 Universidad Técnica Estatal de Quevedo
-            // Campus "Ingeniero Manuel Agustín Haz Álvarez"
-            // Av. Quito km. 1 1/2 vía a Santo Domingo de los Tsáchilas
-            // (+593) 5 3702-220 Ext. 8039
-            // Email: info@uteq.edu.ec
-            // Quevedo - Los Ríos - Ecuador
-            // www.uteq.edu.ec
             const SizedBox(height: 30),
             Text(
               '© 2023 Universidad Técnica Estatal de Quevedo',
