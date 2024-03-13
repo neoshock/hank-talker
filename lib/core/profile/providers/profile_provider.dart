@@ -99,6 +99,7 @@ class ProfileProvider with ChangeNotifier {
   }
 
   Future<HttpBaseResponse> postLessonCompletionRecord(int lessonId) async {
+    print('Sending lesson completion record for lesson $lessonId');
     final response = await _contentService.postLessonCompletionRecord(lessonId);
     if (response.code == 200) {
       return HttpBaseResponse(

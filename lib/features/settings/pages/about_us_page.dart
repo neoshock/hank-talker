@@ -69,7 +69,7 @@ class AboutUsPage extends StatelessWidget {
             const AboutDeveloperItem(
               name: 'Cristopher Zambrano',
               role: 'Mobile Developer',
-              imageUrl: 'assets/images/category.png',
+              imageUrl: 'assets/images/contributors/crisito.jpeg',
               linkedinUrl: 'assets/images/contributors/crisito.jpeg',
             ),
             const SizedBox(height: 10),
@@ -107,7 +107,7 @@ class AboutUsPage extends StatelessWidget {
             ),
             const AboutDeveloperItem(
               name: 'Rosa Baren',
-              role: 'Diseñador de niveles',
+              role: 'Diseñadora de niveles',
               imageUrl: 'assets/images/contributors/rosa.jpg',
               linkedinUrl: 'https://www.linkedin.com/in/jorge-lino-9b1b3b1b9/',
             ),
@@ -121,7 +121,7 @@ class AboutUsPage extends StatelessWidget {
             const AboutDeveloperItem(
               name: 'Orlando Erazo',
               role: 'Director del proyecto de vinculación',
-              imageUrl: 'assets/images/category.png',
+              imageUrl: 'assets/images/contributors/orlando.png',
               email: '',
             ),
             const SizedBox(height: 20),

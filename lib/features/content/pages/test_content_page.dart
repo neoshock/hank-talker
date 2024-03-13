@@ -1,3 +1,6 @@
+// ignore_for_file: cascade_invocations, inference_failure_on_function_invocation, strict_raw_type, avoid_dynamic_calls
+
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:hank_talker_mobile/core/profile/providers/profile_provider.dart';
 import 'package:hank_talker_mobile/features/content/models/lesson_model.dart';
@@ -23,15 +26,23 @@ class TestContentPage extends StatefulWidget {
 }
 
 class _TestContentPageState extends State<TestContentPage> {
+  final player = AudioPlayer();
   final PageController pageController = PageController();
   Future? lessonDetailFuture;
+  BuildContext? modalContext;
 
   int currentQuestion = 0;
   bool dataLoaded = false;
   bool isFinished = false;
 
   void checkAnswer(bool onCorrectAnswer) {
-    // ignore: inference_failure_on_function_invocation
+    if (!onCorrectAnswer) {
+      playSound('sounds/incorrect.ogg');
+      Provider.of<ProfileProvider>(context, listen: false).decrementHeart();
+    } else {
+      playSound('sounds/correct.mp3');
+    }
+
     showModalBottomSheet(
       context: context,
       isDismissible: false,
@@ -39,20 +50,18 @@ class _TestContentPageState extends State<TestContentPage> {
       backgroundColor: Colors.transparent,
       barrierColor: Colors.transparent,
       builder: (BuildContext context) {
+        modalContext = context;
         return PopScope(
-            canPop: false,
-            child: onCorrectAnswer
-                ? SuccessModalBottom(
-                    onSuccess: onNextQuestion,
-                  )
-                : ErrorModalBottom(
-                    onSuccess: onNextQuestion,
-                  ));
+          child: onCorrectAnswer
+              ? SuccessModalBottom(onSuccess: onNextQuestion)
+              : ErrorModalBottom(onSuccess: onNextQuestion),
+        );
       },
     );
-    if (!onCorrectAnswer) {
-      Provider.of<ProfileProvider>(context, listen: false).decrementHeart();
-    }
+  }
+
+  void playSound(String soundUrl) {
+    player.play(AssetSource(soundUrl));
   }
 
   void onNextQuestion() {
@@ -66,8 +75,8 @@ class _TestContentPageState extends State<TestContentPage> {
     );
   }
 
-  Widget getQuestionPage(String type, Question question,
-      {int? length, int totalExp = 10}) {
+  Widget getQuestionPage(String type, Question question, int totalExp,
+      {int? length}) {
     // validate if is the last question
     if (currentQuestion >= length!) {
       Provider.of<ProfileProvider>(context, listen: false)
@@ -108,9 +117,8 @@ class _TestContentPageState extends State<TestContentPage> {
   @override
   void initState() {
     super.initState();
-    lessonDetailFuture = context
-        .read<ContentProvider>()
-        .getLessonDetail(widget.lessonId); // Llama a getLessonDetail aquí
+    lessonDetailFuture = Provider.of<ContentProvider>(context, listen: false)
+        .getLessonDetail(widget.lessonId);
   }
 
   @override
@@ -149,6 +157,11 @@ class _TestContentPageState extends State<TestContentPage> {
                     .statistic
                     .remainingLive;
                 if (totalHeart <= 0) {
+                  if (modalContext != null) {
+                    playSound('sounds/lose.wav');
+                    Navigator.of(modalContext!).pop();
+                    modalContext = null;
+                  }
                   return const FailedPage(
                     title: '¡Atención!',
                     description:
@@ -181,8 +194,8 @@ class _TestContentPageState extends State<TestContentPage> {
                             return getQuestionPage(
                               lessonDetail.questions[index].questionDescription,
                               lessonDetail.questions[index],
+                              lessonDetail.totalExperience,
                               length: lessonDetail.questions.length,
-                              totalExp: lessonDetail.totalExperience,
                             );
                           },
                         ),
