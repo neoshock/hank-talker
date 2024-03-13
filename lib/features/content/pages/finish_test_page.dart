@@ -1,13 +1,18 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:hank_talker_mobile/core/profile/providers/profile_provider.dart';
 import 'package:hank_talker_mobile/widgets/bottom_bar.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 
 class FinishTestPage extends StatefulWidget {
   final int totalExp;
+  final int lessonId;
 
-  const FinishTestPage({Key? key, required this.totalExp}) : super(key: key);
+  const FinishTestPage(
+      {Key? key, required this.totalExp, required this.lessonId})
+      : super(key: key);
 
   @override
   _FinishTestPageState createState() => _FinishTestPageState();
@@ -19,6 +24,8 @@ class _FinishTestPageState extends State<FinishTestPage> {
   @override
   void initState() {
     super.initState();
+    Provider.of<ProfileProvider>(context, listen: false)
+        .postLessonCompletionRecord(widget.lessonId);
     playSound('sounds/win.wav');
   }
 

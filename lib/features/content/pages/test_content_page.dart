@@ -79,9 +79,8 @@ class _TestContentPageState extends State<TestContentPage> {
       {int? length}) {
     // validate if is the last question
     if (currentQuestion >= length!) {
-      Provider.of<ProfileProvider>(context, listen: false)
-          .postLessonCompletionRecord(widget.lessonId);
       return FinishTestPage(
+        lessonId: widget.lessonId,
         totalExp: totalExp,
       );
     }
