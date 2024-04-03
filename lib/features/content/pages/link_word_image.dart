@@ -22,16 +22,13 @@ class _LinkWordImageState extends State<LinkWordImage> {
 
   final List<Offset> _points = [];
   int _selectedImage = -1;
-  int _lastSelectedImageIndex = -1;
-
   final Map<int, int> _selectedPairs = {};
 
   Future<void> _handleTapWord(int wordIndex) async {
     if (_selectedImage == -1) {
-      return; // Si no hay ninguna imagen seleccionada, no hacer nada.
+      return;
     }
 
-    // Encuentra si la palabra ya está vinculada a alguna imagen.
     int? previousImageIndex;
     _selectedPairs.forEach((key, value) {
       if (value == wordIndex) {
@@ -44,14 +41,10 @@ class _LinkWordImageState extends State<LinkWordImage> {
           previousImageIndex! >= 0 &&
           previousImageIndex! < _points.length) {
         _selectedPairs.remove(previousImageIndex);
-        _points[previousImageIndex!] =
-            Offset(-1, -1); // Marca la posición como inválida.
-      } else {
-        // Maneja el caso de un índice no válido, si es necesario.
-      }
+        _points[previousImageIndex!] = const Offset(-1, -1);
+      } else {}
 
       _selectedPairs[_selectedImage] = wordIndex;
-      _lastSelectedImageIndex = _selectedImage;
 
       if (_selectedImage < _points.length) {
         _points[_selectedImage] = _createOffset(wordIndex);
@@ -75,10 +68,8 @@ class _LinkWordImageState extends State<LinkWordImage> {
 
   Offset _createOffset(int wordIndex) {
     if (wordIndex < 0) {
-      // Devuelve un Offset que representa una posición no válida.
       return const Offset(-1, -1);
     }
-    // De lo contrario, calcula y devuelve un nuevo Offset basado en la palabra seleccionada.
     return Offset(
       MediaQuery.of(context).size.width * 0.3,
       wordIndex * (MediaQuery.of(context).size.height * 0.17),
@@ -86,7 +77,6 @@ class _LinkWordImageState extends State<LinkWordImage> {
   }
 
   Future<void> checkAnswer() async {
-    // Comprueba si todas las imágenes tienen una palabra asociada
     if (_selectedPairs.length != _linkWordImageModel.images!.length) {
       return;
     }
@@ -109,6 +99,7 @@ class _LinkWordImageState extends State<LinkWordImage> {
 
   @override
   void initState() {
+    print(_linkWordImageModel.toJson());
     super.initState();
   }
 
@@ -220,7 +211,7 @@ class _LinkWordImageState extends State<LinkWordImage> {
                             margin: const EdgeInsets.all(15),
                             child: Center(
                               child: Text(
-                                _linkWordImageModel.words[index].value,
+                                _linkWordImageModel.words[index].name!,
                                 textAlign: TextAlign.center,
                                 style: Theme.of(context).textTheme.bodyMedium,
                               ),
