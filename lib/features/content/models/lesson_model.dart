@@ -172,7 +172,9 @@ class Word {
   });
 
   factory Word.fromJson(Map<String, dynamic> json) => Word(
-        name: json['name'].toString(),
+        name: json['name'].toString() == 'null'
+            ? json['word'].toString()
+            : json['name'].toString(),
         value: json['value'].toString(),
       );
 

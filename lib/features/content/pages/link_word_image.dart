@@ -47,29 +47,32 @@ class _LinkWordImageState extends State<LinkWordImage> {
       _selectedPairs[_selectedImage] = wordIndex;
 
       if (_selectedImage < _points.length) {
-        _points[_selectedImage] = _createOffset(wordIndex);
+        _points[_selectedImage] = _createOffset(_selectedImage, _selectedPairs);
       } else {
-        _points.add(_createOffset(wordIndex));
+        _points.add(_createOffset(_selectedImage, _selectedPairs));
       }
     });
   }
 
   Future<void> _handleTapImage(int imageIndex) async {
     setState(() {
-      if (imageIndex == 0 || _selectedPairs.containsKey(imageIndex - 1)) {
-        if (_selectedImage == imageIndex) {
-          _selectedImage = -1;
-        } else {
-          _selectedImage = imageIndex;
-        }
-      } else {}
+      if (_selectedImage == imageIndex) {
+        _selectedImage = -1;
+      } else {
+        _selectedImage = imageIndex;
+      }
     });
   }
 
-  Offset _createOffset(int wordIndex) {
+  Offset _createOffset(int imageIndex, Map<int, int> selectedPairs) {
+    int wordIndex = selectedPairs[imageIndex] ?? -1;
+    print(wordIndex);
+    print(selectedPairs);
+    print(imageIndex);
     if (wordIndex < 0) {
       return const Offset(-1, -1);
     }
+
     return Offset(
       MediaQuery.of(context).size.width * 0.3,
       wordIndex * (MediaQuery.of(context).size.height * 0.17),
@@ -99,7 +102,6 @@ class _LinkWordImageState extends State<LinkWordImage> {
 
   @override
   void initState() {
-    print(_linkWordImageModel.toJson());
     super.initState();
   }
 
@@ -180,7 +182,10 @@ class _LinkWordImageState extends State<LinkWordImage> {
                   MediaQuery.sizeOf(context).height *
                       (0.14 * _linkWordImageModel.words.length),
                 ),
-                painter: LinePainter(points: _points, context: context),
+                painter: LinePainter(
+                  selectedPairs: _selectedPairs,
+                  context: context,
+                ),
               ),
               Positioned(
                 right: 0,
@@ -243,8 +248,8 @@ class _LinkWordImageState extends State<LinkWordImage> {
 }
 
 class LinePainter extends CustomPainter {
-  LinePainter({required this.points, required this.context});
-  final List<Offset> points;
+  LinePainter({required this.selectedPairs, required this.context});
+  final Map<int, int> selectedPairs;
   final BuildContext context;
 
   @override
@@ -256,38 +261,37 @@ class LinePainter extends CustomPainter {
       ..strokeWidth = 6.0
       ..strokeCap = StrokeCap.round;
 
-    for (var i = 0; i < points.length; i++) {
-      // Solo dibujar la línea si el punto no es el Offset que representa 'no dibujar línea'.
-      if (points[i] != Offset(-1, -1)) {
+    selectedPairs.forEach((imageIndex, wordIndex) {
+      if (wordIndex >= 0) {
+        // Calcula el 'Offset' para la imagen y la palabra
+        double imageY = imageIndex * MediaQuery.of(context).size.height * 0.17;
+        double wordY = wordIndex * MediaQuery.of(context).size.height * 0.17;
+
         canvas.drawPath(
           Path()
-            ..moveTo(0, i * MediaQuery.of(context).size.height * 0.17)
+            ..moveTo(0, imageY)
             ..cubicTo(
               size.width * 0.3,
-              i * MediaQuery.of(context).size.height * 0.17,
+              imageY,
               size.width * 0.75,
-              points[i].dy,
+              wordY,
               size.width,
-              points[i].dy,
+              wordY,
             ),
           paint,
         );
       }
-    }
+    });
   }
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    // Podrías hacer una comprobación más inteligente aquí, comparando los puntos antiguos y nuevos
-    // para ver si realmente necesitas repintar el canvas.
-    return oldDelegate is! LinePainter ||
-        listsDiffer(points, (oldDelegate as LinePainter).points);
+    return true;
   }
 
-  // Una función de utilidad para comparar si dos listas de puntos son diferentes
   bool listsDiffer(List<Offset> a, List<Offset> b) {
     if (a.length != b.length) return true;
-    for (int i = 0; i < a.length; i++) {
+    for (var i = 0; i < a.length; i++) {
       if (a[i] != b[i]) return true;
     }
     return false;

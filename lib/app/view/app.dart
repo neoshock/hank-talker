@@ -21,10 +21,6 @@ class App extends StatelessWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    return FutureBuilder(
-      future: Future.delayed(const Duration(seconds: 3)), // Espera 1 segundo
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
           return MultiProvider(
             providers: [
               ChangeNotifierProvider(create: (_) => AuthProvider()),
@@ -43,22 +39,5 @@ class App extends StatelessWidget {
               );
             },
           );
-        } else {
-          // Muestra un indicador de carga mientras espera
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            theme: CustomThemeData.lightTheme,
-            home: Scaffold(
-              backgroundColor: const Color(0xFF4FA53A),
-              body: Center(
-                  child: Image.asset(
-                'assets/images/logo_splash.png',
-                width: 300,
-              )),
-            ),
-          );
-        }
-      },
-    );
   }
 }
