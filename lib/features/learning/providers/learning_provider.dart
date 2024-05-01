@@ -7,6 +7,7 @@ import 'package:hank_talker_mobile/core/profile/providers/profile_provider.dart'
 import 'package:hank_talker_mobile/features/learning/models/category_model.dart';
 import 'package:hank_talker_mobile/features/learning/models/cateogry_detail_model.dart';
 import 'package:hank_talker_mobile/features/learning/services/learning_services.dart';
+import 'package:hank_talker_mobile/utils/custom_methods.dart';
 import 'package:provider/provider.dart';
 
 class LearningProvider with ChangeNotifier {
@@ -35,13 +36,16 @@ class LearningProvider with ChangeNotifier {
     return [];
   }
 
-  void findCategory(String query) async {
+  Future<void> findCategory(String query) async {
     if (query.isEmpty) {
       await getAllCategories(); // Esto ya llama a notifyListeners()
     } else {
       final result = _categories.where((element) {
-        return element.title.toLowerCase().contains(query.toLowerCase());
+        final cleanTitle = removeAccents(element.title.toLowerCase());
+        final cleanQuery = removeAccents(query.toLowerCase());
+        return cleanTitle.contains(cleanQuery);
       }).toList();
+
       _categories = result;
       notifyListeners();
     }

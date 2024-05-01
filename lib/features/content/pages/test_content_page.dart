@@ -51,10 +51,14 @@ class _TestContentPageState extends State<TestContentPage> {
       barrierColor: Colors.transparent,
       builder: (BuildContext context) {
         modalContext = context;
-        return PopScope(
-          child: onCorrectAnswer
-              ? SuccessModalBottom(onSuccess: onNextQuestion)
-              : ErrorModalBottom(onSuccess: onNextQuestion),
+        return WillPopScope(
+          onWillPop: () async =>
+              false, // Evita que se cierre el modal al presionar retroceder
+          child: PopScope(
+            child: onCorrectAnswer
+                ? SuccessModalBottom(onSuccess: onNextQuestion)
+                : ErrorModalBottom(onSuccess: onNextQuestion),
+          ),
         );
       },
     );

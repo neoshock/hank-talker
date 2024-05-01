@@ -116,10 +116,9 @@ class _TopicTreeWidgetState extends State<TopicTreeWidget> {
                             gridDelegate:
                                 // ignore: lines_longer_than_80_chars
                                 const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              mainAxisExtent: 210,
-                              childAspectRatio: 1.5,
-                            ),
+                                    crossAxisCount: 2,
+                                    childAspectRatio: 1.5,
+                                    mainAxisExtent: 240),
                             itemBuilder: (context, index) {
                               final lesson = topicDetail.lessons[index];
                               return Card(

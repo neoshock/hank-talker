@@ -43,6 +43,7 @@ class LevelItemWidget extends StatelessWidget {
           Expanded(
             child: Text(
               lesson.title,
+              maxLines: 3,
               style: Theme.of(context)
                   .textTheme
                   .bodyMedium!
