@@ -97,7 +97,8 @@ class _SelectCorrectWordState extends State<SelectCorrectWord> {
                   },
                   borderRadius: BorderRadius.circular(15),
                   child: Container(
-                    margin: const EdgeInsets.all(5),
+                    margin: const EdgeInsets.all(3),
+                    padding: const EdgeInsets.all(6),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                       color: content.words[index].value == currrentWord
@@ -116,7 +117,8 @@ class _SelectCorrectWordState extends State<SelectCorrectWord> {
                     child: Center(
                       child: Text(
                         content.words[index].name!,
-                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               color: Theme.of(context).colorScheme.onPrimary,
                             ),
                       ),

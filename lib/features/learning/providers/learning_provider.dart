@@ -16,6 +16,8 @@ class LearningProvider with ChangeNotifier {
   List<CategoryModel> _categories = [];
   // get
   List<CategoryModel> get categories => _categories;
+  // aux variable
+  List<CategoryModel> _categoriesAux = [];
 
   Future<List<CategoryModel>> getAllCategories() async {
     _categories = [];
@@ -30,6 +32,7 @@ class LearningProvider with ChangeNotifier {
       // order by orderNumber
       result.sort((a, b) => a.orderNumber.compareTo(b.orderNumber));
       _categories = result;
+      _categoriesAux = result;
       notifyListeners();
       return result;
     }
@@ -38,9 +41,10 @@ class LearningProvider with ChangeNotifier {
 
   Future<void> findCategory(String query) async {
     if (query.isEmpty) {
-      await getAllCategories(); // Esto ya llama a notifyListeners()
+      await getAllCategories();
     } else {
-      final result = _categories.where((element) {
+      final result = _categoriesAux.where((element) {
+        print(element);
         final cleanTitle = removeAccents(element.title.toLowerCase());
         final cleanQuery = removeAccents(query.toLowerCase());
         return cleanTitle.contains(cleanQuery);

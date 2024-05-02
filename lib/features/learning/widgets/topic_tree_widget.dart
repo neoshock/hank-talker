@@ -91,7 +91,7 @@ class _TopicTreeWidgetState extends State<TopicTreeWidget> {
               },
               leading: CircleAvatar(
                 backgroundColor: Colors.grey[300],
-                child: FileInterceptorWidget(fileUrl: topic.iconUrl),
+                backgroundImage: NetworkImage(topic.iconUrl),
               ),
               title: Text(topic.name),
               subtitle: Text('${topic.pendingLessons} pendientes'),
