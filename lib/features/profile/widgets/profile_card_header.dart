@@ -37,8 +37,7 @@ class ProfileCardHeader extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.3,
-
+                    width: MediaQuery.of(context).size.width * 0.36,
                     child: Text(
                       '${userProfileModel.firstName} ${userProfileModel.lastName}',
                       style: Theme.of(context).textTheme.displayMedium,
@@ -65,21 +64,21 @@ class ProfileCardHeader extends StatelessWidget {
               )
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              const Text('Se unió desde:'),
-              const SizedBox(
-                width: 15,
-              ),
-              Text(
-                userProfileModel.registrationDate != null
-                    ? userProfileModel.registrationDate.toString()
-                    : '${userProfileModel.registrationDate ?? 'No disponible'}',
-                style: Theme.of(context).textTheme.bodyMedium,
-              )
-            ],
-          ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.end,
+          //   children: [
+          //     const Text('Se unió desde:'),
+          //     const SizedBox(
+          //       width: 15,
+          //     ),
+          //     Text(
+          //       userProfileModel.registrationDate != null
+          //           ? userProfileModel.registrationDate.toString()
+          //           : '${userProfileModel.registrationDate ?? 'No disponible'}',
+          //       style: Theme.of(context).textTheme.bodyMedium,
+          //     )
+          //   ],
+          // ),
           const SizedBox(height: 6),
           Divider(
             height: 3,

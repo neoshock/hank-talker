@@ -86,27 +86,27 @@ class _LearningPageState extends State<LearningPage> {
                       );
                     },
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          'Temas recientes',
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Text(
-                    'No has visto ningún tema recientemente',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
+                  // const SizedBox(
+                  //   height: 15,
+                  // ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     Expanded(
+                  //       child: Text(
+                  //         'Temas recientes',
+                  //         style: Theme.of(context).textTheme.bodyLarge,
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  // const SizedBox(
+                  //   height: 15,
+                  // ),
+                  // Text(
+                  //   'No has visto ningún tema recientemente',
+                  //   style: Theme.of(context).textTheme.bodyMedium,
+                  // ),
                 ],
               ),
             ),

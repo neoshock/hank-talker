@@ -38,9 +38,7 @@ class _CustomFindInputWidgetState extends State<CustomFindInputWidget> {
               child: Padding(
                 padding: const EdgeInsets.only(left: 15),
                 child: TextField(
-                  onChanged: (e) {
-                    _onChanged(e);
-                  },
+                  onChanged: _onChanged,
                   decoration: InputDecoration(
                       contentPadding: const EdgeInsets.symmetric(vertical: 18),
                       hintText: 'Buscar',

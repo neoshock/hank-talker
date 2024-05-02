@@ -91,7 +91,7 @@ class _TopicTreeWidgetState extends State<TopicTreeWidget> {
               },
               leading: CircleAvatar(
                 backgroundColor: Colors.grey[300],
-                child: FileInterceptorWidget(fileUrl: topic.iconUrl),
+                backgroundImage: NetworkImage(topic.iconUrl),
               ),
               title: Text(topic.name),
               subtitle: Text('${topic.pendingLessons} pendientes'),
@@ -116,10 +116,9 @@ class _TopicTreeWidgetState extends State<TopicTreeWidget> {
                             gridDelegate:
                                 // ignore: lines_longer_than_80_chars
                                 const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              mainAxisExtent: 210,
-                              childAspectRatio: 1.5,
-                            ),
+                                    crossAxisCount: 2,
+                                    childAspectRatio: 1.5,
+                                    mainAxisExtent: 240),
                             itemBuilder: (context, index) {
                               final lesson = topicDetail.lessons[index];
                               return Card(

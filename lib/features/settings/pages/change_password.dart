@@ -79,7 +79,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  'La contraseña debe tener al menos seis caracteres e incluir una combinación de números, letras y caracteres especiales (!@%)',
+                  r'La contraseña debe tener al menos seis caracteres e incluir una combinación de números, letras, mayúsculas y caracteres especiales (!@#$&*~), al menos 2 caracteres especiales.',
                   style: TextStyle(
                     fontSize: 16,
                   ),
@@ -126,10 +126,10 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                       return 'La contraseña debe tener al menos 6 caracteres';
                     }
                     const pattern =
-                        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{6,}$';
+                        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]?.*?[!@#\$&*~]?).{6,}$';
                     final regExp = RegExp(pattern);
                     if (!regExp.hasMatch(value)) {
-                      return r'Incluir números, letras y caracteres especiales (!@#$&*~)';
+                      return r'Incluir números, letras y uno o dos caracteres especiales (!@#$&*~)';
                     }
                     return null;
                   },
@@ -159,10 +159,10 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                       return 'La contraseña debe tener al menos 6 caracteres';
                     }
                     const pattern =
-                        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{6,}$';
+                        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]?.*?[!@#\$&*~]?).{6,}$';
                     final regExp = RegExp(pattern);
                     if (!regExp.hasMatch(value)) {
-                      return r'Incluir números, letras y caracteres especiales (!@#$&*~)';
+                      return r'Incluir números, letras y uno o dos caracteres especiales (!@#$&*~)';
                     }
                     return null;
                   },

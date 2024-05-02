@@ -3,10 +3,9 @@ class AppConstants {
 }
 
 final imagesBackgrounds = [
-  'assets/images/backgrounds/1.jpg',
+  'assets/images/backgrounds/1.jpeg',
   'assets/images/backgrounds/2.jpg',
   'assets/images/backgrounds/3.jpg',
   'assets/images/backgrounds/4.jpg',
-  'assets/images/backgrounds/5.jpg',
-  'assets/images/backgrounds/6.jpg',
+  'assets/images/backgrounds/5.jpeg',
 ];

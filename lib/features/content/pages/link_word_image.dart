@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hank_talker_mobile/features/content/models/lesson_model.dart';
+import 'package:hank_talker_mobile/utils/dialogs_events.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
+import 'package:collection/collection.dart';
 
 class LinkWordImage extends StatefulWidget {
   const LinkWordImage({
@@ -20,7 +22,6 @@ class _LinkWordImageState extends State<LinkWordImage> {
     widget.questionModel.content as Map<String, dynamic>,
   );
 
-  final List<Offset> _points = [];
   int _selectedImage = -1;
   final Map<int, int> _selectedPairs = {};
 
@@ -29,65 +30,39 @@ class _LinkWordImageState extends State<LinkWordImage> {
       return;
     }
 
-    int? previousImageIndex;
-    _selectedPairs.forEach((key, value) {
-      if (value == wordIndex) {
-        previousImageIndex = key;
-      }
-    });
-
     setState(() {
-      if (previousImageIndex != null &&
-          previousImageIndex! >= 0 &&
-          previousImageIndex! < _points.length) {
-        _selectedPairs.remove(previousImageIndex);
-        _points[previousImageIndex!] = const Offset(-1, -1);
-      } else {}
+      final existingImageIndex = _selectedPairs.entries
+          .firstWhereOrNull((entry) => entry.value == wordIndex)
+          ?.key;
+
+      if (existingImageIndex != null) {
+        _selectedPairs.remove(existingImageIndex);
+      }
 
       _selectedPairs[_selectedImage] = wordIndex;
-
-      if (_selectedImage < _points.length) {
-        _points[_selectedImage] = _createOffset(_selectedImage, _selectedPairs);
-      } else {
-        _points.add(_createOffset(_selectedImage, _selectedPairs));
-      }
     });
   }
 
   Future<void> _handleTapImage(int imageIndex) async {
     setState(() {
-      if (_selectedImage == imageIndex) {
-        _selectedImage = -1;
-      } else {
-        _selectedImage = imageIndex;
-      }
+      _selectedImage = (_selectedImage == imageIndex) ? -1 : imageIndex;
     });
-  }
-
-  Offset _createOffset(int imageIndex, Map<int, int> selectedPairs) {
-    int wordIndex = selectedPairs[imageIndex] ?? -1;
-    print(wordIndex);
-    print(selectedPairs);
-    print(imageIndex);
-    if (wordIndex < 0) {
-      return const Offset(-1, -1);
-    }
-
-    return Offset(
-      MediaQuery.of(context).size.width * 0.3,
-      wordIndex * (MediaQuery.of(context).size.height * 0.17),
-    );
   }
 
   Future<void> checkAnswer() async {
     if (_selectedPairs.length != _linkWordImageModel.images!.length) {
+      // show error message scaffold
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Debes seleccionar todas las parejas'),
+        ),
+      );
       return;
     }
 
     var allPairsCorrect = true;
 
     _selectedPairs.forEach((imageIndex, wordIndex) {
-      // Compara el valor de la imagen y la palabra seleccionada
       if (_linkWordImageModel.images![imageIndex].value !=
           _linkWordImageModel.words[wordIndex].value) {
         allPairsCorrect = false;
@@ -95,9 +70,6 @@ class _LinkWordImageState extends State<LinkWordImage> {
     });
 
     widget.onCheckAnswer(allPairsCorrect);
-
-    // Opcional: resetear las selecciones después de la verificación
-    setState(_selectedPairs.clear);
   }
 
   @override
@@ -211,14 +183,14 @@ class _LinkWordImageState extends State<LinkWordImage> {
                                 width: 1,
                               ),
                             ),
-                            width: MediaQuery.sizeOf(context).width * 0.24,
+                            width: MediaQuery.sizeOf(context).width * 0.27,
                             height: MediaQuery.sizeOf(context).height * 0.13,
                             margin: const EdgeInsets.all(15),
                             child: Center(
                               child: Text(
                                 _linkWordImageModel.words[index].name!,
                                 textAlign: TextAlign.center,
-                                style: Theme.of(context).textTheme.bodyMedium,
+                                style: Theme.of(context).textTheme.bodySmall,
                               ),
                             ),
                           ),
@@ -254,7 +226,6 @@ class LinePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    // paint a curved line
     final paint = Paint()
       ..color = const Color(0xFFD29335)
       ..style = PaintingStyle.stroke
@@ -263,7 +234,6 @@ class LinePainter extends CustomPainter {
 
     selectedPairs.forEach((imageIndex, wordIndex) {
       if (wordIndex >= 0) {
-        // Calcula el 'Offset' para la imagen y la palabra
         double imageY = imageIndex * MediaQuery.of(context).size.height * 0.17;
         double wordY = wordIndex * MediaQuery.of(context).size.height * 0.17;
 
@@ -285,15 +255,5 @@ class LinePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
-  }
-
-  bool listsDiffer(List<Offset> a, List<Offset> b) {
-    if (a.length != b.length) return true;
-    for (var i = 0; i < a.length; i++) {
-      if (a[i] != b[i]) return true;
-    }
-    return false;
-  }
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }

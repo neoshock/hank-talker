@@ -18,7 +18,7 @@ class LevelItemWidget extends StatelessWidget {
             children: [
               CircleAvatar(
                 backgroundColor: Colors.grey[300],
-                child: FileInterceptorWidget(fileUrl: lesson.iconUrl),
+                backgroundImage: NetworkImage(lesson.iconUrl),
               ),
               const SizedBox(
                 width: 6,
@@ -43,6 +43,7 @@ class LevelItemWidget extends StatelessWidget {
           Expanded(
             child: Text(
               lesson.title,
+              maxLines: 3,
               style: Theme.of(context)
                   .textTheme
                   .bodyMedium!
@@ -56,7 +57,7 @@ class LevelItemWidget extends StatelessWidget {
             child: Text(
               lesson.description,
               style: Theme.of(context).textTheme.bodySmall,
-              maxLines: 2,
+              maxLines: 4,
               overflow: TextOverflow.ellipsis,
             ),
           ),
