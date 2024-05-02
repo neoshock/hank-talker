@@ -37,8 +37,7 @@ class ProfileCardHeader extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.3,
-
+                    width: MediaQuery.of(context).size.width * 0.36,
                     child: Text(
                       '${userProfileModel.firstName} ${userProfileModel.lastName}',
                       style: Theme.of(context).textTheme.displayMedium,

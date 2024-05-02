@@ -57,7 +57,7 @@ class LevelItemWidget extends StatelessWidget {
             child: Text(
               lesson.description,
               style: Theme.of(context).textTheme.bodySmall,
-              maxLines: 2,
+              maxLines: 4,
               overflow: TextOverflow.ellipsis,
             ),
           ),

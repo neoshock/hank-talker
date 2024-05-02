@@ -22,6 +22,12 @@ class _SelectCorrectWordState extends State<SelectCorrectWord> {
   Future<void> checkAnswer() async {
     // validate if current word is null
     if (currrentWord == null) {
+      // show error message scaffold
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Debes seleccionar una palabra'),
+        ),
+      );
       return;
     }
     widget.onCheckAnswer(currrentWord == widget.questionModel.answer);

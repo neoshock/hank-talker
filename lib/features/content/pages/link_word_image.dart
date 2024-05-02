@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hank_talker_mobile/features/content/models/lesson_model.dart';
+import 'package:hank_talker_mobile/utils/dialogs_events.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
 import 'package:collection/collection.dart';
 
@@ -50,6 +51,12 @@ class _LinkWordImageState extends State<LinkWordImage> {
 
   Future<void> checkAnswer() async {
     if (_selectedPairs.length != _linkWordImageModel.images!.length) {
+      // show error message scaffold
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Debes seleccionar todas las parejas'),
+        ),
+      );
       return;
     }
 
