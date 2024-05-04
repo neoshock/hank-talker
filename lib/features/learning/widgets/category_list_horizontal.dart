@@ -13,7 +13,7 @@ class CategoryListHorizontal extends StatelessWidget {
     return SizedBox(
       width: MediaQuery.sizeOf(context).width,
       // calculate the height of the listview based on the number of items
-      height: (120 * categories.length).toDouble(),
+      height: (150 * categories.length).toDouble(),
       child: ListView.builder(
         itemCount: categories.length,
         physics: const NeverScrollableScrollPhysics(),

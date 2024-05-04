@@ -1,3 +1,5 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,7 +47,14 @@ class _RegisterPasswordState extends State<RegisterPassword> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height: 15),
+                const Text(
+                  r'La contraseña debe tener al menos seis caracteres e incluir una combinación de números, letras mayúsculas, minúscula y al menos 2 caracteres especiales (!@#$&*~).',
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+                const SizedBox(height: 15),
                 CustomImputPassword(
                     passwordController,
                     TextInputType.visiblePassword,
@@ -55,8 +64,17 @@ class _RegisterPasswordState extends State<RegisterPassword> {
                       color: Colors.grey,
                     ),
                     'Contraseña', (value) {
-                  if (value == null || value == '') {
+                  if (value == null || value.isEmpty) {
                     return 'Contraseña es requerida';
+                  }
+                  if (value.length < 6) {
+                    return 'La contraseña debe tener al menos 6 caracteres';
+                  }
+                  const pattern =
+                      r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]?.*?[!@#\$&*~]?).{6,}$';
+                  final regExp = RegExp(pattern);
+                  if (!regExp.hasMatch(value)) {
+                    return r'Incluir números, letras y uno o dos caracteres especiales (!@#$&*~)';
                   }
                   return null;
                 }, () {

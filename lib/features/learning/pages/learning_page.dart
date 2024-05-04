@@ -71,7 +71,6 @@ class _LearningPageState extends State<LearningPage> {
                   Consumer<LearningProvider>(
                     builder: (context, learningProvider, child) {
                       final categories = learningProvider.categories;
-
                       if (categories.isEmpty) {
                         // Puedes considerar mostrar un indicador de carga o un mensaje
                         // si la lista está vacía porque aún está cargando los datos.

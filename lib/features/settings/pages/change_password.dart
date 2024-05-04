@@ -79,7 +79,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  r'La contraseña debe tener al menos seis caracteres e incluir una combinación de números, letras, mayúsculas y caracteres especiales (!@#$&*~), al menos 2 caracteres especiales.',
+                  r'La contraseña debe tener al menos seis caracteres e incluir una combinación de números, letras mayúsculas, minúscula y al menos 2 caracteres especiales (!@#$&*~).',
                   style: TextStyle(
                     fontSize: 16,
                   ),

@@ -6,6 +6,7 @@ import 'package:hank_talker_mobile/core/profile/providers/profile_provider.dart'
 import 'package:hank_talker_mobile/features/learning/providers/learning_provider.dart';
 import 'package:hank_talker_mobile/features/learning/widgets/status_info_container.dart';
 import 'package:hank_talker_mobile/features/learning/widgets/topic_tree_widget.dart';
+import 'package:hank_talker_mobile/widgets/bottom_bar.dart';
 import 'package:hank_talker_mobile/widgets/custom_appbar_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -71,10 +72,19 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                                   ),
                                 ),
                               ),
-                              CustomAppbarWidget(context,
-                                  title: categoryDetail!.title,
-                                  showBackButton: true,
-                                  hasShadow: true),
+                              CustomAppbarWidget(
+                                context,
+                                title: categoryDetail!.title,
+                                showBackButton: true,
+                                hasShadow: true,
+                                onBack: () {
+                                  Navigator.pushAndRemoveUntil(context,
+                                      // ignore: inference_failure_on_instance_creation
+                                      MaterialPageRoute(builder: (context) {
+                                    return BottomBar();
+                                  }), (route) => false);
+                                },
+                              ),
                             ],
                           ),
                         ),
@@ -102,6 +112,7 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                               Expanded(
                                 child: TopicTreeWidget(
                                   topics: categoryDetail.topics,
+                                  idCategory: widget.idCategory,
                                 ),
                               ),
                             ],

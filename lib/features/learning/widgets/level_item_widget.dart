@@ -4,7 +4,10 @@ import 'package:hank_talker_mobile/utils/file_type_interceptor.dart';
 
 class LevelItemWidget extends StatelessWidget {
   final Lesson lesson;
-  const LevelItemWidget({Key? key, required this.lesson}) : super(key: key);
+  final int idCategory;
+  const LevelItemWidget(
+      {Key? key, required this.lesson, required this.idCategory})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

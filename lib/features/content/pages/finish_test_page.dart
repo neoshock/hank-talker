@@ -1,7 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:hank_talker_mobile/core/profile/providers/profile_provider.dart';
-import 'package:hank_talker_mobile/widgets/bottom_bar.dart';
+import 'package:hank_talker_mobile/features/learning/pages/category_detail_page.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -9,9 +9,13 @@ import 'package:provider/provider.dart';
 class FinishTestPage extends StatefulWidget {
   final int totalExp;
   final int lessonId;
+  final int idCategory;
 
   const FinishTestPage(
-      {Key? key, required this.totalExp, required this.lessonId})
+      {Key? key,
+      required this.totalExp,
+      required this.lessonId,
+      required this.idCategory})
       : super(key: key);
 
   @override
@@ -61,10 +65,12 @@ class _FinishTestPageState extends State<FinishTestPage> {
                     width: MediaQuery.of(context).size.width,
                     child: CusttomButtonRounded(context, () {
                       Navigator.pushAndRemoveUntil(context,
+                          // ignore: inference_failure_on_instance_creation
                           MaterialPageRoute(builder: (context) {
-                        return const BottomBar();
+                        return CategoryDetailPage(
+                            idCategory: widget.idCategory);
                       }), (route) => false);
-                    }, 'Volver al menú'))
+                    }, 'Continuar'))
               ],
             )));
   }

@@ -9,6 +9,7 @@ PreferredSizeWidget CustomAppbarWidget(
   Color? textColor = Colors.black,
   List<Widget>? actions,
   bool hasShadow = false,
+  Function()? onBack,
 }) {
   return AppBar(
     toolbarHeight: 90,
@@ -46,7 +47,10 @@ PreferredSizeWidget CustomAppbarWidget(
             margin: const EdgeInsets.only(left: 15),
             padding: const EdgeInsets.symmetric(vertical: 21),
             child: CustomBackButton(context, () {
-              Navigator.pop(context);
+              if (onBack != null) {
+                onBack();
+              } else
+                Navigator.pop(context);
             }),
           )
         : null,

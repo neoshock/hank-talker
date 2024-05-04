@@ -109,6 +109,15 @@ class _PrivacyPageState extends State<PrivacyPage> {
                         if (value!.isEmpty) {
                           return 'El nombre no puede estar vacío';
                         }
+                        if (value.length < 3) {
+                          return 'El nombre debe tener al menos 3 caracteres';
+                        }
+                        if (value.length > 50) {
+                          return 'El nombre no puede tener más de 50 caracteres';
+                        }
+                        if (!RegExp(r'^[a-zA-Z ]+$').hasMatch(value)) {
+                          return 'Nombres no válidos';
+                        }
                         return null;
                       }, false),
                       const SizedBox(height: 15),
@@ -120,9 +129,20 @@ class _PrivacyPageState extends State<PrivacyPage> {
                           const Icon(
                             PhosphorIcons.user_circle_bold,
                             color: Colors.grey,
-                          ),
-                          (value) {},
-                          false),
+                          ), (value) {
+                        if (value!.isEmpty) {
+                          return 'El apellido no puede estar vacío';
+                        }
+                        if (value.length < 3) {
+                          return 'El apellido debe tener al menos 3 caracteres';
+                        }
+                        if (value.length > 50) {
+                          return 'El apellido no puede tener más de 50 caracteres';
+                        }
+                        if (!RegExp(r'^[a-zA-Z ]+$').hasMatch(value)) {
+                          return 'Apellidos no válidos';
+                        }
+                      }, false),
                       const SizedBox(height: 15),
                       CustomTextImputWithLabel(
                           'Correo electrónico',
