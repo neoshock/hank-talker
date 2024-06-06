@@ -49,10 +49,10 @@ class App extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: CustomThemeData.lightTheme,
             home: Scaffold(
-              backgroundColor: const Color(0xFF4FA53A),
+              backgroundColor: const Color(0xFFF1F5F9),
               body: Center(
                   child: Image.asset(
-                'assets/images/logo_splash.png',
+                'assets/images/logo-fe-alegria.png',
                 width: 300,
               )),
             ),

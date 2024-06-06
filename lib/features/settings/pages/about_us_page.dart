@@ -151,14 +151,9 @@ class AboutUsPage extends StatelessWidget {
               'Con la colaboración de:',
               style: Theme.of(context).textTheme.displayMedium,
             ),
-            const SizedBox(height: 20),
-            Text(
-              'Rosa Andrade (Directora Desarrollo Social GADM Quevedo)',
-              style: Theme.of(context).textTheme.bodySmall,
-            ),
             const SizedBox(height: 10),
             Text(
-              'Sergio Yépez (Colaborador Desarrollo Social GADM Quevedo)',
+              'Mgtr. Florencio José Pico Anchundia. (RECTOR DE LA UNIDAD EDUCATIVA ESPECIALIZADA FE Y ALEGRÍA)',
               style: Theme.of(context).textTheme.bodySmall,
             ),
             const SizedBox(height: 30),

@@ -31,17 +31,21 @@ class WelcomePage extends StatelessWidget {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image.asset(
                   'assets/images/splash_screen-removebg-preview.png',
-                  width: 180,
+                  width: 150,
                 ),
                 const SizedBox(
-                  width: 30,
+                  width: 15,
                 ),
                 Image.asset(
-                  'assets/images/image-4.png',
-                  width: 150,
+                  'assets/images/logo-fe-alegria.png',
+                  width: 210,
+                ),
+                const SizedBox(
+                  width: 6,
                 ),
               ],
             ),
