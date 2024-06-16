@@ -7,12 +7,14 @@ import 'package:hank_talker_mobile/features/content/provider/content_provider.da
 import 'package:hank_talker_mobile/features/learning/models/cateogry_detail_model.dart';
 import 'package:hank_talker_mobile/features/learning/widgets/level_item_widget.dart';
 import 'package:hank_talker_mobile/utils/dialogs_events.dart';
-import 'package:hank_talker_mobile/utils/file_type_interceptor.dart';
 import 'package:provider/provider.dart';
 
 class TopicTreeWidget extends StatefulWidget {
   final List<Topic> topics;
-  const TopicTreeWidget({Key? key, required this.topics}) : super(key: key);
+  final int idCategory;
+  const TopicTreeWidget(
+      {Key? key, required this.topics, required this.idCategory})
+      : super(key: key);
 
   @override
   _TopicTreeWidgetState createState() => _TopicTreeWidgetState();
@@ -21,7 +23,7 @@ class TopicTreeWidget extends StatefulWidget {
 class _TopicTreeWidgetState extends State<TopicTreeWidget> {
   final _totalExpanded = ValueNotifier<int>(0);
 
-  Future<void> _openTestContentPage(Lesson lesson) async {
+  Future<void> _openTestContentPage(Lesson lesson, int idCategory) async {
     final totalLive = Provider.of<ProfileProvider>(context, listen: false)
         .userProfileModel
         .statistic
@@ -46,6 +48,7 @@ class _TopicTreeWidgetState extends State<TopicTreeWidget> {
       MaterialPageRoute(
         builder: (context) => TestContentPage(
           lessonId: lesson.id,
+          idCategory: idCategory,
         ),
       ),
     );
@@ -138,9 +141,12 @@ class _TopicTreeWidgetState extends State<TopicTreeWidget> {
                                 ),
                                 child: InkWell(
                                   onTap: () async {
-                                    await _openTestContentPage(lesson);
+                                    await _openTestContentPage(
+                                        lesson, widget.idCategory);
                                   },
-                                  child: LevelItemWidget(lesson: lesson),
+                                  child: LevelItemWidget(
+                                      lesson: lesson,
+                                      idCategory: widget.idCategory),
                                 ),
                               );
                             },

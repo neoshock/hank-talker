@@ -102,25 +102,25 @@ class ProfileCardHeader extends StatelessWidget {
                   )
                 ],
               ),
-              Container(
-                height: 40,
-                width: 1,
-                color:
-                    Theme.of(context).colorScheme.onSecondary.withOpacity(0.25),
-              ),
-              Column(
-                children: [
-                  Text(
-                    '${userProfileModel.statistic.emeralds}',
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                  const SizedBox(height: 6),
-                  Text(
-                    'Esmeraldas',
-                    style: Theme.of(context).textTheme.bodySmall,
-                  )
-                ],
-              ),
+              // Container(
+              //   height: 40,
+              //   width: 1,
+              //   color:
+              //       Theme.of(context).colorScheme.onSecondary.withOpacity(0.25),
+              // ),
+              // Column(
+              //   children: [
+              //     Text(
+              //       '${userProfileModel.statistic.emeralds}',
+              //       style: Theme.of(context).textTheme.bodyLarge,
+              //     ),
+              //     const SizedBox(height: 6),
+              //     Text(
+              //       'Esmeraldas',
+              //       style: Theme.of(context).textTheme.bodySmall,
+              //     )
+              //   ],
+              // ),
             ],
           ),
         ],

@@ -69,6 +69,16 @@ class _RegisterNaneState extends State<RegisterNane> {
                       if (value == null || value.isEmpty) {
                         return 'Nombres requeridos';
                       }
+                      // validate if the name is valid and not use characters special
+                      if (!RegExp(r'^[a-zA-Z ]+$').hasMatch(value)) {
+                        return 'Nombres no válidos';
+                      }
+                      if (value.length < 3) {
+                        return 'El nombre debe tener al menos 3 caracteres';
+                      }
+                      if (value.length > 50) {
+                        return 'El nombre no puede tener más de 50 caracteres';
+                      }
                       return null;
                     }, false),
                     const SizedBox(height: 20),
@@ -83,6 +93,16 @@ class _RegisterNaneState extends State<RegisterNane> {
                         ), (value) {
                       if (value == null || value.isEmpty) {
                         return 'Apellidos requeridos';
+                      }
+                      // validate if the last name is valid and not use characters special
+                      if (!RegExp(r'^[a-zA-Z ]+$').hasMatch(value)) {
+                        return 'Apellidos no válidos';
+                      }
+                      if (value.length < 3) {
+                        return 'El apellido debe tener al menos 3 caracteres';
+                      }
+                      if (value.length > 50) {
+                        return 'El apellido no puede tener más de 50 caracteres';
                       }
                       return null;
                     }, false),

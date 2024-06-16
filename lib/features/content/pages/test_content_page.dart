@@ -19,7 +19,10 @@ import 'package:provider/provider.dart';
 
 class TestContentPage extends StatefulWidget {
   final int lessonId;
-  const TestContentPage({Key? key, required this.lessonId}) : super(key: key);
+  final int idCategory;
+  const TestContentPage(
+      {Key? key, required this.lessonId, required this.idCategory})
+      : super(key: key);
 
   @override
   _TestContentPageState createState() => _TestContentPageState();
@@ -86,6 +89,7 @@ class _TestContentPageState extends State<TestContentPage> {
       return FinishTestPage(
         lessonId: widget.lessonId,
         totalExp: totalExp,
+        idCategory: widget.idCategory,
       );
     }
     switch (type) {
@@ -168,7 +172,7 @@ class _TestContentPageState extends State<TestContentPage> {
                   return const FailedPage(
                     title: '¡Atención!',
                     description:
-                        'No tienes más vidas disponibles, espera a que se recarguen',
+                        'No tienes más vidas disponibles, espera 3 horas hasta que tus vidas estén listas para ser utilizadas nuevamente',
                   );
                 }
 
