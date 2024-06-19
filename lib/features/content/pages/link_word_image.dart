@@ -3,6 +3,7 @@ import 'package:hank_talker_mobile/features/content/models/lesson_model.dart';
 import 'package:hank_talker_mobile/utils/dialogs_events.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
 import 'package:collection/collection.dart';
+import 'package:hank_talker_mobile/widgets/video_player_widget.dart';
 
 class LinkWordImage extends StatefulWidget {
   const LinkWordImage({
@@ -118,12 +119,6 @@ class _LinkWordImageState extends State<LinkWordImage> {
                             margin: const EdgeInsets.all(15),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                  _linkWordImageModel.images![index].valueUrl,
-                                ),
-                                fit: BoxFit.contain,
-                              ),
                               border: _selectedImage == index
                                   ? Border.all(
                                       color: Theme.of(context).primaryColor,
@@ -137,6 +132,9 @@ class _LinkWordImageState extends State<LinkWordImage> {
                                   offset: const Offset(0, 3),
                                 ),
                               ],
+                            ),
+                            child: VideoPlayerWidget(
+                              url: _linkWordImageModel.images![index].valueUrl,
                             ),
                           ),
                         ),

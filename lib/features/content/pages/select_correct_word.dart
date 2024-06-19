@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hank_talker_mobile/features/content/models/lesson_model.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
+import 'package:hank_talker_mobile/widgets/video_player_widget.dart';
 
 class SelectCorrectWord extends StatefulWidget {
   const SelectCorrectWord({
@@ -59,19 +60,19 @@ class _SelectCorrectWordState extends State<SelectCorrectWord> {
           Container(
             height: 200,
             width: 200,
+            padding: const EdgeInsets.all(3),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
               color: Theme.of(context).colorScheme.background,
-              image: DecorationImage(
-                image: NetworkImage(content.valueUrl!),
-                fit: BoxFit.cover,
-              ),
               boxShadow: [
                 BoxShadow(
                   color: Theme.of(context).colorScheme.shadow.withOpacity(0.25),
                   blurRadius: 6,
                 ),
               ],
+            ),
+            child: VideoPlayerWidget(
+              url: content.valueUrl!,
             ),
           ),
           const SizedBox(

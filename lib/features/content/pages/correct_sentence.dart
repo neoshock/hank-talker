@@ -5,6 +5,7 @@ import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:hank_talker_mobile/features/content/models/lesson_model.dart';
 import 'package:hank_talker_mobile/utils/file_type_interceptor.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
+import 'package:hank_talker_mobile/widgets/video_player_widget.dart';
 
 class CorrectSentence extends StatefulWidget {
   final ValueSetter<bool> onCheckAnswer;
@@ -105,7 +106,7 @@ class _CorrectSentenceState extends State<CorrectSentence> {
           Container(
             width: MediaQuery.sizeOf(context).width,
             height: 150,
-            padding: const EdgeInsets.all(15),
+            padding: const EdgeInsets.all(3),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
               color: Theme.of(context).colorScheme.background,
@@ -116,8 +117,8 @@ class _CorrectSentenceState extends State<CorrectSentence> {
                 ),
               ],
             ),
-            child: FileInterceptorWidget(
-              fileUrl: widget.questionModel.content['valueUrl'].toString(),
+            child: VideoPlayerWidget(
+              url: widget.questionModel.content['valueUrl'].toString(),
             ),
           ),
           const SizedBox(

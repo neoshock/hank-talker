@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hank_talker_mobile/features/content/models/lesson_model.dart';
 import 'package:hank_talker_mobile/utils/file_type_interceptor.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
+import 'package:hank_talker_mobile/widgets/video_player_widget.dart';
 
 class SelectCorrectImage extends StatefulWidget {
   const SelectCorrectImage({
@@ -79,6 +80,7 @@ class _SelectCorrectImageState extends State<SelectCorrectImage> {
                 crossAxisCount: 2,
               ),
               itemBuilder: (context, index) {
+                print(contents[index].valueUrl);
                 return InkWell(
                   onTap: () {
                     setState(() {
@@ -88,7 +90,7 @@ class _SelectCorrectImageState extends State<SelectCorrectImage> {
                   borderRadius: BorderRadius.circular(15),
                   child: Container(
                     margin: const EdgeInsets.all(15),
-                    padding: const EdgeInsets.all(15),
+                    padding: const EdgeInsets.all(3),
                     decoration: BoxDecoration(
                       boxShadow: [
                         BoxShadow(
@@ -104,8 +106,8 @@ class _SelectCorrectImageState extends State<SelectCorrectImage> {
                           : Theme.of(context).colorScheme.surface,
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    child: FileInterceptorWidget(
-                      fileUrl: contents[index].valueUrl,
+                    child: VideoPlayerWidget(
+                      url: contents[index].valueUrl,
                     ),
                   ),
                 );
