@@ -46,6 +46,25 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
+  Future<void> autoLogin() async {
+    final authProvider = context.read<AuthProvider>();
+    final response = await authProvider.autoLogin();
+    if (response.code == 200) {
+      await Navigator.pushAndRemoveUntil(
+        context,
+        // ignore: inference_failure_on_instance_creation
+        MaterialPageRoute(builder: (context) => const BottomBar()),
+        (Route<dynamic> route) => false,
+      );
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    autoLogin();
+  }
+
   // validateEmail
 
   @override

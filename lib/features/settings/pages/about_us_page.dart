@@ -185,6 +185,10 @@ class AboutUsPage extends StatelessWidget {
               'www.uteq.edu.ec',
               style: Theme.of(context).textTheme.bodySmall,
             ),
+            const SizedBox(height: 15),
+            // add ©️ 2024 hand talker
+            Text('© 2024 Hand Talker',
+                style: Theme.of(context).textTheme.bodySmall),
           ],
         ),
       ),

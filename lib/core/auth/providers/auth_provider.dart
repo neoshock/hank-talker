@@ -44,6 +44,9 @@ class AuthProvider with ChangeNotifier {
     if (respose.code == 200) {
       _isAuth = true;
       await Preferences().setPreferences('token', respose.data['token']);
+      // set the email and password in the preferences
+      await Preferences().setPreferences('email', email);
+      await Preferences().setPreferences('password', password);
     } else {
       _isAuth = false;
     }
@@ -81,6 +84,8 @@ class AuthProvider with ChangeNotifier {
       newPassword,
     );
     if (response.code == 200) {
+      // set the password in the preferences
+      await Preferences().setPreferences('password', newPassword);
       notifyListeners();
     }
     return response;
@@ -93,5 +98,16 @@ class AuthProvider with ChangeNotifier {
       notifyListeners();
     }
     return response;
+  }
+
+  Future<HttpBaseResponse> autoLogin() async {
+    // get the email and password from the preferences
+    final email = await Preferences().getPreferences('email');
+    final password = await Preferences().getPreferences('password');
+    if (email != null && password != null) {
+      return await login(email as String, password as String);
+    }
+    return HttpBaseResponse(
+        code: 400, message: 'No hay credenciales', data: {}, detail: {});
   }
 }

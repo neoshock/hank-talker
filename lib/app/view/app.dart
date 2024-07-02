@@ -8,6 +8,7 @@ import 'package:hank_talker_mobile/core/profile/providers/profile_provider.dart'
 import 'package:hank_talker_mobile/core/register/providers/regi_provider.dart';
 import 'package:hank_talker_mobile/features/content/provider/content_provider.dart';
 import 'package:hank_talker_mobile/features/learning/providers/learning_provider.dart';
+import 'package:hank_talker_mobile/features/login/pages/login_page.dart';
 import 'package:hank_talker_mobile/features/welcome/pages/welcome_page.dart';
 import 'package:hank_talker_mobile/widgets/bottom_bar.dart';
 import 'package:provider/provider.dart';
@@ -21,6 +22,7 @@ class App extends StatelessWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+
     return FutureBuilder(
       future: Future.delayed(const Duration(seconds: 3)), // Espera 1 segundo
       builder: (context, snapshot) {
@@ -38,7 +40,7 @@ class App extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 theme: CustomThemeData.lightTheme,
                 home: Provider.of<AuthProvider>(context).isAuth
-                    ? const BottomBar()
+                    ? const LoginPage()
                     : const WelcomePage(),
               );
             },
