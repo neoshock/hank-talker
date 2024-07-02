@@ -59,6 +59,8 @@ class AuthProvider with ChangeNotifier {
     _isAuth = false;
     await Preferences().erasedPreferences('token');
     await Preferences().erasedPreferences('region');
+    await Preferences().erasedPreferences('email');
+    await Preferences().erasedPreferences('password');
     notifyListeners();
     return true;
   }
