@@ -27,7 +27,10 @@ class RegiService {
     } catch (e) {
       print(e);
       return HttpBaseResponse(
-          code: 500, data: null, message: 'Error al registrar', detail: null);
+          code: 500,
+          data: null,
+          message: 'Error al registrar, $e',
+          detail: null);
     }
   }
 }
