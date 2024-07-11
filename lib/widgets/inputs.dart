@@ -29,7 +29,7 @@ Widget CustomTextImputWithLabel(
                 borderRadius: BorderRadius.circular(20)),
             errorStyle: Theme.of(context)
                 .textTheme
-                .bodySmall!
+                .bodyMedium!
                 .copyWith(color: Theme.of(context).colorScheme.error),
             fillColor: Theme.of(context).colorScheme.onPrimary,
             hintText: label,
@@ -64,7 +64,7 @@ Widget CustomTextImputWithOutLabel(
             borderSide: BorderSide(color: Theme.of(context).colorScheme.error)),
         errorStyle: Theme.of(context)
             .textTheme
-            .bodySmall!
+            .bodyMedium!
             .copyWith(color: Theme.of(context).colorScheme.error),
         fillColor: Theme.of(context).colorScheme.onPrimary,
         hintText: hintText,
@@ -143,7 +143,7 @@ Widget CustomImputPassword(
                 borderRadius: BorderRadius.circular(20)),
             errorStyle: Theme.of(context)
                 .textTheme
-                .bodySmall!
+                .bodyMedium!
                 .copyWith(color: Theme.of(context).colorScheme.error),
             fillColor: Theme.of(context).colorScheme.surface,
             hintText: hintText,

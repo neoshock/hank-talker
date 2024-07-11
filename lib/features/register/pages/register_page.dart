@@ -37,7 +37,7 @@ class RegisterPage extends StatelessWidget {
               ),
               const Center(
                 child: Text(
-                  'Create un nuevo',
+                  'Créate un nuevo',
                   style: TextStyle(fontSize: 32),
                 ),
               ),
@@ -63,7 +63,7 @@ class RegisterPage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 // ignore: lines_longer_than_80_chars, lines_longer_than_80_chars
                 child: const Text(
-                  '¡Crea un perfil para guardar tu progreso de aprendizaje y sigue aprendiendo gratis!',
+                  'Crea un perfil para guardar tu progreso de aprendizaje y sigue aprendiendo gratis.',
                   style: TextStyle(fontSize: 18),
                 ),
               ),

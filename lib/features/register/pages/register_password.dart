@@ -26,78 +26,12 @@ class _RegisterPasswordState extends State<RegisterPassword> {
   final passwordController = TextEditingController(text: '');
   final RegiProvider regiProvider = RegiProvider();
   bool showPassword = false;
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: CustomAppbarWidget(context, showBackButton: true),
-        body: SafeArea(
-            child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(18.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Center(
-                  child: Text(
-                    'Configura tu contraseña',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 15),
-                const Text(
-                  r'La contraseña debe tener al menos seis caracteres e incluir una combinación de números, letras mayúsculas, minúscula y al menos 2 caracteres especiales (!@#$&*~).',
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
-                ),
-                const SizedBox(height: 15),
-                CustomImputPassword(
-                    passwordController,
-                    TextInputType.visiblePassword,
-                    context,
-                    const Icon(
-                      PhosphorIcons.lock,
-                      color: Colors.grey,
-                    ),
-                    'Contraseña', (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Contraseña es requerida';
-                  }
-                  if (value.length < 6) {
-                    return 'La contraseña debe tener al menos 6 caracteres';
-                  }
-                  const pattern =
-                      r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]?.*?[!@#\$&*~]?).{6,}$';
-                  final regExp = RegExp(pattern);
-                  if (!regExp.hasMatch(value)) {
-                    return r'Incluir números, letras y uno o dos caracteres especiales (!@#$&*~)';
-                  }
-                  return null;
-                }, () {
-                  setState(() {
-                    showPassword = !showPassword;
-                  });
-                }, false, showPassword),
-                const SizedBox(height: 40),
-                SizedBox(
-                  width: MediaQuery.sizeOf(context).width,
-                  child: CusttomButtonRounded(
-                    context,
-                    intoPassword,
-                    'Comenzar',
-                  ),
-                )
-              ],
-            ),
-          ),
-        )));
-  }
-
-  Future<void> intoPassword() async {
+  Future<void> registerUser() async {
+    if (!formKey.currentState!.validate()) {
+      return;
+    }
     final result =
         await context.read<RegiProvider>().register(passwordController.text);
     if (result.code == 200) {
@@ -112,7 +46,79 @@ class _RegisterPasswordState extends State<RegisterPassword> {
       );
     } else {
       // ignore: use_build_context_synchronously
-      await showErrorDialog('Error', result.message, context);
+      await showErrorDialog('Atención', result.message, context);
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: CustomAppbarWidget(context, showBackButton: true),
+        body: SafeArea(
+            child: SingleChildScrollView(
+          child: Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: Form(
+                key: formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Center(
+                      child: Text(
+                        'Configura tu contraseña',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 15),
+                    const Text(
+                      r'La contraseña debe tener al menos seis caracteres e incluir una combinación de números, letras mayúsculas, minúscula y al menos 2 caracteres especiales (!@#$&*~).',
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                    const SizedBox(height: 15),
+                    CustomImputPassword(
+                        passwordController,
+                        TextInputType.visiblePassword,
+                        context,
+                        const Icon(
+                          PhosphorIcons.lock,
+                          color: Colors.grey,
+                        ),
+                        'Contraseña', (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Contraseña es requerida';
+                      }
+                      if (value.length < 6) {
+                        return 'La contraseña debe tener al menos 6 caracteres';
+                      }
+                      const pattern =
+                          r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]?.*?[!@#\$&*~]?).{6,}$';
+                      final regExp = RegExp(pattern);
+                      if (!regExp.hasMatch(value)) {
+                        return r'Incluir números, letras y uno o dos caracteres especiales (!@#$&*~)';
+                      }
+                      return null;
+                    }, () {
+                      setState(() {
+                        showPassword = !showPassword;
+                      });
+                    }, false, showPassword),
+                    const SizedBox(height: 40),
+                    SizedBox(
+                      width: MediaQuery.sizeOf(context).width,
+                      child: CusttomButtonRounded(
+                        context,
+                        registerUser,
+                        'Comenzar',
+                      ),
+                    )
+                  ],
+                ),
+              )),
+        )));
   }
 }

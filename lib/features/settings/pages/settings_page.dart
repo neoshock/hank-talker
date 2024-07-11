@@ -81,19 +81,21 @@ class _SettingsPageState extends State<SettingsPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const TermsPage(),
+                            builder: (context) => const PrivacyPolicyPage(),
                           ),
                         );
                       }),
                   const SizedBox(height: 15),
-                  CustomSettingsListTile(title: 'Acerca de', onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const AboutUsPage(),
-                      ),
-                    );
-                  }),
+                  CustomSettingsListTile(
+                      title: 'Acerca de',
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AboutUsPage(),
+                          ),
+                        );
+                      }),
                 ]),
               ],
             ),

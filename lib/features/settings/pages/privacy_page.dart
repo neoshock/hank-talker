@@ -80,7 +80,7 @@ class _PrivacyPageState extends State<PrivacyPage> {
                       bottom: 15,
                       child: CustomAvatarEdit(
                         url:
-                            'https://cdn.pixabay.com/photo/2014/04/03/00/33/hand-308667_640.png',
+                            'https://static.vecteezy.com/system/resources/previews/019/896/008/original/male-user-avatar-icon-in-flat-design-style-person-signs-illustration-png.png',
                       )),
                   Positioned(
                     bottom: 0,

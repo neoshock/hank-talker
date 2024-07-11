@@ -29,7 +29,7 @@ class RegiService {
       return HttpBaseResponse(
           code: 500,
           data: null,
-          message: 'Error al registrar, $e',
+          message: 'Hubo un error al registrar el usuario',
           detail: null);
     }
   }

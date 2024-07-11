@@ -16,12 +16,12 @@ class AboutUsPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Acerca de hand talker',
+              'Acerca de Hand Talker',
               style: Theme.of(context).textTheme.displayLarge,
             ),
             const SizedBox(height: 10),
             Text(
-              'Hand talker es una aplicación móvil que permite a los usuarios aprender la lengua de señas de una manera fácil y divertida. La aplicación está dirigida a personas con discapacidad auditiva y a personas que desean aprender la lengua de señas.',
+              'Hand Talker es una aplicación móvil que permite a los usuarios aprender la lengua de señas de una manera fácil y divertida. La aplicación está dirigida a personas con discapacidad auditiva y a personas que desean aprender la lengua de señas.',
               textAlign: TextAlign.justify,
               style: Theme.of(context).textTheme.bodyMedium,
             ),
@@ -133,13 +133,19 @@ class AboutUsPage extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              'Leonardo Matute (Director de Vinculación)',
+              'Marlene Medina (Director de Vinculación)',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             const SizedBox(height: 10),
             Text(
               'Patricio Alcócer (Decano)',
               style: Theme.of(context).textTheme.bodyMedium,
+            ),
+            const SizedBox(height: 10),
+            Text(
+              'Emilio Zhuma (Coordinador de la carrera de Ingeniería en Software)',
+              style: Theme.of(context).textTheme.bodyMedium,
+              textAlign: TextAlign.center,
             ),
             const SizedBox(height: 10),
             Text(
@@ -153,12 +159,12 @@ class AboutUsPage extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              'Mgtr. Florencio José Pico Anchundia. (RECTOR DE LA UNIDAD EDUCATIVA ESPECIALIZADA FE Y ALEGRÍA)',
-              style: Theme.of(context).textTheme.bodySmall,
+              'Mgtr. Florencio José Pico Anchundia. (Rector de la Unidad Educativa Especializada Fe y Alegría)',
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
             const SizedBox(height: 30),
             Text(
-              '© 2023 Universidad Técnica Estatal de Quevedo',
+              '© 2024 Universidad Técnica Estatal de Quevedo',
               style: Theme.of(context).textTheme.bodySmall,
             ),
             Text(
