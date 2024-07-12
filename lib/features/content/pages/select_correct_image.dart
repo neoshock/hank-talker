@@ -41,6 +41,7 @@ class _SelectCorrectImageState extends State<SelectCorrectImage> {
   @override
   void initState() {
     super.initState();
+    print(widget.questionModel.toJson());
     for (var i = 0; i < contentResponse.length; i++) {
       contents.add(
         ContentElement.fromJson(contentResponse[i] as Map<String, dynamic>),

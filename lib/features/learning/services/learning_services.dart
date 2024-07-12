@@ -43,4 +43,31 @@ class LearningService {
           detail: null);
     }
   }
+
+  //{{LOCAL_URL_BACK}}/api/file/mobile_backgrounds
+  Future<HttpBaseResponse> getBackgrounds() async {
+    try {
+      final response = await _apiInterceptor.get('/file/mobile_backgrounds');
+      final decodedData = json.decode(response.body);
+      if (response.statusCode == 200) {
+        return HttpBaseResponse(
+            code: 200,
+            data: decodedData,
+            message: 'Fondos obtenidos correctamente',
+            detail: null);
+      }
+      return HttpBaseResponse(
+          code: 400,
+          data: null,
+          message: 'Hubo un problema al obtener las categorias',
+          detail: null);
+    } catch (e) {
+      print(e);
+      return HttpBaseResponse(
+          code: 500,
+          data: null,
+          message: 'Hubo un problema al obtener las categorias',
+          detail: null);
+    }
+  }
 }

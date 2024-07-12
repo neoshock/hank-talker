@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:hank_talker_mobile/core/profile/providers/profile_provider.dart';
 import 'package:hank_talker_mobile/features/learning/models/category_model.dart';
 import 'package:hank_talker_mobile/features/learning/models/cateogry_detail_model.dart';
+import 'package:hank_talker_mobile/features/learning/models/image_file_model.dart';
 import 'package:hank_talker_mobile/features/learning/services/learning_services.dart';
 import 'package:hank_talker_mobile/utils/custom_methods.dart';
 import 'package:provider/provider.dart';
@@ -100,5 +101,19 @@ class LearningProvider with ChangeNotifier {
       iconUrl: '',
       topics: [],
     );
+  }
+
+  Future<ImageFile> getBackground() async {
+    final response = await _learningService.getBackgrounds();
+    if (response.code == 200) {
+      final list = response.data as List;
+      final images = List.generate(list.length, (index) {
+        return ImageFile.fromJson(list[index] as Map<String, dynamic>);
+      });
+      // random order
+      images.shuffle();
+      return images.first;
+    }
+    return ImageFile(id: 0, urlFile: '', name: '');
   }
 }

@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:hank_talker_mobile/config/conts.dart';
 import 'package:hank_talker_mobile/core/profile/providers/profile_provider.dart';
+import 'package:hank_talker_mobile/features/learning/models/image_file_model.dart';
 import 'package:hank_talker_mobile/features/learning/providers/learning_provider.dart';
 import 'package:hank_talker_mobile/features/learning/widgets/status_info_container.dart';
 import 'package:hank_talker_mobile/features/learning/widgets/topic_tree_widget.dart';
@@ -21,7 +22,22 @@ class CategoryDetailPage extends StatefulWidget {
 
 class _CategoryDetailPageState extends State<CategoryDetailPage> {
   final ValueNotifier<bool> _expandInfoContainer = ValueNotifier<bool>(false);
-  final backgrounds = Random().nextInt(imagesBackgrounds.length);
+  late ImageFile imagesBackgroundsNet = ImageFile(
+      urlFile:
+          'https://lh6.googleusercontent.com/proxy/imGKCfEyRg4d7inM91hzqXudmvIYyo2xNdJgadP7dFJlFxzcnsQtd8O6CUA0rJfQWwv1e-vCVty0Ofx6bBgMowBVXNM5716Lcr0jLqmLsGttgEA',
+      id: 0,
+      name: '');
+
+  Future<void> getImagesBackgroundFromNet() async {
+    imagesBackgroundsNet =
+        await context.read<LearningProvider>().getBackground();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getImagesBackgroundFromNet();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,10 +82,9 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                                   color:
                                       Theme.of(context).colorScheme.secondary,
                                   image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: AssetImage(
-                                        imagesBackgrounds[backgrounds]),
-                                  ),
+                                      fit: BoxFit.cover,
+                                      image: NetworkImage(
+                                          imagesBackgroundsNet.urlFile)),
                                 ),
                               ),
                               CustomAppbarWidget(
