@@ -74,7 +74,7 @@ class _RegisterEmailState extends State<RegisterEmail> {
                           return 'Correo electrónico es requerido';
                         }
                         final String emailPattern =
-                            r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+';
+                            r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
                         final RegExp regex = RegExp(emailPattern);
                         if (!regex.hasMatch(value!)) {
                           return 'Ingrese un correo electrónico válido';
