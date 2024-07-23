@@ -159,7 +159,7 @@ class AboutUsPage extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              'Mgtr. Florencio José Pico Anchundia. (Rector de la Unidad Educativa Especializada Fe y Alegría)',
+              'Florencio José Pico Anchundia (Rector de la Unidad Educativa Especializada Fe y Alegría)',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             const SizedBox(height: 30),
