@@ -71,11 +71,12 @@ class _RecoveryPasswordPageState extends State<RecoveryPasswordPage> {
                       ),
                       (value) {
                         if (value == null || value == '') {
+                          print("Validating email");
                           return 'Correo electrónico es requerido';
                         }
-                        String emailPattern =
-                            r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+';
-                        RegExp regex = RegExp(emailPattern);
+                        final String emailPattern =
+                            r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
+                        final RegExp regex = RegExp(emailPattern);
                         if (!regex.hasMatch(value!)) {
                           return 'Ingrese un correo electrónico válido';
                         }
