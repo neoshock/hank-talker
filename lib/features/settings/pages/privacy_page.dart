@@ -28,6 +28,7 @@ class _PrivacyPageState extends State<PrivacyPage> {
 
   Future<void> updateUser() async {
     if (formKey.currentState!.validate()) {
+      showLoadingDialog(context);
       final updateResponse =
           await context.read<ProfileProvider>().updateProfile(
                 textControllers['name']!.text,
@@ -35,9 +36,11 @@ class _PrivacyPageState extends State<PrivacyPage> {
                 '12/12/2000',
               );
       if (updateResponse.code == 200) {
+        Navigator.of(context).pop();
         // ignore: use_build_context_synchronously
         await showSuccessDialog('Éxito', updateResponse.message, context);
       } else {
+        Navigator.of(context).pop();
         // ignore: use_build_context_synchronously
         await showErrorDialog(
             'Hubo un problema', updateResponse.message, context);
