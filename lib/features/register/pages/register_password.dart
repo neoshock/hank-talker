@@ -32,9 +32,11 @@ class _RegisterPasswordState extends State<RegisterPassword> {
     if (!formKey.currentState!.validate()) {
       return;
     }
+    showLoadingDialog(context);
     final result =
         await context.read<RegiProvider>().register(passwordController.text);
     if (result.code == 200) {
+      Navigator.of(context).pop();
       // ignore: use_build_context_synchronously
       await showSuccessDialog('¡Felicidades!', result.message, context);
       // ignore: use_build_context_synchronously
@@ -45,6 +47,7 @@ class _RegisterPasswordState extends State<RegisterPassword> {
         (route) => false,
       );
     } else {
+      Navigator.of(context).pop();
       // ignore: use_build_context_synchronously
       await showErrorDialog('Atención', result.message, context);
     }

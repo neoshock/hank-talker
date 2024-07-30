@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hank_talker_mobile/widgets/error_dialog_widget.dart';
+import 'package:hank_talker_mobile/widgets/loading_dialog_widget.dart';
 import 'package:hank_talker_mobile/widgets/succes_dialog_widget.dart';
 
 Future<void> showSuccessDialog(
@@ -24,6 +25,17 @@ Future<void> showErrorDialog(
         title: title,
         description: description,
       );
+    },
+  );
+}
+
+Future<void> showLoadingDialog(BuildContext context) {
+  return showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext context) {
+      return WillPopScope(
+          child: LoadingDialogWidget(), onWillPop: () async => false);
     },
   );
 }

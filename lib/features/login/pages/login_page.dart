@@ -24,10 +24,12 @@ class _LoginPageState extends State<LoginPage> {
 
   Future<void> login() async {
     if (formGlobalKey.currentState!.validate()) {
+      showLoadingDialog(context);
       final loginResponse = await context
           .read<AuthProvider>()
           .login(emailController.text, passwordController.text);
       if (loginResponse.code == 200) {
+        Navigator.of(context).pop();
         // ignore: use_build_context_synchronously
         await showSuccessDialog('Bienvenido', loginResponse.message, context);
 
@@ -39,6 +41,7 @@ class _LoginPageState extends State<LoginPage> {
           (Route<dynamic> route) => false,
         );
       } else {
+        Navigator.of(context).pop();
         // ignore: use_build_context_synchronously
         await showErrorDialog(
             'Hubo un problema', loginResponse.message, context);
@@ -107,8 +110,8 @@ class _LoginPageState extends State<LoginPage> {
                           if (value == null || value == '') {
                             return 'Correo electrónico es requerido';
                           }
-                          const emailPattern =
-                              r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+';
+                          final String emailPattern =
+                              r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
                           final regex = RegExp(emailPattern);
                           if (!regex.hasMatch(value!)) {
                             return 'Ingrese un correo electrónico válido';
