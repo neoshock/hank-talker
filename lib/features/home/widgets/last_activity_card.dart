@@ -85,10 +85,15 @@ class _LastActivityCardState extends State<LastActivityCard> {
                                   const SizedBox(
                                     height: 6,
                                   ),
-                                  Text(
-                                    category.description,
-                                    style:
-                                        Theme.of(context).textTheme.bodySmall,
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.45,
+                                    child: Text(
+                                      category.description,
+                                      style:
+                                          Theme.of(context).textTheme.bodySmall,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
                                   ),
                                   const SizedBox(
                                     height: 6,
