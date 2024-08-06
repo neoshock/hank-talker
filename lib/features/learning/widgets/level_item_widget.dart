@@ -32,7 +32,7 @@ class LevelItemWidget extends StatelessWidget {
                   color: Theme.of(context).colorScheme.secondary,
                   borderRadius: BorderRadius.circular(15),
                 ),
-                child: Text('${lesson.totalExperience} EXP',
+                child: Text('${lesson.totalExperience} XP',
                     style: Theme.of(context)
                         .textTheme
                         .bodySmall!

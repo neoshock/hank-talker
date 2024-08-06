@@ -21,7 +21,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
     super.initState();
     player
       ..setDataSource(widget.url, autoPlay: true)
-      ..setLoop(0) // 0 significa que el video estará en loop.
+      ..setLoop(0)
       ..addListener(_playerValueListener);
   }
 
