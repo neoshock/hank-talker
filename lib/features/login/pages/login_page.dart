@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hank_talker_mobile/core/auth/providers/auth_provider.dart';
+import 'package:hank_talker_mobile/features/content/pages/loading_screen.dart';
 import 'package:hank_talker_mobile/features/register/pages/register_page.dart';
 import 'package:hank_talker_mobile/features/settings/pages/recovery_password.dart';
 import 'package:hank_talker_mobile/utils/dialogs_events.dart';
@@ -8,6 +10,8 @@ import 'package:hank_talker_mobile/widgets/bottom_bar.dart';
 import 'package:hank_talker_mobile/widgets/buttons.dart';
 import 'package:hank_talker_mobile/widgets/inputs.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -76,121 +80,136 @@ class _LoginPageState extends State<LoginPage> {
         body: SingleChildScrollView(
             padding: const EdgeInsets.all(15),
             child: SafeArea(
-                child: Form(
-                    key: formGlobalKey,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // Agrega la imagen centrada en la parte superior
-                        Center(
-                          child: Container(
-                            margin: const EdgeInsets.only(
-                                bottom:
-                                    20), // Ajusta el margen inferior según sea necesario
-                            child: Image.asset(
-                              'assets/images/Logo_HT_general.png',
-                              fit: BoxFit.cover,
-                              width: MediaQuery.sizeOf(
-                                    context,
-                                  ).width *
-                                  0.6,
-                            ),
+                child: Provider.of<AuthProvider>(context).isAuth
+                    ? Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                              height: MediaQuery.sizeOf(context).height * 0.15),
+                          LottieBuilder.asset(
+                              'assets/animations/Animation - 1710271718521.json'),
+                          Text(
+                            'Cargando...',
+                            style: Theme.of(context).textTheme.displayLarge,
                           ),
-                        ),
-                        const SizedBox(height: 30),
-                        CustomTextImputWithLabel(
-                            'Correo electrónico',
-                            emailController,
-                            TextInputType.emailAddress,
-                            context,
-                            const Icon(
-                              PhosphorIcons.envelope,
-                              color: Colors.grey,
-                            ), (value) {
-                          if (value == null || value == '') {
-                            return 'Correo electrónico es requerido';
-                          }
-                          final String emailPattern =
-                              r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
-                          final regex = RegExp(emailPattern);
-                          if (!regex.hasMatch(value!)) {
-                            return 'Ingrese un correo electrónico válido';
-                          }
-                          return null;
-                        }, false),
-                        const SizedBox(height: 15),
-                        CustomImputPassword(
-                            passwordController,
-                            TextInputType.visiblePassword,
-                            context,
-                            const Icon(
-                              PhosphorIcons.lock,
-                              color: Colors.grey,
-                            ),
-                            'Contraseña', (value) {
-                          if (value == null || value == '') {
-                            return 'Contraseña es requerida';
-                          }
-                          return null;
-                        }, () {
-                          setState(() {
-                            showPassword = !showPassword;
-                          });
-                        }, true, showPassword),
-                        const SizedBox(height: 30),
-                        SizedBox(
-                          width: MediaQuery.sizeOf(context).width,
-                          child: CusttomButtonRounded(
-                            context,
-                            login,
-                            'Iniciar sesión',
-                          ),
-                        ),
-                        const SizedBox(height: 15),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                // ignore: inference_failure_on_instance_creation
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const RecoveryPasswordPage()));
-                          },
-                          child: const Text(
-                            '¿Olvidaste tu contraseña?',
-                            style: TextStyle(
-                              color: Colors.green,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 45),
-                        GestureDetector(
-                          onTap: () {
-                            //  print("Registrarse Tocado"); // ejecutando
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const RegisterPage()),
-                            );
-                          },
-                          child: RichText(
-                            text: const TextSpan(
-                              text: '¿No tienes una cuenta? ',
-                              style: TextStyle(color: Colors.black),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: 'Registrarse',
-                                  style: TextStyle(
-                                    color: Colors.green,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                        ],
+                      )
+                    : Form(
+                        key: formGlobalKey,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            // Agrega la imagen centrada en la parte superior
+                            Center(
+                              child: Container(
+                                margin: const EdgeInsets.only(
+                                    bottom:
+                                        20), // Ajusta el margen inferior según sea necesario
+                                child: Image.asset(
+                                  'assets/images/Logo_HT_general.png',
+                                  fit: BoxFit.cover,
+                                  width: MediaQuery.sizeOf(
+                                        context,
+                                      ).width *
+                                      0.6,
                                 ),
-                              ],
+                              ),
                             ),
-                          ),
-                        ),
-                      ],
-                    )))));
+                            const SizedBox(height: 30),
+                            CustomTextImputWithLabel(
+                                'Correo electrónico',
+                                emailController,
+                                TextInputType.emailAddress,
+                                context,
+                                const Icon(
+                                  PhosphorIcons.envelope,
+                                  color: Colors.grey,
+                                ), (value) {
+                              if (value == null || value == '') {
+                                return 'Correo electrónico es requerido';
+                              }
+                              final String emailPattern =
+                                  r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
+                              final regex = RegExp(emailPattern);
+                              if (!regex.hasMatch(value!)) {
+                                return 'Ingrese un correo electrónico válido';
+                              }
+                              return null;
+                            }, false),
+                            const SizedBox(height: 15),
+                            CustomImputPassword(
+                                passwordController,
+                                TextInputType.visiblePassword,
+                                context,
+                                const Icon(
+                                  PhosphorIcons.lock,
+                                  color: Colors.grey,
+                                ),
+                                'Contraseña', (value) {
+                              if (value == null || value == '') {
+                                return 'Contraseña es requerida';
+                              }
+                              return null;
+                            }, () {
+                              setState(() {
+                                showPassword = !showPassword;
+                              });
+                            }, true, showPassword),
+                            const SizedBox(height: 30),
+                            SizedBox(
+                              width: MediaQuery.sizeOf(context).width,
+                              child: CusttomButtonRounded(
+                                context,
+                                login,
+                                'Iniciar sesión',
+                              ),
+                            ),
+                            const SizedBox(height: 15),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    // ignore: inference_failure_on_instance_creation
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const RecoveryPasswordPage()));
+                              },
+                              child: const Text(
+                                '¿Olvidaste tu contraseña?',
+                                style: TextStyle(
+                                  color: Colors.green,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 45),
+                            GestureDetector(
+                              onTap: () {
+                                //  print("Registrarse Tocado"); // ejecutando
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const RegisterPage()),
+                                );
+                              },
+                              child: RichText(
+                                text: const TextSpan(
+                                  text: '¿No tienes una cuenta? ',
+                                  style: TextStyle(color: Colors.black),
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text: 'Registrarse',
+                                      style: TextStyle(
+                                        color: Colors.green,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        )))));
   }
 }
