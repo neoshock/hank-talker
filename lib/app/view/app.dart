@@ -11,6 +11,7 @@ import 'package:hank_talker_mobile/features/learning/providers/learning_provider
 import 'package:hank_talker_mobile/features/login/pages/login_page.dart';
 import 'package:hank_talker_mobile/features/welcome/pages/welcome_page.dart';
 import 'package:hank_talker_mobile/widgets/bottom_bar.dart';
+import 'package:hank_talker_mobile/widgets/custom_started_screen.dart';
 import 'package:provider/provider.dart';
 
 class App extends StatelessWidget {
@@ -37,12 +38,11 @@ class App extends StatelessWidget {
             ],
             builder: (context, child) {
               return MaterialApp(
-                debugShowCheckedModeBanner: false,
-                theme: CustomThemeData.lightTheme,
-                home: Provider.of<AuthProvider>(context).isAuth
-                    ? const LoginPage()
-                    : const WelcomePage(),
-              );
+                  debugShowCheckedModeBanner: false,
+                  theme: CustomThemeData.lightTheme,
+                  home: !Provider.of<AuthProvider>(context).isAuth
+                      ? const WelcomePage()
+                      : const CustomStartedScreen());
             },
           );
         } else {
