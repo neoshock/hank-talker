@@ -4,7 +4,7 @@ class CustomThemeData {
   static ThemeData lightTheme = ThemeData(
     primaryColor: const Color(0xFF4FA53A),
     secondaryHeaderColor: const Color(0xFFD29335),
-    cardTheme: const CardTheme(color: Colors.white, elevation: 3),
+    cardTheme: const CardThemeData(color: Colors.white, elevation: 3),
     appBarTheme: const AppBarTheme(
       backgroundColor: Color(0xFFF1F5F9),
       foregroundColor: Color.fromRGBO(44, 44, 44, 1),
@@ -51,7 +51,7 @@ class CustomThemeData {
   static ThemeData darkTheme = ThemeData.dark().copyWith(
     primaryColor: const Color(0xFF4FA53A),
     secondaryHeaderColor: const Color(0xFFD29335),
-    cardTheme: const CardTheme(color: Color(0xff1E293B), elevation: 3),
+    cardTheme: const CardThemeData(color: Color(0xff1E293B), elevation: 3),
     appBarTheme: const AppBarTheme(
       backgroundColor: Color(0xff131B31),
       foregroundColor: Colors.white,

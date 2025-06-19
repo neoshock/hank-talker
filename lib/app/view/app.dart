@@ -8,9 +8,7 @@ import 'package:hank_talker_mobile/core/profile/providers/profile_provider.dart'
 import 'package:hank_talker_mobile/core/register/providers/regi_provider.dart';
 import 'package:hank_talker_mobile/features/content/provider/content_provider.dart';
 import 'package:hank_talker_mobile/features/learning/providers/learning_provider.dart';
-import 'package:hank_talker_mobile/features/login/pages/login_page.dart';
 import 'package:hank_talker_mobile/features/welcome/pages/welcome_page.dart';
-import 'package:hank_talker_mobile/widgets/bottom_bar.dart';
 import 'package:hank_talker_mobile/widgets/custom_started_screen.dart';
 import 'package:provider/provider.dart';
 
