@@ -8,7 +8,7 @@ plugins {
 android {
     namespace = "com.uteq.hanktalker.mobile.hank_talker_mobile"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    ndkVersion = "27.0.12077973"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -37,6 +37,27 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
     }
+
+    flavorDimensions += "default"
+
+    productFlavors {
+        create("production") {
+            dimension = "default"
+            applicationIdSuffix = ""
+            manifestPlaceholders["appName"] = "Hank Talker Mobile"
+        }
+        create("staging") {
+            dimension = "default"
+            applicationIdSuffix = ".stg"
+            manifestPlaceholders["appName"] = "[STG] Hank Talker Mobile"
+        }
+        create("development") {
+            dimension = "default"
+            applicationIdSuffix = ".dev"
+            manifestPlaceholders["appName"] = "[DEV] Hank Talker Mobile"
+        }
+    }
+
 }
 
 flutter {

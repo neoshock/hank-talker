@@ -1,36 +1,31 @@
-// ignore_for_file: use_colored_box
-
-import 'package:fijkplayer/fijkplayer.dart';
 import 'package:flutter/material.dart';
+import 'package:video_player/video_player.dart';
 
 class VideoPlayerWidget extends StatefulWidget {
   final String url;
 
-  VideoPlayerWidget({required this.url});
+  const VideoPlayerWidget({super.key, required this.url});
 
   @override
-  _VideoPlayerWidgetState createState() => _VideoPlayerWidgetState();
+  State<VideoPlayerWidget> createState() => _VideoPlayerWidgetState();
 }
 
 class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
-  final FijkPlayer player = FijkPlayer();
-  bool isLoading = true;
+  late VideoPlayerController _controller;
+  bool isInitialized = false;
 
   @override
   void initState() {
     super.initState();
-    player
-      ..setDataSource(widget.url, autoPlay: true)
-      ..setLoop(0)
-      ..addListener(_playerValueListener);
-  }
-
-  void _playerValueListener() {
-    if (player.value.state == FijkState.started) {
-      setState(() {
-        isLoading = false;
+    print('Video URL: ${widget.url}');
+    _controller = VideoPlayerController.networkUrl(Uri.parse(widget.url))
+      ..initialize().then((_) {
+        setState(() {
+          isInitialized = true;
+        });
+        _controller.play();
       });
-    }
+    _controller.setLooping(false); 
   }
 
   @override
@@ -40,27 +35,26 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
       height: 150,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        color: Theme.of(context).colorScheme.background,
+        color: Theme.of(context).colorScheme.surface,
       ),
       child: Stack(
         children: [
-          Positioned.fill(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Container(
-                color: Theme.of(context).colorScheme.background,
-                child: FijkView(
-                  player: player,
-                  fit: FijkFit.cover,
-                  panelBuilder: (FijkPlayer player, FijkData data,
-                      BuildContext context, Size viewSize, Rect texturePos) {
-                    return Container();
-                  },
+          if (isInitialized)
+            Positioned.fill(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: FittedBox(
+                  fit: BoxFit.cover,
+                  clipBehavior: Clip.hardEdge,
+                  child: SizedBox(
+                    width: _controller.value.size.width,
+                    height: _controller.value.size.height,
+                    child: VideoPlayer(_controller),
+                  ),
                 ),
               ),
             ),
-          ),
-          if (isLoading)
+          if (!isInitialized)
             const Center(
               child: CircularProgressIndicator(),
             ),
@@ -71,9 +65,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
 
   @override
   void dispose() {
-    player
-      ..removeListener(_playerValueListener)
-      ..release();
+    _controller.dispose();
     super.dispose();
   }
 }
